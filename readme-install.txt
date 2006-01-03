@@ -17,5 +17,5 @@ Add:
 	<ul>
 		<li><a href="<?php echo get_settings('home'); ?>/wp-stats.php">My Blog Stats</a></li>
 	</ul>
-<li>
+</li>
 ------------------------------------------------------------------

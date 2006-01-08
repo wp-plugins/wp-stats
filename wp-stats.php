@@ -62,7 +62,7 @@ function get_totallinks() {
 ### Function: Get Recent Posts
 function get_recentposts($limit = 10) {
     global $wpdb, $post;
-    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_date, user_login FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
+    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, user_login FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
 	if($recentposts) {
 		foreach ($recentposts as $post) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));
@@ -78,7 +78,7 @@ function get_recentposts($limit = 10) {
 ### Function: Get Recent Comments
 function get_recentcomments($limit = 10) {
     global $wpdb, $post;
-    $recentcomments = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, comment_author, post_date, comment_date FROM $wpdb->posts INNER JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') AND post_password = '' ORDER  BY comment_date DESC LIMIT $limit");
+    $recentcomments = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, comment_author, post_date, comment_date FROM $wpdb->posts INNER JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') AND post_password = '' ORDER  BY comment_date DESC LIMIT $limit");
 	if($recentcomments) {
 		foreach ($recentcomments as $post) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));
@@ -94,7 +94,7 @@ function get_recentcomments($limit = 10) {
 ### Function: Get Top Commented Posts
 function get_mostcommented($limit = 10) {
     global $wpdb, $post;
-    $mostcommenteds = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_date, COUNT($wpdb->comments.comment_post_ID) AS 'comment_total' FROM $wpdb->posts LEFT JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') AND post_password = '' GROUP BY $wpdb->comments.comment_post_ID ORDER  BY comment_total DESC LIMIT $limit");
+    $mostcommenteds = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, COUNT($wpdb->comments.comment_post_ID) AS 'comment_total' FROM $wpdb->posts LEFT JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') AND post_password = '' GROUP BY $wpdb->comments.comment_post_ID ORDER  BY comment_total DESC LIMIT $limit");
 	if($mostcommenteds) {
 		foreach ($mostcommenteds as $post) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));

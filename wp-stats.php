@@ -285,21 +285,25 @@ function get_mostemailed($limit = 10) {
 		<h2 class="pagetitle">Comments Posted By <?php echo $comment_author; ?></h2>
 		<p>Displaying <b><?php echo $displayonpage; ?></b> To <b><?php echo $maxonpage; ?></b> Of <b><?php echo $totalcomments; ?></b> Comments</p>
 		<?php
-			foreach($gmz_comments as $post) {
-				$comment_id = intval($post-> comment_ID);
-				$comment_author2 = htmlspecialchars(stripslashes($post->comment_author));
-				$comment_date = mysql2date('d.m.Y @ H:i', $post->comment_date);
-				$comment_content = wpautop(stripslashes($post->comment_content));
-				$post_date = mysql2date('d.m.Y @ H:i', $post->post_date);
-				$post_title = htmlspecialchars(stripslashes($post->post_title));
+			if($gmz_comments) {
+				foreach($gmz_comments as $post) {
+					$comment_id = intval($post-> comment_ID);
+					$comment_author2 = htmlspecialchars(stripslashes($post->comment_author));
+					$comment_date = mysql2date('d.m.Y @ H:i', $post->comment_date);
+					$comment_content = wpautop(stripslashes($post->comment_content));
+					$post_date = mysql2date('d.m.Y @ H:i', $post->post_date);
+					$post_title = htmlspecialchars(stripslashes($post->post_title));
 
-				// If New Title, Print It Out
-				if($post_title != $cache_post_title) {
-					echo "<p><b><a href=\"".get_permalink()."\" title=\"Posted On $post_date\">$post_title</a></b></p>";
+					// If New Title, Print It Out
+					if($post_title != $cache_post_title) {
+						echo "<p><b><a href=\"".get_permalink()."\" title=\"Posted On $post_date\">$post_title</a></b></p>";
+					}
+					echo "<blockquote>$comment_content <a href=\"".get_permalink()."#comment-$comment_id\">Comment</a> Posted By <b>$comment_author2</b> On $comment_date</blockquote>";
+
+					$cache_post_title = $post_title;
 				}
-				echo "<blockquote>$comment_content <a href=\"".get_permalink()."#comment-$comment_id\">Comment</a> Posted By <b>$comment_author2</b> On $comment_date</blockquote>";
-
-				$cache_post_title = $post_title;
+			} else {
+					echo "<p>$comment_author has not made any comments yet.</p>";
 			}
 		?>
 		<table width="100%" cellspacing="0" cellpadding="0" border="0">

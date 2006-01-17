@@ -267,8 +267,10 @@ function get_mostemailed($limit = 10) {
 		$perpage = 10;
 		// Comment Author Link
 		$comment_author_link = urlencode($comment_author);
+		// Comment Author SQL
+		$comment_author_sql = $wpdb->escape($comment_author);
 		// Total Comments Posted By User
-		$totalcomments = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_author='$comment_author'");
+		$totalcomments = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_author='$comment_author_sql'");
 		// Checking $page and $offset
 		if (empty($page) || $page == 0) { $page = 1; }
 		if (empty($offset)) { $offset = 0; }
@@ -280,11 +282,12 @@ function get_mostemailed($limit = 10) {
 		// Count Total Pages
 		$totalpages = ceil($totalcomments/$perpage);
 		// Getting The Comments
-		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.ID, comment_author, comment_date, comment_content, ID, comment_ID, post_date, post_title, post_name FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
+		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.ID, comment_author, comment_date, comment_content, ID, comment_ID, post_date, post_title, post_name FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
 ?>
 		<h2 class="pagetitle">Comments Posted By <?php echo $comment_author; ?></h2>
 		<p>Displaying <b><?php echo $displayonpage; ?></b> To <b><?php echo $maxonpage; ?></b> Of <b><?php echo $totalcomments; ?></b> Comments</p>
 		<?php
+			// Get Comments
 			if($gmz_comments) {
 				foreach($gmz_comments as $post) {
 					$comment_id = intval($post-> comment_ID);
@@ -305,6 +308,9 @@ function get_mostemailed($limit = 10) {
 			} else {
 					echo "<p>$comment_author has not made any comments yet.</p>";
 			}
+
+			// If Total Pages Is More Than 1, Display Page Navigation
+			if($totalpages > 1) {
 		?>
 		<table width="100%" cellspacing="0" cellpadding="0" border="0">
 			<tr>
@@ -343,7 +349,7 @@ function get_mostemailed($limit = 10) {
 						for($i = $page - 2 ; $i  <= $page +2; $i++) {
 							if ($i >= 1 && $i <= $totalpages) {
 								if($i == $page) {
-									echo "[$i]";
+									echo " [$i] ";
 								} else {
 									echo "<a href=\"wp-stats.php?author=$comment_author_link&amp;page=$i\">$i</a> ";
 								}
@@ -359,7 +365,10 @@ function get_mostemailed($limit = 10) {
 					</p>
 				</td>
 			</tr>
-		</table>	
+		</table>
+		<?php
+			}
+		?>
 		<p><b>&laquo;&laquo;</b> <a href="<?php get_settings('home'); ?>wp-stats.php">Back To Stats Page</a></p>
 <?php
 	} // End If

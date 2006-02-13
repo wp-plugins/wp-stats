@@ -84,6 +84,7 @@ $page = intval($_GET['page']);
 		<?php if(function_exists('useronline')): ?>
 			<li><b>WP-UserOnline</b></li>
 			<ul>
+				<li><?php get_useronline(); ?> Now.</li>
 				<li>Most users ever online was <b><?php get_most_useronline(); ?></b>.</li>
 				<li>On <b><?php get_most_useronline_date(); ?></b>.</li>
 			</ul>

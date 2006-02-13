@@ -6,9 +6,15 @@ Website		-> http://www.lesterchan.net/
 Demo		-> http://www.lesterchan.net/wp-stats.php
 Documentation	-> http://dev.wp-plugins.org/wiki/wp-stats
 Development	-> http://dev.wp-plugins.org/browser/wp-stats/
-Updated		-> 1st February 2006
+Updated		-> 1st March 2006
 --------------------------------------------------
 
+
+// Version 2.02 (01-03-2006)
+- NEW: Added WP-PostRatings, WP-PostViews, WP-UserOnline Stats
+- NEW: Slightly Changed The Grouping Of Stats
+- NEW: WP-Stats Now Can Be Found ALso On The Dashboard
+- FIXED: Moved All Stats Functions To stats.php
 
 // Version 2.01 (01-02-2006)
 - NEW: Display EMail Stats If You Have WP-EMail Installed

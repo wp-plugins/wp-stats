@@ -1,5 +1,13 @@
--> Upgrade Instructions For Version 2.00 To Version 2.01
+-> Upgrade Instructions For Version 1.0x To Version 2.02
 ------------------------------------------------------------------
+// Open wp-content/plugins folder
+
+Overwrite:
+------------------------------------------------------------------
+stats.php
+------------------------------------------------------------------
+
+
 // Open root Wordpress folder
 
 Overwrite:

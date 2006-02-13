@@ -1,5 +1,16 @@
 -> Installation Instructions
 --------------------------------------------------
+// Open wp-content/plugins folder
+
+Put:
+------------------------------------------------------------------
+stats.php
+------------------------------------------------------------------
+
+
+// Activate WP-Stats Plugin
+
+
 // Open root Wordpress folder
 
 Put

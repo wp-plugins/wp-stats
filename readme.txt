@@ -14,6 +14,7 @@ Updated		-> 1st March 2006
 - NEW: Added WP-PostRatings, WP-PostViews, WP-UserOnline Stats
 - NEW: Slightly Changed The Grouping Of Stats
 - NEW: WP-Stats Now Can Be Found ALso On The Dashboard
+- NEW: Added Author Status
 - FIXED: Moved All Stats Functions To stats.php
 
 // Version 2.01 (01-02-2006)

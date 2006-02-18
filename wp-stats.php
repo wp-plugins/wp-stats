@@ -33,6 +33,7 @@ $page = intval($_GET['page']);
 		<!-- General Stats -->
 		<h2 class="pagetitle">General Stats</h2>
 		<ul>
+			<li><b><?php get_totalauthors(); ?></b> Authors To This Blog.</li>
 			<li><b><?php get_totalposts(); ?></b> Posts Were Posted.</li>
 			<li><b><?php get_totalpages(); ?></b> Pages Were Created.</li>
 			<li><b><?php get_totalcomments(); ?></b> Comments Were Posted.</li>
@@ -136,6 +137,12 @@ $page = intval($_GET['page']);
 					<br />
 				<?php endif; ?>
 		</ul>
+
+		<!-- Author Stats -->
+		<h2 class="pagetitle">Authors Stats</h2>
+		<ol>
+			<?php get_authorsstats(); ?>
+		</ol>
 
 		<!-- Comments' Members Stats -->
 		<h2 class="pagetitle">Comments' Members Stats</h2>

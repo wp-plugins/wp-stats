@@ -43,6 +43,7 @@ function display_stats() {
 	<div class="wrap">		
 		<h2>General Stats</h2>
 		<ul>
+			<li><b><?php get_totalauthors(); ?></b> Authors To This Blog.</li>
 			<li><b><?php get_totalposts(); ?></b> Posts Were Posted.</li>
 			<li><b><?php get_totalpages(); ?></b> Pages Were Created.</li>
 			<li><b><?php get_totalcomments(); ?></b> Comments Were Posted.</li>
@@ -152,6 +153,14 @@ function display_stats() {
 		</ul>
 	</div>
 
+	<!-- Author Stats -->
+	<div class="wrap">		
+		<h2>Authors Stats</h2>
+		<ol>
+			<?php get_authorsstats(); ?>
+		</ol>
+	</div>
+
 	<!-- Comments' Members Stats -->
 	<div class="wrap">		
 		<h2>Comments' Members Stats</h2>
@@ -178,6 +187,14 @@ function display_stats() {
 		</ul>
 	</div>
 <?php
+}
+
+
+### Function: Get Total Authors
+function get_totalauthors() {
+	global $wpdb;
+	$totalauthors = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->users WHERE user_activation_key = ''");
+	echo $totalauthors;
 }
 
 
@@ -232,13 +249,13 @@ function get_recentposts($mode = '', $limit = 10) {
 	} else {
 			$where = '(post_status = \'publish\' OR post_status = \'static\')';
 	}
-    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, user_login FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE post_date < '".current_time('mysql')."' AND $where AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
+    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, user_login, display_name FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE post_date < '".current_time('mysql')."' AND $where AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
 	if($recentposts) {
 		foreach ($recentposts as $post) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));
 				$post_date = mysql2date('d.m.Y', $post->post_date);
-				$user_nickname = htmlspecialchars(stripslashes($post->user_login));
-				echo "<li>$post_date - <a href=\"".get_permalink()."\">$post_title</a> ($user_nickname)</li>";
+				$display_name = htmlspecialchars(stripslashes($post->display_name));
+				echo "<li>$post_date - <a href=\"".get_permalink()."\">$post_title</a> ($display_name)</li>";
 		}
 	} else {
 		echo '<li>'.__('N/A').'</li>';
@@ -288,6 +305,37 @@ function get_mostcommented($mode = '', $limit = 10) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));
 				$comment_total = intval($post->comment_total);
 				echo "<li><a href=\"".get_permalink()."\">$post_title</a> - $comment_total ".__('comments')."</li>";
+		}
+	} else {
+		echo '<li>'.__('N/A').'</li>';
+	}
+}
+
+
+### Function: Get Author Stats
+function  get_authorsstats() {
+	global $wpdb, $wp_rewrite;
+	$where = '';
+	if($mode == 'post') {
+			$where = 'post_status = \'publish\'';
+	} elseif($mode == 'page') {
+			$where = 'post_status = \'static\'';
+	} else {
+			$where = '(post_status = \'publish\' OR post_status = \'static\')';
+	}
+	$posts = $wpdb->get_results("SELECT COUNT($wpdb->posts.ID) AS 'posts_total', $wpdb->users.display_name,  $wpdb->users.user_nicename FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author AND user_activation_key = '' AND $where GROUP BY $wpdb->posts.post_author");
+	if($posts) {
+		$using_permalink = get_settings('permalink_structure');
+		$permalink = $wp_rewrite->get_author_permastruct();
+		foreach ($posts as $post) {
+				$author_link = str_replace('%author%', strip_tags(stripslashes($post->user_nicename)), $permalink);
+				$display_name = urlencode($post->display_name);
+				$posts_total = intval($post->posts_total);				
+				if($using_permalink) {
+					echo "<li><a href=\"".get_settings('siteurl').$author_link."\">$display_name</a> ($posts_total)</li>";
+				} else {
+					echo "<li><a href=\"".get_settings('siteurl')."/?author_name=$post_author\">$display_name</a> ($posts_total)</li>";
+				}
 		}
 	} else {
 		echo '<li>'.__('N/A').'</li>';
@@ -523,6 +571,24 @@ if(!function_exists('get_highest_rated')) {
 			}
 		} else {
 			echo '<li>'.__('N/A').'</li>';
+		}
+	}
+}
+
+
+### Function: Display UserOnline
+if(!function_exists('get_useronline')) {
+	function get_useronline($user = 'User', $users = 'Users', $display = true) {
+		global $useronline;
+		// Display User Online
+		if($display) {
+			if($useronline > 1) {
+				echo "<b>$useronline</b> $users ".__('Online');
+			} else {
+				echo "<b>$useronline</b> $user ".__('Online');
+			}
+		} else {
+			return $useronline;
 		}
 	}
 }

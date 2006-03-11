@@ -6,9 +6,12 @@ Website		-> http://www.lesterchan.net/
 Demo		-> http://www.lesterchan.net/wp-stats.php
 Documentation	-> http://dev.wp-plugins.org/wiki/wp-stats
 Development	-> http://dev.wp-plugins.org/browser/wp-stats/
-Updated		-> 1st March 2006
+Updated		-> 1st April 2006
 --------------------------------------------------
 
+
+// Version 2.03 (01-04-2006)
+- FIXED: Hardcoded Table Name For Ratings Stats
 
 // Version 2.02 (01-03-2006)
 - NEW: Added WP-PostRatings, WP-PostViews, WP-UserOnline Stats

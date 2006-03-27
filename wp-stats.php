@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-Stats 2.02										|
+|	WordPress 2.0 Plugin: WP-Stats 2.03										|
 |	Copyright (c) 2005 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -187,7 +187,7 @@ $page = intval($_GET['page']);
 		// Count Total Pages
 		$totalpages = ceil($totalcomments/$perpage);
 		// Getting The Comments
-		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.ID, comment_author, comment_date, comment_content, ID, comment_ID, post_date, post_title, post_name FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
+		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.ID, comment_author, comment_date, comment_content, ID, comment_ID, post_date, post_title, post_name, post_password FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
 ?>
 		<h2 class="pagetitle">Comments Posted By <?php echo $comment_author; ?></h2>
 		<p>Displaying <b><?php echo $displayonpage; ?></b> To <b><?php echo $maxonpage; ?></b> Of <b><?php echo $totalcomments; ?></b> Comments</p>
@@ -202,48 +202,52 @@ $page = intval($_GET['page']);
 					$post_date = mysql2date('d.m.Y @ H:i', $post->post_date);
 					$post_title = htmlspecialchars(stripslashes($post->post_title));
 
-					// If New Title, Print It Out
-					if($post_title != $cache_post_title) {
-						echo "<p><b><a href=\"".get_permalink()."\" title=\"Posted On $post_date\">$post_title</a></b></p>";
+					// Check For Password Protected Post
+					if(!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {
+						// If New Title, Print It Out
+						if($post_title != $cache_post_title) {
+							echo "<p><b><a href=\"".get_permalink()."\" title=\"Posted On $post_date\">Protected: $post_title</a></b></p>\n";
+							echo "<blockquote>Comments Protected</blockquote>\n";	
+						}							
+					} else {
+						// If New Title, Print It Out
+						if($post_title != $cache_post_title) {
+							echo "<p><b><a href=\"".get_permalink()."\" title=\"Posted On $post_date\">$post_title</a></b></p>\n";
+						}
+						echo "<blockquote>$comment_content <a href=\"".get_permalink()."#comment-$comment_id\">Comment</a> Posted By <b>$comment_author2</b> On $comment_date</blockquote>\n";						
 					}
-					echo "<blockquote>$comment_content <a href=\"".get_permalink()."#comment-$comment_id\">Comment</a> Posted By <b>$comment_author2</b> On $comment_date</blockquote>";
-
 					$cache_post_title = $post_title;
 				}
 			} else {
-					echo "<p>$comment_author has not made any comments yet.</p>";
+					echo "<p>$comment_author has not made any comments yet.</p>\n";
 			}
 
 			// If Total Pages Is More Than 1, Display Page Navigation
 			if($totalpages > 1) {
 		?>
-		<table width="100%" cellspacing="0" cellpadding="0" border="0">
-			<tr>
-				<td align="left" width="50%">
-					<br />
-					<?php
-						if($page > 1 && ((($page*$perpage)-($perpage-1)) < $totalcomments)) {
-							echo '<p><b>&laquo;</b> <a href="wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'">Previous Page</a></p>';
-						} else {
-							echo '<p>&nbsp;</p>';
-						}
-					?>
-				</td>
-				<td align="right" width="50%">
-					<br />
-					<?php
-						if($page >= 1 && ((($page*$perpage)+1) <  $totalcomments)) {
-							echo '<p><a href="wp-stats.php?author='.$comment_author_link.'&amp;page='.($page+1).'">Next page</a> <b>&raquo;</b></p>';
-						} else {
-							echo '<p>&nbsp;</p>';
-						}
-					?>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<br />
-					<p>Pages (<?php echo $totalpages; ?>):
+				<p>
+					<span style="float: left">
+						<?php
+							if($page > 1 && ((($page*$perpage)-($perpage-1)) < $totalcomments)) {
+								echo '<p><b>&laquo;</b> <a href="wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'">Previous Page</a></p>';
+							} else {
+								echo '<p>&nbsp;</p>';
+							}
+						?>
+					</span>
+					<span style="float: right">
+						<?php
+							if($page >= 1 && ((($page*$perpage)+1) <  $totalcomments)) {
+								echo '<p><a href="wp-stats.php?author='.$comment_author_link.'&amp;page='.($page+1).'">Next page</a> <b>&raquo;</b></p>';
+							} else {
+								echo '<p>&nbsp;</p>';
+							}
+						?>
+					</span>
+				</p>
+				<br style="clear: both">
+				<p align="center">
+					Pages (<?php echo $totalpages; ?>):
 					<?php
 						if ($page >= 4) {
 							echo "<a href=\"wp-stats.php?author=$comment_author_link\">&laquo; First</a> ... ";
@@ -267,10 +271,7 @@ $page = intval($_GET['page']);
 							echo " ... <a href=\"wp-stats.php?author=$comment_author_link&amp;page=$totalpages\">Last &raquo;</a>";
 						}
 					?>
-					</p>
-				</td>
-			</tr>
-		</table>
+				</p>
 		<?php
 			}
 		?>

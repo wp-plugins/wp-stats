@@ -12,6 +12,8 @@ Updated		-> 1st April 2006
 
 // Version 2.03 (01-04-2006)
 - FIXED: Hardcoded Table Name For Ratings Stats
+- FIXED: Removed Table From Comment's Author Page Navigation
+- FIXED: Password Protected Post's Comments Viewable
 
 // Version 2.02 (01-03-2006)
 - NEW: Added WP-PostRatings, WP-PostViews, WP-UserOnline Stats

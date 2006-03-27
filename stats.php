@@ -2,14 +2,14 @@
 /*
 Plugin Name: WP-Stats
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
-Description: Display your WordPress statistics.
-Version: 2.02
+Description: Display Your WordPress Statistics.
+Version: 2.03
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
 
 
-/*  Copyright 2005  Lester Chan  (email : gamerz84@hotmail.com)
+/*  Copyright 2006  Lester Chan  (email : gamerz84@hotmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -194,7 +194,7 @@ function display_stats() {
 function get_totalauthors() {
 	global $wpdb;
 	$totalauthors = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->users WHERE user_activation_key = ''");
-	echo $totalauthors;
+	echo number_format($totalauthors);
 }
 
 
@@ -202,7 +202,7 @@ function get_totalauthors() {
 function get_totalposts() {
 	global $wpdb;
 	$totalposts = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->posts WHERE post_status = 'publish'");
-	echo $totalposts;
+	echo number_format($totalposts);
 }
 
 
@@ -210,7 +210,7 @@ function get_totalposts() {
 function get_totalpages() {
 	global $wpdb;
 	$totalpages = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->posts WHERE post_status = 'static'");
-	echo $totalpages;
+	echo number_format($totalpages);
 }
 
 
@@ -218,7 +218,7 @@ function get_totalpages() {
 function get_totalcomments() {
 	global $wpdb;
 	$totalcomments = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_approved = '1'");
-	echo $totalcomments;
+	echo number_format($totalcomments);
 }
 
 
@@ -226,7 +226,7 @@ function get_totalcomments() {
 function get_totalcommentposters() {
 	global $wpdb;
 	$totalcommentposters = $wpdb->get_var("SELECT COUNT(DISTINCT comment_author) FROM $wpdb->comments WHERE comment_approved = '1'");
-	echo $totalcommentposters;
+	echo number_format($totalcommentposters);
 }
 
 
@@ -234,7 +234,7 @@ function get_totalcommentposters() {
 function get_totallinks() {
 	global $wpdb;
 	$totallinks = $wpdb->get_var("SELECT COUNT(link_id) FROM $wpdb->links");
-	echo $totallinks;
+	echo number_format($totallinks);
 }
 
 
@@ -387,7 +387,7 @@ if(!function_exists('get_pollquestions')) {
 	function get_pollquestions() {
 		global $wpdb;
 		$totalpollq = $wpdb->get_var("SELECT COUNT(pollq_id) FROM $wpdb->pollsq");
-		echo $totalpollq;
+		echo number_format($totalpollq);
 	}
 }
 
@@ -397,7 +397,7 @@ if(!function_exists('get_pollanswers')) {
 	function get_pollanswers() {
 		global $wpdb;
 		$totalpolla = $wpdb->get_var("SELECT COUNT(polla_aid) FROM $wpdb->pollsa");
-		echo $totalpolla;
+		echo number_format($totalpolla);
 	}
 }
 
@@ -407,7 +407,7 @@ if(!function_exists('get_pollvotes')) {
 	function get_pollvotes() {
 		global $wpdb;
 		$totalpollip = $wpdb->get_var("SELECT COUNT(pollip_id) FROM $wpdb->pollsip");
-		echo $totalpollip;
+		echo number_format($totalpollip);
 	}
 }
 
@@ -417,7 +417,7 @@ if(!function_exists('get_emails')) {
 	function get_emails() {
 		global $wpdb;
 		$totalemails = $wpdb->get_var("SELECT COUNT(email_id) FROM $wpdb->email");
-		echo $totalemails;
+		echo number_format($totalemails);
 	}
 }
 
@@ -427,7 +427,7 @@ if(!function_exists('get_emails_success')) {
 	function get_emails_success() {
 		global $wpdb; 
 		$totalemails_success = $wpdb->get_var("SELECT COUNT(email_id) FROM $wpdb->email WHERE email_status = '".__('Success')."'");
-		echo $totalemails_success;
+		echo number_format($totalemails_success);
 	}
 }
 
@@ -437,7 +437,7 @@ if(!function_exists('get_emails_failed')) {
 	function get_emails_failed() {
 		global $wpdb; 
 		$totalemails_failed = $wpdb->get_var("SELECT COUNT(email_id) FROM $wpdb->email WHERE email_status = '". __('Failed')."'");
-		echo $totalemails_failed;
+		echo number_format($totalemails_failed);
 	}
 }
 
@@ -499,7 +499,7 @@ if(!function_exists('get_totalviews')) {
 	function get_totalviews() {
 		global $wpdb;
 		$total_views = $wpdb->get_var("SELECT SUM(CAST(meta_value AS UNSIGNED)) FROM $wpdb->postmeta WHERE meta_key = 'views'");
-		echo $total_views;
+		echo number_format($total_views);
 	}
 }
 
@@ -509,7 +509,7 @@ if(!function_exists('get_ratings_votes')) {
 	function get_ratings_votes() {
 		global $wpdb;
 		$ratings_votes = $wpdb->get_var("SELECT SUM(CAST(meta_value AS UNSIGNED)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_score'");
-		echo $ratings_votes;
+		echo number_format($ratings_votes);
 	}
 }
 
@@ -519,7 +519,7 @@ if(!function_exists('get_ratings_users')) {
 	function get_ratings_users() {
 		global $wpdb;
 		$ratings_users = $wpdb->get_var("SELECT SUM(CAST(meta_value AS UNSIGNED)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
-		echo $ratings_users;
+		echo number_format($ratings_users);
 	}
 }
 
@@ -583,7 +583,7 @@ if(!function_exists('get_useronline')) {
 		// Display User Online
 		if($display) {
 			if($useronline > 1) {
-				echo "<b>$useronline</b> $users ".__('Online');
+				echo "<b>".number_format($useronline)."</b> $users ".__('Online');
 			} else {
 				echo "<b>$useronline</b> $user ".__('Online');
 			}
@@ -599,7 +599,7 @@ if(!function_exists('get_most_useronline')) {
 	function get_most_useronline($display = true) {
 		$most_useronline_users = intval(get_settings('useronline_most_users'));
 		if($display) {
-			echo $most_useronline_users;
+			echo number_format($most_useronline_users);
 		} else {
 			return $most_useronline_users;
 		}

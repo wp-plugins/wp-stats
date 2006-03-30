@@ -17,3 +17,11 @@ wp-stats.php
 
 
 // Activate WP-Stats Plugin
+
+
+// Tutorial On How To Integrate wp-stats.php With Your Theme
+
+Go To:
+------------------------------------------------------------------
+http://www.lesterchan.net/wordpress/tutorials/integrating/
+------------------------------------------------------------------

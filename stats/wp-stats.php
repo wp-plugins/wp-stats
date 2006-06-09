@@ -242,10 +242,10 @@ $page = intval($_GET['page']);
 					Pages (<?php echo $totalpages; ?>) :
 					<?php
 						if ($page >= 4) {
-							echo '<a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'" title="'.__('Go to First Page').'">&laquo; '.__('First').'</a></b> ... '."\n";
+							echo '<b><a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'" title="'.__('Go to First Page').'">&laquo; '.__('First').'</a></b> ... '."\n";
 						}
 						if($page > 1) {
-							echo ' <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'" title="&laquo; '.__('Go to Page').' '.($page-1).'">&laquo;</a></b> '."\n";
+							echo ' <b><a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'" title="&laquo; '.__('Go to Page').' '.($page-1).'">&laquo;</a></b> '."\n";
 						}
 						for($i = $page - 2 ; $i  <= $page +2; $i++) {
 							if ($i >= 1 && $i <= $totalpages) {

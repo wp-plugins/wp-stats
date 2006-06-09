@@ -221,53 +221,53 @@ $page = intval($_GET['page']);
 					<span style="float: left">
 						<?php
 							if($page > 1 && ((($page*$perpage)-($perpage-1)) < $totalcomments)) {
-								echo '<p><b>&laquo;</b> <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'">Previous Page</a></p>';
+								echo '<b>&laquo;</b> <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'" title="&laquo; '.__('Previous Page').'">'.__('Previous Page').'</a>'."\n";
 							} else {
-								echo '<p>&nbsp;</p>';
+								echo '&nbsp;'."\n";
 							}
 						?>
 					</span>
 					<span style="float: right">
 						<?php
 							if($page >= 1 && ((($page*$perpage)+1) <  $totalcomments)) {
-								echo '<p><a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page+1).'">Next page</a> <b>&raquo;</b></p>';
+								echo '<a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page+1).'" title="'.__('Next Page').' &raquo;">'.__('Next Page').'</a> <b>&raquo;</b>'."\n";
 							} else {
-								echo '<p>&nbsp;</p>';
+								echo '&nbsp;'."\n";
 							}
 						?>
 					</span>
 				</p>
-				<br style="clear: both">
+				<br style="clear: both" />
 				<p align="center">
-					Pages (<?php echo $totalpages; ?>):
+					Pages (<?php echo $totalpages; ?>) :
 					<?php
 						if ($page >= 4) {
-							echo '<a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'">&laquo; First</a> ... ';
+							echo '<a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'" title="'.__('Go to First Page').'">&laquo; '.__('First').'</a></b> ... '."\n";
 						}
 						if($page > 1) {
-							echo ' <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'">&laquo;</a> ';
+							echo ' <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'" title="&laquo; '.__('Go to Page').' '.($page-1).'">&laquo;</a></b> '."\n";
 						}
 						for($i = $page - 2 ; $i  <= $page +2; $i++) {
 							if ($i >= 1 && $i <= $totalpages) {
 								if($i == $page) {
-									echo " [$i] ";
+									echo "<b>[$i]</b> "."\n";
 								} else {
-									echo '<a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.$i.'">'.$i.'</a> ';
+									echo '<a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.$i.'" title="'.__('Page').' '.$i.'">'.$i.'</a> '."\n";
 								}
 							}
 						}
 						if($page < $totalpages) {
-							echo ' <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page+1).'">&raquo;</a> ';
+							echo ' <b><a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page+1).'" title="'.__('Go to Page').' '.($page+1).' &raquo;">&raquo;</a></b> '."\n";
 						}
 						if (($page+2) < $totalpages) {
-							echo ' ... <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.$totalpages.'">Last &raquo;</a>';
+							echo ' ... <b><a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.$totalpages.'" title="'.__('Go to Last Page').'">'.__('Last').' &raquo;</a></b>'."\n";
 						}
 					?>
 				</p>
 		<?php
 			}
 		?>
-		<p><b>&laquo;&laquo;</b> <a href="<?php get_settings('siteurl'); ?>/wp-content/plugins/stats/wp-stats.php">Back To Stats Page</a></p>
+		<p><b>&laquo;&laquo;</b> <a href="<?php echo get_settings('siteurl'); ?>/wp-content/plugins/stats/wp-stats.php">Back To Stats Page</a></p>
 <?php
 	} // End If
 ?>

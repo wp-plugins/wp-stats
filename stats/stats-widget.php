@@ -46,7 +46,7 @@ function widget_stats_init() {
 			echo $before_widget.$before_title.$title.$after_title;
 			if(!empty($stats_total_options)) {
 				echo '<ul>'."\n";
-				echo '<li><b>Total Stats</b/></li>'."\n";
+				echo '<li><b>Total Stats</b></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				// Total Authors
@@ -80,7 +80,8 @@ function widget_stats_init() {
 			// Most Commented
 			if($stats_most_options['comments'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><b>'.$limit.' Most Commented</b/></li>'."\n";
+				echo '<li><b>'.$limit.' Most Commented</b></li>'."\n";
+				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				get_mostcommented('', $limit, $chars);
 				echo '</ul>'."\n";
@@ -90,7 +91,8 @@ function widget_stats_init() {
 			// Most Emailed
 			if($stats_most_options['emails'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><b>'.$limit.' Most Emailed</b/></li>'."\n";
+				echo '<li><b>'.$limit.' Most Emailed</b></li>'."\n";
+				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				get_mostemailed('', $limit, $chars);
 				echo '</ul>'."\n";
@@ -100,7 +102,8 @@ function widget_stats_init() {
 			// Highest Rated
 			if($stats_most_options['ratings_highest'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><b>'.$limit.' Highest Rated</b/></li>'."\n";
+				echo '<li><b>'.$limit.' Highest Rated</b></li>'."\n";
+				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				get_highest_rated('', $limit, $chars);
 				echo '</ul>'."\n";
@@ -110,7 +113,8 @@ function widget_stats_init() {
 			// Most Rated
 			if($stats_most_options['ratings_highest'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><b>'.$limit.' Most Rated</b/></li>'."\n";
+				echo '<li><b>'.$limit.' Most Rated</b></li>'."\n";
+				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				get_most_rated('', $limit, $chars);
 				echo '</ul>'."\n";
@@ -120,7 +124,8 @@ function widget_stats_init() {
 			// Most Viewed
 			if($stats_most_options['views'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><b>'.$limit.' Most Viewed</b/></li>'."\n";
+				echo '<li><b>'.$limit.' Most Viewed</b></li>'."\n";
+				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				get_most_viewed('', $limit, $chars);
 				echo '</ul>'."\n";
@@ -130,7 +135,6 @@ function widget_stats_init() {
 			if(intval($options['show_link']) == 1) {
 				echo '<ul>'."\n";
 				echo '<li><a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php">My Blog Statistics</a></li>'."\n";
-				echo '</li>'."\n";
 				echo '</ul>'."\n";
 			}
 			echo $after_widget;

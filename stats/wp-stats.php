@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.0 Plugin: WP-Stats 2.03										|
+|	WordPress 2.0 Plugin: WP-Stats 2.04										|
 |	Copyright (c) 2005 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,14 +11,14 @@
 |																							|
 |	File Information:																	|
 |	- WordPress Statistics															|
-|	- wp-stats.php																	|
+|	- wp-content/plugins/stats/wp-stats.php									|
 |																							|
 +----------------------------------------------------------------+
 */
 
 
 ### Require WordPress Header
-require(dirname(__FILE__).'/wp-blog-header.php');
+require('../../../wp-blog-header.php');
 
 ### Variables Variables Variables
 $comment_author = urldecode(strip_tags(stripslashes(trim($_GET['author']))));
@@ -32,6 +32,7 @@ $page = intval($_GET['page']);
 ?>
 		<!-- General Stats -->
 		<h2 class="pagetitle">General Stats</h2>
+		<p><b>Total Stats</b></p>
 		<ul>
 			<li><b><?php get_totalauthors(); ?></b> Authors To This Blog.</li>
 			<li><b><?php get_totalposts(); ?></b> Posts Were Posted.</li>
@@ -42,128 +43,119 @@ $page = intval($_GET['page']);
 		</ul>
 
 		<!-- Plugin Stats -->
-		<h2 class="pagetitle">Plugins Stats</h2>
-		<ul>
+		<h2 class="pagetitle">Plugins Stats</h2>		
 		<!-- WP-EMail Stats -->
 		<?php if(function_exists('wp_email')): ?>
-			<li><b>WP-EMail</b></li>
+			<p><b>WP-EMail</b></p>
 			<ul>
 				<li><b><?php get_emails(); ?></b> Emails Were Sent.</li>
 				<li><b><?php get_emails_success(); ?></b> Emails Were Sent Successfully.</li>
 				<li><b><?php get_emails_failed(); ?></b> Emails Failed To Send.</li>	
-			</ul>
-			<br />
+			</ul>		
 		<?php endif; ?>
 		<!-- WP-Polls Stats -->
 		<?php if(function_exists('get_poll')): ?>
-			<li><b>WP-Polls</b></li>
+			<p><b>WP-Polls</b></p>
 			<ul>
 				<li><b><?php get_pollquestions(); ?></b> Polls Were Created.</li>
 				<li><b><?php get_pollanswers(); ?></b> Polls' Answers Were Given.</li>
 				<li><b><?php get_pollvotes(); ?></b> Votes Were Casted.</li>
 			</ul>
-			<br />
 		<?php endif; ?>
 		<!-- WP-PostRatings Stats -->
 		<?php if(function_exists('the_ratings')): ?>
-			<li><b>WP-PostRatings</b></li>
+			<p><b>WP-PostRatings</b></p>
 			<ul>
 				<li><b><?php get_ratings_votes(); ?></b> Votes Were Casted.</li>
 				<li><b><?php get_ratings_users(); ?></b> Users Casted Their Vote.</li>	
 			</ul>
-			<br />
 		<?php endif; ?>
 		<!-- WP-PostViews Stats -->
 		<?php if(function_exists('the_views')): ?>
-			<li><b>WP-PostViews</b></li>
+			<p><b>WP-PostViews</b></p>
 			<ul>
 				<li><b><?php get_totalviews(); ?></b> Views Were Generated.</li>
 			</ul>
-			<br />
 		<?php endif; ?>
 		<!-- WP-UserOnline Stats -->
 		<?php if(function_exists('useronline')): ?>
-			<li><b>WP-UserOnline</b></li>
+			<p><b>WP-UserOnline</b></p>
 			<ul>
 				<li><?php get_useronline(); ?> Now.</li>
 				<li>Most users ever online was <b><?php get_most_useronline(); ?></b>.</li>
 				<li>On <b><?php get_most_useronline_date(); ?></b>.</li>
-			</ul>
-			<br />
-			<?php endif; ?>
-		</ul>
+			</ul>			
+		<?php endif; ?>
 
 		<!-- Top 10 Stats-->
 		<h2 class="pagetitle">Top 10 Stats</h2>
+		<!-- 10 Recent Posts -->
+		<p><b>10 Recent Posts</b></p>
 		<ul>
-				<!-- 10 Recent Posts -->
-				<li><b>10 Recent Posts</b></li>
-				<ul>
-					<?php get_recentposts(); ?>
-				</ul>
-				<br />
-				<!-- 10 Recent Comments -->
-				<li><b>10 Recent Comments</b></li>
-				<ul>
-					<?php get_recentcomments(); ?>
-				</ul>
-				<br />
-				<!-- 10 Most Commented Post -->
-				<li><b>10 Most Commented Post</b></li>
-				<ul>
-					<?php get_mostcommented(); ?>
-				</ul>
-				<br />
-				<!-- WP-EMail (10 Most EMailed Post) -->
-				<?php if(function_exists('wp_email')): ?>
-					<li><b>10 Most Emailed Post</b></li>
-					<ul>
-						<?php get_mostemailed(); ?>
-					</ul>
-					<br />
-				<?php endif; ?>
-				<!-- WP-PostRatings (10 Most Rated Post) -->
-				<?php if(function_exists('the_ratings')): ?>
-					<li><b>10 Most Rated Post</b></li>
-					<ul>
-						<?php get_highest_rated(); ?>
-					</ul>
-					<br />
-				<?php endif; ?>
-				<!-- WP-PostViews (10 Most Viewed Post) -->
-				<?php if(function_exists('the_views')): ?>
-					<li><b>10 Most Viewed Post</b></li>
-					<ul><?php get_most_viewed(); ?></ul>
-					<br />
-				<?php endif; ?>
+			<?php get_recentposts(); ?>
 		</ul>
+		<!-- 10 Recent Comments -->
+		<p><b>10 Recent Comments</b></p>
+		<ul>
+			<?php get_recentcomments(); ?>
+		</ul>
+		<!-- 10 Most Commented Post -->
+		<p><b>10 Most Commented Post</b></p>
+		<ul>
+			<?php get_mostcommented(); ?>
+		</ul>
+		<!-- WP-EMail (10 Most EMailed Post) -->
+		<?php if(function_exists('wp_email')): ?>
+			<p><b>10 Most Emailed Post</b></p>
+			<ul>
+				<?php get_mostemailed(); ?>
+			</ul>
+		<?php endif; ?>
+		<!-- WP-PostRatings (10 Highest Rated Post) -->
+		<?php if(function_exists('the_ratings')): ?>
+			<p><b>10 Highest Rated Post</b></p>
+			<ul>
+				<?php get_highest_rated(); ?>
+			</ul>
+		<?php endif; ?>
+		<!-- WP-PostRatings (10 Most Rated Post) -->
+		<?php if(function_exists('the_ratings')): ?>
+			<p><b>10 Most Rated Post</b></p>
+			<ul>
+				<?php get_most_rated(); ?>
+			</ul>
+		<?php endif; ?>
+		<!-- WP-PostViews (10 Most Viewed Post) -->
+		<?php if(function_exists('the_views')): ?>
+			<p><b>10 Most Viewed Post</b></p>
+			<ul><?php get_most_viewed(); ?></ul>
+		<?php endif; ?>
 
 		<!-- Author Stats -->
 		<h2 class="pagetitle">Authors Stats</h2>
+		<p><b>Authors</b></p>
 		<ol>
 			<?php get_authorsstats(); ?>
 		</ol>
 
 		<!-- Comments' Members Stats -->
 		<h2 class="pagetitle">Comments' Members Stats</h2>
+		<p><b>Comment Members</b></p>
 		<ol>
 			<?php get_commentmembersstats(); ?>
 		</ol>
 
 		<!-- Misc Stats -->
 		<h2 class="pagetitle">Misc Stats</h2>
+		<!-- Post Categories -->
+		<p><b>Post Categories</b></p>
 		<ul>
-			<!-- Post Categories -->
-			<li><b>Post Categories</b></li>
-			<ul>
-				<?php list_cats(1,'All','name','asc','',true,0,1,0,1,true,0,0,0,'','','',true); ?>
-			</ul>
-			<br />
-			<!-- Link Categories -->
-			<li><b>Link Categories</b></li>
-			<ul>
-				<?php get_linkcats(); ?>
-			</ul>
+			<?php list_cats(1,'All','name','asc','',true,0,1,0,1,true,0,0,0,'','','',true); ?>
+		</ul>
+		<!-- Link Categories -->
+		<p><b>Link Categories</b></p>
+		<ul>
+			<?php get_linkcats(); ?>
 		</ul>
 <?php
 	### Displaying Comments Posted By User
@@ -229,7 +221,7 @@ $page = intval($_GET['page']);
 					<span style="float: left">
 						<?php
 							if($page > 1 && ((($page*$perpage)-($perpage-1)) < $totalcomments)) {
-								echo '<p><b>&laquo;</b> <a href="wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'">Previous Page</a></p>';
+								echo '<p><b>&laquo;</b> <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'">Previous Page</a></p>';
 							} else {
 								echo '<p>&nbsp;</p>';
 							}
@@ -238,7 +230,7 @@ $page = intval($_GET['page']);
 					<span style="float: right">
 						<?php
 							if($page >= 1 && ((($page*$perpage)+1) <  $totalcomments)) {
-								echo '<p><a href="wp-stats.php?author='.$comment_author_link.'&amp;page='.($page+1).'">Next page</a> <b>&raquo;</b></p>';
+								echo '<p><a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page+1).'">Next page</a> <b>&raquo;</b></p>';
 							} else {
 								echo '<p>&nbsp;</p>';
 							}
@@ -250,32 +242,32 @@ $page = intval($_GET['page']);
 					Pages (<?php echo $totalpages; ?>):
 					<?php
 						if ($page >= 4) {
-							echo "<a href=\"wp-stats.php?author=$comment_author_link\">&laquo; First</a> ... ";
+							echo '<a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'">&laquo; First</a> ... ';
 						}
 						if($page > 1) {
-							echo " <a href=\"wp-stats.php?author=$comment_author_link&amp;page=".($page-1)."\">&laquo;</a> ";
+							echo ' <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page-1).'">&laquo;</a> ';
 						}
 						for($i = $page - 2 ; $i  <= $page +2; $i++) {
 							if ($i >= 1 && $i <= $totalpages) {
 								if($i == $page) {
 									echo " [$i] ";
 								} else {
-									echo "<a href=\"wp-stats.php?author=$comment_author_link&amp;page=$i\">$i</a> ";
+									echo '<a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.$i.'">'.$i.'</a> ';
 								}
 							}
 						}
 						if($page < $totalpages) {
-							echo " <a href=\"wp-stats.php?author=$comment_author_link&amp;page=".($page+1)."\">&raquo;</a> ";
+							echo ' <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.($page+1).'">&raquo;</a> ';
 						}
 						if (($page+2) < $totalpages) {
-							echo " ... <a href=\"wp-stats.php?author=$comment_author_link&amp;page=$totalpages\">Last &raquo;</a>";
+							echo ' ... <a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php?author='.$comment_author_link.'&amp;page='.$totalpages.'">Last &raquo;</a>';
 						}
 					?>
 				</p>
 		<?php
 			}
 		?>
-		<p><b>&laquo;&laquo;</b> <a href="<?php get_settings('home'); ?>/wp-stats.php">Back To Stats Page</a></p>
+		<p><b>&laquo;&laquo;</b> <a href="<?php get_settings('siteurl'); ?>/wp-content/plugins/stats/wp-stats.php">Back To Stats Page</a></p>
 <?php
 	} // End If
 ?>

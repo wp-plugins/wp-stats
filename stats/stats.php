@@ -3,7 +3,7 @@
 Plugin Name: WP-Stats
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Display Your WordPress Statistics.
-Version: 2.04
+Version: 2.05
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -337,7 +337,7 @@ function get_mostcommented($mode = '', $limit = 10, $chars = 0) {
 
 
 ### Function: Get Author Stats
-function  get_authorsstats() {
+function get_authorsstats() {
 	global $wpdb, $wp_rewrite;
 	$where = '';
 	if($mode == 'post') {

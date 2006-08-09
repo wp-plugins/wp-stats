@@ -3,7 +3,7 @@
 Plugin Name: WP-Stats Widget
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Adds a Sidebar Widget To Display Partial Stats From WP-Stats Plugin
-Version: 2.04
+Version: 2.05
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -41,7 +41,7 @@ function widget_stats_init() {
 		$stats_most_options = $options['stats_display_most'];
 		$limit = intval($options['most_limit']);
 		$chars = intval($options['snippet_chars']);
-		$title = __('Statistics');		
+		$title = htmlspecialchars($options['title']);
 		if (function_exists('display_stats') && basename($_SERVER['PHP_SELF']) != 'wp-stats.php') {
 			echo $before_widget.$before_title.$title.$after_title;
 			if(!empty($stats_total_options)) {
@@ -148,7 +148,7 @@ function widget_stats_init() {
 		$stats_options_total_array = array();
 		$stats_options_most_array = array();
 		if (!is_array($options)) {
-			$options = array('stats_display_total' => array(), 'stats_display_most' => array(), 'most_limit' => '10', 'show_link' => '1', 'snippet_chars' => 12);
+			$options = array('title' => 'Statistics', 'stats_display_total' => array(), 'stats_display_most' => array(), 'most_limit' => '10', 'show_link' => '1', 'snippet_chars' => 12);
 		}
 		if ($_POST['stats-submit']) {
 			$most_limit = intval($_POST['most_limit']);
@@ -156,21 +156,27 @@ function widget_stats_init() {
 			$snippet_chars = intval($_POST['snippet_chars']);
 			$post_total_stats = $_POST['stats_display_total'];
 			$post_most_stats = $_POST['stats_display_most'];
-			foreach($post_total_stats as $post_total_stat) {
-				$post_total_stat = addslashes($post_total_stat);
-				$stats_options_total_array[$post_total_stat] = 1;
-			}			
-			foreach($post_most_stats as $post_most_stat) {
-				$post_most_stat = addslashes($post_most_stat);
-				$stats_options_most_array[$post_most_stat] = 1;
+			if($post_total_stats) {
+				foreach($post_total_stats as $post_total_stat) {
+					$post_total_stat = addslashes($post_total_stat);
+					$stats_options_total_array[$post_total_stat] = 1;
+				}
+			}
+			if($post_most_stats) {
+				foreach($post_most_stats as $post_most_stat) {
+					$post_most_stat = addslashes($post_most_stat);
+					$stats_options_most_array[$post_most_stat] = 1;
+				}
 			}
 			$options['stats_display_total'] = $stats_options_total_array;
 			$options['stats_display_most'] = $stats_options_most_array;
 			$options['most_limit'] = $most_limit;
 			$options['show_link'] = $show_link;
 			$options['snippet_chars'] = $snippet_chars;
+			$options['title'] = strip_tags(stripslashes($_POST['stats-title']));
 			update_option('widget_stats', $options);
 		}
+		echo '<p style="text-align: left;"><label for="stats-title">Widget Title:</label>&nbsp;&nbsp;&nbsp;<input type="text" id="stats-title" name="stats-title" value="'.htmlspecialchars($options['title']).'" />';
 		echo '<p style="text-align: left;"><label for="stats_display">Statistics To Display?</label>&nbsp;&nbsp;&nbsp;'."\n";
 		echo '<p style="text-align: left;">'."\n";
 		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="authors"';
@@ -229,7 +235,7 @@ function widget_stats_init() {
 
 	// Register Widgets
 	register_sidebar_widget('Statistics', 'widget_stats');
-	register_widget_control('Statistics', 'widget_stats_options', 400, 500);
+	register_widget_control('Statistics', 'widget_stats_options', 400, 550);
 }
 
 

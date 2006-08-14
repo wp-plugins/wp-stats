@@ -134,7 +134,7 @@ function widget_stats_init() {
 			}
 			if(intval($options['show_link']) == 1) {
 				echo '<ul>'."\n";
-				echo '<li><a href="'.get_settings('siteurl').'/wp-content/plugins/stats/wp-stats.php">My Blog Statistics</a></li>'."\n";
+				echo '<li><a href="'.stripslashes(get_settings('stats_url')).'">My Blog Statistics</a></li>'."\n";
 				echo '</ul>'."\n";
 			}
 			echo $after_widget;

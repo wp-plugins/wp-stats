@@ -210,13 +210,13 @@
 			<p><b>Documentation:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/wiki/wp-stats" title="http://dev.wp-plugins.org/wiki/wp-stats">http://dev.wp-plugins.org/wiki/wp-stats</a></p>
 			<p><b>Development:</b><br /><b>&raquo;</b> <a href="http://dev.wp-plugins.org/browser/wp-stats/" title="http://dev.wp-plugins.org/browser/wp-stats/">http://dev.wp-plugins.org/browser/wp-stats/</a></p>
 			<p><b>Support Forums:</b><br /><b>&raquo;</b> <a href="http://forums.lesterchan.net/viewforum.php?f=6" title="http://forums.lesterchan.net/viewforum.php?f=6">http://forums.lesterchan.net/viewforum.php?f=6</a></p>
-			<p><b>Updated:</b><br /><b>&raquo;</b> 1st October 2006</p>
-			
+			<p><b>Updated:</b><br /><b>&raquo;</b> 1st October 2006</p>			
 			<div class="SubSubTitle">Changelog</div>
 			<ul>
 				<li>
 					<b>Version 2.05 (01-10-2006)</b>
 					<ul>
+						<li>NEW: Stats Is Now Embedded Into A Page, And Hence No More Integrating Of Stats Page</li>
 						<li>NEW: Added Widget Title Option To WP-Stats Widget</li>
 					</ul>
 				<li>
@@ -304,15 +304,24 @@
 					<blockquote>Folder: stats</blockquote>
 				</li>
 				<li>
+					Open <b>wp-content/plugins/stats</b> Folder
+				</li>
+				<li>
+					Delete file if exists:
+					<blockquote>File: wp-stats.php</blockquote>
+				</li>
+				<li>
 					Open <b>Root WordPress</b> Folder
 				</li>
 				<li>
 					Delete file if exists:
 					<blockquote>File: wp-stats.php</blockquote>
 				</li>
-
 				<li>
 					<b>Activate</b> WP-Stats Plugin
+				</li>
+				<li>
+					Refer To <b>Usage</b> For Further Instructions
 				</li>
 			</ol>
 		</div>
@@ -323,26 +332,38 @@
 			<div class="SubSubTitle">General Usage</div>
 			<ol>
 				<li>
-					Open <b>wp-content/themes/&lt;YOUR THEME NAME&gt;/sidebar.php</b>
+					Go to 'WP-Admin -> Write -> Write Page'
 				</li>
 				<li>
-					Add:
-					<blockquote>
-						&lt;?php if (function_exists('display_stats') &amp;&amp; basename($_SERVER['PHP_SELF']) != 'wp-stats.php'): ?&gt;<br />
-						&lt;li&gt;<br />
-						&nbsp;&nbsp;&nbsp;&lt;h2&gt;Statistics&lt;/h2&gt;<br />
-						&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />			
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="&lt;?php echo get_settings('siteurl'); ?&gt;/wp-content/plugins/stats/wp-stats.php"&gt;My Blog Statistics&lt;/a&gt;&lt;/li&gt;<br />
-						&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
-						&lt;/li&gt;<br />
-						&lt;?php endif; ?&gt;
-					</blockquote>
+					Type any title you like in the post's title area
 				</li>
 				<li>
-					Tutorial On How To Integrate wp-stats.php With Your Theme:
-					<blockquote>
-						<a href="http://www.lesterchan.net/wordpress/tutorials/integrating/">http://www.lesterchan.net/wordpress/tutorials/integrating/</a>
-					</blockquote>
+					Type '<b>&lt;page_stats&gt</b>' in the post's content area (without the quotes)
+				</li>
+				<li>
+					Type '<b>stats</b>' in the post's slug area (without the quotes)
+				</li>
+				<li>
+					Click 'Publish'
+				</li>
+				<li>If you <b>ARE NOT</b> using nice permalinks, you need to go to 'WP-Admin -> Options -> Stats' and under '<b>Stats URL</b>', you need to fill in the URL to the Stats Page you created above.</li>
+			</ol>
+			<div class="SubSubTitle">Using Stats Widget</div>
+			<ol>
+				<li>
+					<b>Activate</b> WP-Stats Widget Plugin
+				</li>
+				<li>
+					Go to 'WP-Admin -> Presentation -> Sidebar Widgets'
+				</li>
+				<li>
+					<b>Drag</b> the Stats Widget to your sidebar
+				</li>
+				<li>
+					You can <b>configure</b> the Stats Widget by clicking on the configure icon
+				</li>
+				<li>
+					Click 'Save changes'
 				</li>
 			</ol>
 		</div>

@@ -503,7 +503,6 @@ function stats_page() {
 	// Default wp-stats.php Page
 	if(empty($comment_author)) {
 		// General Stats
-		$temp_stats .= '<!-- General Stats -->'."\n";
 		$temp_stats .= '<h2 class="pagetitle">General Stats</h2>'."\n";
 		$temp_stats .= '<p><b>Total Stats</b></p>'."\n";
 		$temp_stats .= '<ul>'."\n";
@@ -516,12 +515,10 @@ function stats_page() {
 		$temp_stats .= '</ul>'."\n";
 
 		// Plugin Stats
-		$temp_stats .= '<!-- Plugin Stats -->'."\n";
 		$temp_stats .= '<h2 class="pagetitle">Plugins Stats</h2>'."\n";
 
 		// WP-EMail Stats		
 		if(function_exists('wp_email')) {
-			$temp_stats .= '<!-- WP-EMail Stats -->'."\n";
 			$temp_stats .= '<p><b>WP-EMail</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><b>'.get_emails(false).'</b> Emails Were Sent.</li>'."\n";
@@ -532,7 +529,6 @@ function stats_page() {
 		
 		// WP-Polls Stats		
 		if(function_exists('get_poll')) {
-			$temp_stats .= '<!-- WP-Polls Stats -->'."\n";
 			$temp_stats .= '<p><b>WP-Polls</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><b>'.get_pollquestions(false).'</b> Polls Were Created.</li>'."\n";
@@ -543,7 +539,6 @@ function stats_page() {
 		
 		// WP-PostRatings Stats		
 		if(function_exists('the_ratings')) {
-			$temp_stats .= '<!-- WP-PostRatings Stats -->'."\n";
 			$temp_stats .= '<p><b>WP-PostRatings</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><b>'.get_ratings_votes(false).'</b> Votes Were Casted.</li>'."\n";
@@ -553,7 +548,6 @@ function stats_page() {
 		
 		// WP-PostViews Stats		
 		if(function_exists('the_views')) {
-			$temp_stats .= '<!-- WP-PostViews Stats -->'."\n";
 			$temp_stats .= '<p><b>WP-PostViews</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><b>'.get_totalviews(false).'</b> Views Were Generated.</li>'."\n";
@@ -562,7 +556,6 @@ function stats_page() {
 
 		// WP-UserOnline Stats		
 		if(function_exists('useronline')) {
-			$temp_stats .= '<!-- WP-UserOnline Stats -->'."\n";
 			$temp_stats .= '<p><b>WP-UserOnline</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><b>'.get_useronline('', '', false).'</b> User(s) Online Now.</li>'."\n";
@@ -572,25 +565,21 @@ function stats_page() {
 		}
 		
 		// Top 10 Stats
-		$temp_stats .= '<!-- Top 10 Stats-->'."\n";
 		$temp_stats .= '<h2 class="pagetitle">Top 10 Stats</h2>'."\n";
 
 		// 10 Recent Posts
-		$temp_stats .= '<!-- 10 Recent Posts -->'."\n";
 		$temp_stats .= '<p><b>10 Recent Posts</b></p>'."\n";
 		$temp_stats .= '<ul>'."\n";
 		$temp_stats .= get_recentposts('', 10, false);
 		$temp_stats .= '</ul>'."\n";
 		
 		// 10 Recent Comments
-		$temp_stats .= '<!-- 10 Recent Comments -->'."\n";
 		$temp_stats .= '<p><b>10 Recent Comments</b></p>'."\n";
 		$temp_stats .= '<ul>'."\n";
 		$temp_stats .= get_recentcomments('', 10, false);
 		$temp_stats .= '</ul>'."\n";
 
 		// 10 Most Commented Post
-		$temp_stats .= '<!-- 10 Most Commented Post -->'."\n";
 		$temp_stats .= '<p><b>10 Most Commented Post</b></p>'."\n";
 		$temp_stats .= '<ul>'."\n";
 		$temp_stats .= get_mostcommented('', 10, 0, false);
@@ -598,7 +587,6 @@ function stats_page() {
 
 		// WP-EMail (10 Most EMailed Post)
 		if(function_exists('wp_email')) {
-			$temp_stats .= '<!-- WP-EMail (10 Most EMailed Post) -->'."\n";
 			$temp_stats .= '<p><b>10 Most Emailed Post</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_mostemailed('', 10, 0, false);
@@ -607,13 +595,10 @@ function stats_page() {
 		
 		// WP-PostRatings (10 Highest Rated Post) (10 Most Rated Post)
 		if(function_exists('the_ratings')) {
-			$temp_stats .= '<!-- WP-PostRatings (10 Highest Rated Post) -->'."\n";
 			$temp_stats .= '<p><b>10 Highest Rated Post</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_highest_rated('', 10, 0, false);
 			$temp_stats .= '</ul>'."\n";
-			
-			$temp_stats .= '<!-- WP-PostRatings (10 Most Rated Post) -->'."\n";
 			$temp_stats .= '<p><b>10 Most Rated Post</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_most_rated('', 10, 0, false);
@@ -622,7 +607,6 @@ function stats_page() {
 		
 		// WP-PostViews (10 Most Viewed Post)
 		if(function_exists('the_views')) {
-			$temp_stats .= '<!-- WP-PostViews (10 Most Viewed Post) -->'."\n";
 			$temp_stats .= '<p><b>10 Most Viewed Post</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_most_viewed('', 10, 0, false);
@@ -630,7 +614,6 @@ function stats_page() {
 		}
 		
 		// Author Stats
-		$temp_stats .= '<!-- Author Stats -->'."\n";
 		$temp_stats .= '<h2 class="pagetitle">Authors Stats</h2>'."\n";
 		$temp_stats .= '<p><b>Authors</b></p>'."\n";
 		$temp_stats .= '<ol>'."\n";
@@ -638,7 +621,6 @@ function stats_page() {
 		$temp_stats .= '</ol>'."\n";
 		
 		// Comments' Members Stats
-		$temp_stats .= '<!-- Comments\' Members Stats -->'."\n";
 		$temp_stats .= '<h2 class="pagetitle">Comments\' Members Stats</h2>'."\n";
 		$temp_stats .= '<p><b>Comment Members</b></p>'."\n";
 		$temp_stats .= '<ol>'."\n";
@@ -646,18 +628,15 @@ function stats_page() {
 		$temp_stats .= '</ol>'."\n";
 		
 		// Misc Stats
-		$temp_stats .= '<!-- Misc Stats -->'."\n";
 		$temp_stats .= '<h2 class="pagetitle">Misc Stats</h2>'."\n";
 
 		// Post Categories
-		$temp_stats .= '<!-- Post Categories -->'."\n";
 		$temp_stats .= '<p><b>Post Categories</b></p>'."\n";
 		$temp_stats .= '<ul>'."\n";
 		$temp_stats .= list_cats(1,'All','name','asc','',true,0,1,0,1,true,0,0,1,'','','',true);
 		$temp_stats .= '</ul>'."\n";
 
 		// Link Categories
-		$temp_stats .= '<!-- Link Categories -->'."\n";
 		$temp_stats .= '<p><b>Link Categories</b></p>'."\n";
 		$temp_stats .= '<ul>'."\n";
 		$temp_stats .= get_linkcats(false);

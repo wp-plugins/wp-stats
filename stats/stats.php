@@ -467,9 +467,9 @@ if (!function_exists('htmlspecialchars_decode')) {
 
 
 ### Function: Place Statistics Page In Content
-add_filter('the_content', 'place_stats', '12');
+add_filter('the_content', 'place_stats', '7');
 function place_stats($content){
-     $content = preg_replace( "/\<page_stats\>/ise", "stats_page()", $content); 
+     $content = preg_replace( "/\[page_stats\]/ise", "stats_page()", $content); 
     return $content;
 }
 

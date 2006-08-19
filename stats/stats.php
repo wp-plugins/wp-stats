@@ -449,11 +449,20 @@ function get_linkcats($display = true) {
 
 ### Function: Snippet Characters
 function snippet_chars($text, $length = 0) {
+	$text = htmlspecialchars_decode($text);
 	 if (strlen($text) > $length){       
-		return substr($text,0,$length).'...';             
+		return htmlspecialchars(substr($text,0,$length)).'...';             
 	 } else {
-		return $text;
+		return htmlspecialchars($text);
 	 }
+}
+
+
+### Function: HTML Special Chars Decode
+if (!function_exists('htmlspecialchars_decode')) {
+   function htmlspecialchars_decode($text) {
+       return strtr($text, array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
+   }
 }
 
 
@@ -489,6 +498,7 @@ function stats_page() {
 	$comment_author = urldecode(strip_tags(stripslashes(trim($_GET['stats_author']))));
 	$page = intval($_GET['stats_page']);
 	$temp_stats = '';
+	$temp_post = $post;
 
 	// Default wp-stats.php Page
 	if(empty($comment_author)) {
@@ -707,7 +717,6 @@ function stats_page() {
 				}
 				$cache_post_title = $post_title;
 			}
-			$post = null;
 		} else {
 				$temp_stats .= "<p>$comment_author has not made any comments yet.</p>\n";
 		}
@@ -761,6 +770,9 @@ function stats_page() {
 		}
 		$temp_stats .= '<p><b>&laquo;&laquo;</b> <a href="'.$stats_url.'">Back To Stats Page</a></p>'."\n";
 	} // End If
+	
+	// Assign Back $post
+	$post = $temp_post;
 
 	// Output Stats Page
 	return $temp_stats;

@@ -41,149 +41,8 @@ function stats_menu() {
 
 ### Display WP-Stats Admin Page
 function display_stats() {
-?>
-	<!-- General Stats -->
-	<div class="wrap">		
-		<h2>General Stats</h2>
-		<p><b>Total Stats</b></p>
-		<ul>
-			<li><b><?php get_totalauthors(); ?></b> Authors To This Blog.</li>
-			<li><b><?php get_totalposts(); ?></b> Posts Were Posted.</li>
-			<li><b><?php get_totalpages(); ?></b> Pages Were Created.</li>
-			<li><b><?php get_totalcomments(); ?></b> Comments Were Posted.</li>
-			<li><b><?php get_totalcommentposters(); ?></b> Different Nicks Were Represented In The Comments.</li>
-			<li><b><?php get_totallinks(); ?></b> Links Were Added.</li>
-		</ul>
-	</div>
-
-	<!-- Plugin Stats -->
-	<div class="wrap">		
-		<h2>Plugins Stats</h2>
-		<!-- WP-EMail Stats -->
-		<?php if(function_exists('wp_email')): ?>
-			<p><b>WP-EMail</b></p>
-			<ul>
-				<li><b><?php get_emails(); ?></b> Emails Were Sent.</li>
-				<li><b><?php get_emails_success(); ?></b> Emails Were Sent Successfully.</li>
-				<li><b><?php get_emails_failed(); ?></b> Emails Failed To Send.</li>	
-			</ul>		
-		<?php endif; ?>
-		<!-- WP-Polls Stats -->
-		<?php if(function_exists('get_poll')): ?>
-			<p><b>WP-Polls</b></p>
-			<ul>
-				<li><b><?php get_pollquestions(); ?></b> Polls Were Created.</li>
-				<li><b><?php get_pollanswers(); ?></b> Polls' Answers Were Given.</li>
-				<li><b><?php get_pollvotes(); ?></b> Votes Were Casted.</li>
-			</ul>
-		<?php endif; ?>
-		<!-- WP-PostRatings Stats -->
-		<?php if(function_exists('the_ratings')): ?>
-			<p><b>WP-PostRatings</b></p>
-			<ul>
-				<li><b><?php get_ratings_votes(); ?></b> Votes Were Casted.</li>
-				<li><b><?php get_ratings_users(); ?></b> Users Casted Their Vote.</li>	
-			</ul>
-		<?php endif; ?>
-		<!-- WP-PostViews Stats -->
-		<?php if(function_exists('the_views')): ?>
-			<p><b>WP-PostViews</b></p>
-			<ul>
-				<li><b><?php get_totalviews(); ?></b> Views Were Generated.</li>
-			</ul>
-		<?php endif; ?>
-		<!-- WP-UserOnline Stats -->
-		<?php if(function_exists('useronline')): ?>
-			<p><b>WP-UserOnline</b></p>
-			<ul>
-				<li><?php get_useronline(); ?> Now.</li>
-				<li>Most users ever online was <b><?php get_most_useronline(); ?></b>.</li>
-				<li>On <b><?php get_most_useronline_date(); ?></b>.</li>
-			</ul>			
-		<?php endif; ?>
-	</div>
-
-	<!-- Top 10 Stats-->
-	<div class="wrap">		
-		<h2>Top 10 Stats</h2>
-		<!-- 10 Recent Posts -->
-		<p><b>10 Recent Posts</b></p>
-		<ul>
-			<?php get_recentposts(); ?>
-		</ul>
-		<!-- 10 Recent Comments -->
-		<p><b>10 Recent Comments</b></p>
-		<ul>
-			<?php get_recentcomments(); ?>
-		</ul>
-		<!-- 10 Most Commented Post -->
-		<p><b>10 Most Commented Post</b></p>
-		<ul>
-			<?php get_mostcommented(); ?>
-		</ul>
-		<!-- WP-EMail (10 Most EMailed Post) -->
-		<?php if(function_exists('wp_email')): ?>
-			<p><b>10 Most Emailed Post</b></p>
-			<ul>
-				<?php get_mostemailed(); ?>
-			</ul>
-		<?php endif; ?>
-		<!-- WP-PostRatings (10 Highest Rated Post) -->
-		<?php if(function_exists('the_ratings')): ?>
-			<p><b>10 Highest Rated Post</b></p>
-			<ul>
-				<?php get_highest_rated(); ?>
-			</ul>
-		<?php endif; ?>
-		<!-- WP-PostRatings (10 Most Rated Post) -->
-		<?php if(function_exists('the_ratings')): ?>
-			<p><b>10 Most Rated Post</b></p>
-			<ul>
-				<?php get_most_rated(); ?>
-			</ul>
-		<?php endif; ?>
-		<!-- WP-PostViews (10 Most Viewed Post) -->
-		<?php if(function_exists('the_views')): ?>
-			<p><b>10 Most Viewed Post</b></p>
-			<ul>
-				<?php get_most_viewed(); ?>
-			</ul>
-		<?php endif; ?>
-	</div>
-
-	<!-- Author Stats -->
-	<div class="wrap">		
-		<h2>Authors Stats</h2>
-		<p><b>Authors</b></p>
-		<ol>
-			<?php get_authorsstats(); ?>
-		</ol>
-	</div>
-
-	<!-- Comments' Members Stats -->
-	<div class="wrap">		
-		<h2>Comments' Members Stats</h2>
-		<p><b>Comment Members</b></p>
-		<ol>
-			<?php get_commentmembersstats(); ?>
-		</ol>
-	</div>
-
-	<!-- Misc Stats -->
-	<div class="wrap">		
-		<h2>Misc Stats</h2>
-		<!-- Post Categories -->
-		<p><b>Post Categories</b></p>
-		<ul>
-			<?php list_cats(1,'All','name','asc','',true,0,1,0,1,true,0,0,0,'','','',true); ?>
-		</ul>
-		<!-- Link Categories -->
-		<p><b>Link Categories</b></p>
-		<ul>
-			<?php get_linkcats(); ?>
-		</ul>
-	</div>
-<?php
+	$stats_page = stats_page();
+	echo "<div class=\"wrap\">\n$stats_page</div>\n";
 }
 
 
@@ -499,26 +358,32 @@ function stats_page() {
 	$page = intval($_GET['stats_page']);
 	$temp_stats = '';
 	$temp_post = $post;
+	$stats_mostlimit = intval(get_settings('stats_mostlimit'));
+	$stats_display = get_settings('stats_display');
 
 	// Default wp-stats.php Page
 	if(empty($comment_author)) {
 		// General Stats
-		$temp_stats .= '<h2 class="pagetitle">General Stats</h2>'."\n";
-		$temp_stats .= '<p><b>Total Stats</b></p>'."\n";
-		$temp_stats .= '<ul>'."\n";
-		$temp_stats .= '<li><b>'.get_totalauthors(false).'</b> Authors To This Blog.</li>'."\n";
-		$temp_stats .= '<li><b>'.get_totalposts(false).'</b> Posts Were Posted.</li>'."\n";
-		$temp_stats .= '<li><b>'.get_totalpages(false).'</b> Pages Were Created.</li>'."\n";
-		$temp_stats .= '<li><b>'.get_totalcomments(false).'</b> Comments Were Posted.</li>'."\n";
-		$temp_stats .= '<li><b>'.get_totalcommentposters(false).'</b> Different Nicks Were Represented In The Comments.</li>'."\n";
-		$temp_stats .= '<li><b>'.get_totallinks(false).'</b> Links Were Added.</li>'."\n";
-		$temp_stats .= '</ul>'."\n";
+		if($stats_display['total_stats'] == 1) {
+			$temp_stats .= '<h2>General Stats</h2>'."\n";
+			$temp_stats .= '<p><b>Total Stats</b></p>'."\n";
+			$temp_stats .= '<ul>'."\n";
+			$temp_stats .= '<li><b>'.get_totalauthors(false).'</b> Authors To This Blog.</li>'."\n";
+			$temp_stats .= '<li><b>'.get_totalposts(false).'</b> Posts Were Posted.</li>'."\n";
+			$temp_stats .= '<li><b>'.get_totalpages(false).'</b> Pages Were Created.</li>'."\n";
+			$temp_stats .= '<li><b>'.get_totalcomments(false).'</b> Comments Were Posted.</li>'."\n";
+			$temp_stats .= '<li><b>'.get_totalcommentposters(false).'</b> Different Nicks Were Represented In The Comments.</li>'."\n";
+			$temp_stats .= '<li><b>'.get_totallinks(false).'</b> Links Were Added.</li>'."\n";
+			$temp_stats .= '</ul>'."\n";
+		}
 
 		// Plugin Stats
-		$temp_stats .= '<h2 class="pagetitle">Plugins Stats</h2>'."\n";
+		if($stats_display['email'] == 1 || $stats_display['polls'] == 1 || $stats_display['ratings'] == 1 || $stats_display['views'] || $stats_display['useronline'] == 1) {
+			$temp_stats .= '<h2>Plugins Stats</h2>'."\n";
+		}
 
 		// WP-EMail Stats		
-		if(function_exists('wp_email')) {
+		if(function_exists('wp_email') && $stats_display['email'] == 1) {
 			$temp_stats .= '<p><b>WP-EMail</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><b>'.get_emails(false).'</b> Emails Were Sent.</li>'."\n";
@@ -528,7 +393,7 @@ function stats_page() {
 		}
 		
 		// WP-Polls Stats		
-		if(function_exists('get_poll')) {
+		if(function_exists('get_poll') && $stats_display['polls'] == 1) {
 			$temp_stats .= '<p><b>WP-Polls</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><b>'.get_pollquestions(false).'</b> Polls Were Created.</li>'."\n";
@@ -538,7 +403,7 @@ function stats_page() {
 		}
 		
 		// WP-PostRatings Stats		
-		if(function_exists('the_ratings')) {
+		if(function_exists('the_ratings') && $stats_display['ratings'] == 1) {
 			$temp_stats .= '<p><b>WP-PostRatings</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><b>'.get_ratings_votes(false).'</b> Votes Were Casted.</li>'."\n";
@@ -547,7 +412,7 @@ function stats_page() {
 		}
 		
 		// WP-PostViews Stats		
-		if(function_exists('the_views')) {
+		if(function_exists('the_views') && $stats_display['views'] == 1) {
 			$temp_stats .= '<p><b>WP-PostViews</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><b>'.get_totalviews(false).'</b> Views Were Generated.</li>'."\n";
@@ -555,7 +420,7 @@ function stats_page() {
 		}
 
 		// WP-UserOnline Stats		
-		if(function_exists('useronline')) {
+		if(function_exists('useronline') && $stats_display['useronline'] == 1) {
 			$temp_stats .= '<p><b>WP-UserOnline</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><b>'.get_useronline('', '', false).'</b> User(s) Online Now.</li>'."\n";
@@ -564,83 +429,105 @@ function stats_page() {
 			$temp_stats .= '</ul>'."\n";
 		}
 		
-		// Top 10 Stats
-		$temp_stats .= '<h2 class="pagetitle">Top 10 Stats</h2>'."\n";
+		// Top Stats
+		if($stats_display['recent_posts'] == 1 || $stats_display['recent_commtents'] == 1 || $stats_display['commented_post'] == 1 || $stats_display['emailed_most'] == 1 || $stats_display['rated_highest'] == 1 || $stats_display['rated_most'] == 1 || $stats_display['viewed_most'] == 1) {
+			$temp_stats .= '<h2>Top '.$stats_mostlimit.' Stats</h2>'."\n";
+		}
 
-		// 10 Recent Posts
-		$temp_stats .= '<p><b>10 Recent Posts</b></p>'."\n";
-		$temp_stats .= '<ul>'."\n";
-		$temp_stats .= get_recentposts('', 10, false);
-		$temp_stats .= '</ul>'."\n";
-		
-		// 10 Recent Comments
-		$temp_stats .= '<p><b>10 Recent Comments</b></p>'."\n";
-		$temp_stats .= '<ul>'."\n";
-		$temp_stats .= get_recentcomments('', 10, false);
-		$temp_stats .= '</ul>'."\n";
-
-		// 10 Most Commented Post
-		$temp_stats .= '<p><b>10 Most Commented Post</b></p>'."\n";
-		$temp_stats .= '<ul>'."\n";
-		$temp_stats .= get_mostcommented('', 10, 0, false);
-		$temp_stats .= '</ul>'."\n";
-
-		// WP-EMail (10 Most EMailed Post)
-		if(function_exists('wp_email')) {
-			$temp_stats .= '<p><b>10 Most Emailed Post</b></p>'."\n";
+		// Recent Posts
+		if($stats_display['recent_posts'] == 1) {
+			$temp_stats .= '<p><b>'.$stats_mostlimit.' Recent Posts</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= get_mostemailed('', 10, 0, false);
+			$temp_stats .= get_recentposts('', $stats_mostlimit, false);
+			$temp_stats .= '</ul>'."\n";
+		}
+
+		// Recent Comments
+		if($stats_display['recent_commtents'] == 1) {
+			$temp_stats .= '<p><b>'.$stats_mostlimit.' Recent Comments</b></p>'."\n";
+			$temp_stats .= '<ul>'."\n";
+			$temp_stats .= get_recentcomments('', $stats_mostlimit, false);
+			$temp_stats .= '</ul>'."\n";
+		}
+
+		// Most Commented Post
+		if($stats_display['commented_post'] == 1) {
+			$temp_stats .= '<p><b>'.$stats_mostlimit.' Most Commented Post</b></p>'."\n";
+			$temp_stats .= '<ul>'."\n";
+			$temp_stats .= get_mostcommented('', $stats_mostlimit, 0, false);
+			$temp_stats .= '</ul>'."\n";
+		}
+
+		// WP-EMail (Most EMailed Post)
+		if(function_exists('wp_email') && $stats_display['emailed_most'] == 1) {
+			$temp_stats .= '<p><b>'.$stats_mostlimit.' Most Emailed Post</b></p>'."\n";
+			$temp_stats .= '<ul>'."\n";
+			$temp_stats .= get_mostemailed('', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";
 		}
 		
-		// WP-PostRatings (10 Highest Rated Post) (10 Most Rated Post)
+		// WP-PostRatings (Highest Rated Post) (Most Rated Post)
 		if(function_exists('the_ratings')) {
-			$temp_stats .= '<p><b>10 Highest Rated Post</b></p>'."\n";
-			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= get_highest_rated('', 10, 0, false);
-			$temp_stats .= '</ul>'."\n";
-			$temp_stats .= '<p><b>10 Most Rated Post</b></p>'."\n";
-			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= get_most_rated('', 10, 0, false);
-			$temp_stats .= '</ul>'."\n";
+			if($stats_display['rated_highest'] == 1) {
+				$temp_stats .= '<p><b>'.$stats_mostlimit.' Highest Rated Post</b></p>'."\n";
+				$temp_stats .= '<ul>'."\n";
+				$temp_stats .= get_highest_rated('', $stats_mostlimit, 0, false);
+				$temp_stats .= '</ul>'."\n";
+			}
+			if($stats_display['rated_most'] == 1) {
+				$temp_stats .= '<p><b>'.$stats_mostlimit.' Most Rated Post</b></p>'."\n";
+				$temp_stats .= '<ul>'."\n";
+				$temp_stats .= get_most_rated('', $stats_mostlimit, 0, false);
+				$temp_stats .= '</ul>'."\n";
+			}
 		}
 		
-		// WP-PostViews (10 Most Viewed Post)
-		if(function_exists('the_views')) {
-			$temp_stats .= '<p><b>10 Most Viewed Post</b></p>'."\n";
+		// WP-PostViews (Most Viewed Post)
+		if(function_exists('the_views') && $stats_display['viewed_most'] == 1) {
+			$temp_stats .= '<p><b>'.$stats_mostlimit.' Most Viewed Post</b></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= get_most_viewed('', 10, 0, false);
+			$temp_stats .= get_most_viewed('', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";
 		}
 		
 		// Author Stats
-		$temp_stats .= '<h2 class="pagetitle">Authors Stats</h2>'."\n";
-		$temp_stats .= '<p><b>Authors</b></p>'."\n";
-		$temp_stats .= '<ol>'."\n";
-		$temp_stats .= get_authorsstats(false);
-		$temp_stats .= '</ol>'."\n";
+		if($stats_display['authors'] == 1) {
+			$temp_stats .= '<h2>Authors Stats</h2>'."\n";
+			$temp_stats .= '<p><b>Authors</b></p>'."\n";
+			$temp_stats .= '<ol>'."\n";
+			$temp_stats .= get_authorsstats(false);
+			$temp_stats .= '</ol>'."\n";
+		}
 		
 		// Comments' Members Stats
-		$temp_stats .= '<h2 class="pagetitle">Comments\' Members Stats</h2>'."\n";
-		$temp_stats .= '<p><b>Comment Members</b></p>'."\n";
-		$temp_stats .= '<ol>'."\n";
-		$temp_stats .= get_commentmembersstats(-1, false);
-		$temp_stats .= '</ol>'."\n";
-		
+		if($stats_display['comment_members'] == 1) {
+			$temp_stats .= '<h2>Comments\' Members Stats</h2>'."\n";
+			$temp_stats .= '<p><b>Comment Members</b></p>'."\n";
+			$temp_stats .= '<ol>'."\n";
+			$temp_stats .= get_commentmembersstats(-1, false);
+			$temp_stats .= '</ol>'."\n";
+		}
+
 		// Misc Stats
-		$temp_stats .= '<h2 class="pagetitle">Misc Stats</h2>'."\n";
+		if($stats_display['post_cats'] == 1 || $stats_display['link_cats'] == 1) {
+			$temp_stats .= '<h2>Misc Stats</h2>'."\n";
+		}
 
 		// Post Categories
-		$temp_stats .= '<p><b>Post Categories</b></p>'."\n";
-		$temp_stats .= '<ul>'."\n";
-		$temp_stats .= list_cats(1,'All','name','asc','',true,0,1,0,1,true,0,0,1,'','','',true);
-		$temp_stats .= '</ul>'."\n";
+		if($stats_display['post_cats'] == 1) {
+			$temp_stats .= '<p><b>Post Categories</b></p>'."\n";
+			$temp_stats .= '<ul>'."\n";
+			$temp_stats .= list_cats(1,'All','name','asc','',true,0,1,0,1,true,0,0,1,'','','',true);
+			$temp_stats .= '</ul>'."\n";
+		}
 
 		// Link Categories
-		$temp_stats .= '<p><b>Link Categories</b></p>'."\n";
-		$temp_stats .= '<ul>'."\n";
-		$temp_stats .= get_linkcats(false);
-		$temp_stats .= '</ul>'."\n";
+		if($stats_display['link_cats'] == 1) {
+			$temp_stats .= '<p><b>Link Categories</b></p>'."\n";
+			$temp_stats .= '<ul>'."\n";
+			$temp_stats .= get_linkcats(false);
+			$temp_stats .= '</ul>'."\n";
+		}
 
 	// Displaying Comments Posted By User
 	} else {
@@ -667,7 +554,7 @@ function stats_page() {
 		// Getting The Comments
 		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.ID, comment_author, comment_date, comment_content, ID, comment_ID, post_date, post_title, post_name, post_password FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
 
-		$temp_stats .= '<h2 class="pagetitle">Comments Posted By '.$comment_author.'</h2>'."\n";
+		$temp_stats .= '<h2>Comments Posted By '.$comment_author.'</h2>'."\n";
 		$temp_stats .= '<p>Displaying <b>'.$displayonpage.'</b> To <b>'.$maxonpage.'</b> Of <b>'.$totalcomments.'</b> Comments</p>'."\n";
 
 		// Get Comments
@@ -762,6 +649,9 @@ function stats_page() {
 add_action('activate_stats/stats.php', 'stats_init');
 function stats_init() {
 	global $wpdb;
+	$stats_display = array('total_stats'  => 1, 'email'  => 1, 'polls' => 1, 'ratings' => 1, 'views' => 1, 'useronline' => 1, 'recent_posts' => 1, 'recent_commtents' => 1, 'commented_post' => 1, 'emailed_most' => 1, 'rated_highest' => 1, 'rated_most' => 1, 'viewed_most' => 1, 'authors' => 1, 'comment_members' => 1, 'post_cats' => 1, 'link_cats' => 1);  
+	add_option('stats_mostlimit', '10', 'Stats Most Limit');
+	add_option('stats_display', $stats_display, 'Stats To Display');
 	add_option('stats_url', get_settings('siteurl').'/stats/', 'Stats URL');
 }
 ?>

@@ -223,7 +223,7 @@ function widget_stats_init() {
 		echo '<p style="text-align: left;"><input type="text" id="snippet_chars" name="snippet_chars" value="'.$options['snippet_chars'].'" size="3" maxlength="3" /></p>'."\n";
 		echo '<p style="text-align: left;"><label for="most_limit">Most Limit:</label>&nbsp;&nbsp;&nbsp;'."\n";
 		echo '<p style="text-align: left;"><input type="text" id="most_limit" name="most_limit" value="'.$options['most_limit'].'" size="2" maxlength="2" /></p>'."\n";
-		echo '<p style="text-align: left;"><label for="show_link">Show Link To Full Stats (wp-stats.php)?</label>&nbsp;&nbsp;&nbsp;'."\n";
+		echo '<p style="text-align: left;"><label for="show_link">Show Link To Full Stats?</label>&nbsp;&nbsp;&nbsp;'."\n";
 		echo '<p style="text-align: left;">';
 		echo '<input type="radio" id="show_link" name="show_link" value="1"';
 		checked(1, intval($options['show_link']));

@@ -78,9 +78,9 @@ if($_POST['Submit']) {
 				 <tr valign="top">
 					<th align="left" width="30%"><?php _e('Type Of Stats To Display'); ?></th>
 					<td align="left">
-						<p><b>General Stats</b></p>
+						<p><strong>General Stats</strong></p>
 						<input type="checkbox" name="stats_display[]" value="total_stats"<?php checked(1, $stats_display['total_stats']); ?> />&nbsp;&nbsp;Total<br />
-						<p><b>Plugin Stats</b></p>
+						<p><strong>Plugin Stats</strong></p>
 						<?php 
 							if(function_exists('wp_email')) {
 								echo '<input type="checkbox" name="stats_display[]" value="email"';
@@ -108,7 +108,7 @@ if($_POST['Submit']) {
 								echo ' />&nbsp;&nbsp;WP-UserOnline<br />'."\n";
 							}
 						?>
-						<p><b>Top <?php echo get_settings('stats_mostlimit'); ?> Stats</b></p>
+						<p><strong>Top <?php echo get_settings('stats_mostlimit'); ?> Stats</strong></p>
 						<input type="checkbox" name="stats_display[]" value="recent_posts"<?php checked(1, $stats_display['recent_posts']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> Most Recent Posts<br />
 						<input type="checkbox" name="stats_display[]" value="recent_commtents"<?php checked(1, $stats_display['recent_commtents']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> Most Recent Comments<br />
 						<input type="checkbox" name="stats_display[]" value="commented_post"<?php checked(1, $stats_display['commented_post']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> Most Commented Posts<br />
@@ -132,11 +132,11 @@ if($_POST['Submit']) {
 								echo ' />&nbsp;&nbsp;'.$stats_mostlimit.' Most Viewed Posts<br />'."\n";
 							}
 						?>
-						<p><b>Authors Stats</b></p>
+						<p><strong>Authors Stats</strong></p>
 						<input type="checkbox" name="stats_display[]" value="authors"<?php checked(1, $stats_display['authors']); ?> />&nbsp;&nbsp;Authors<br />
-						<p><b>Comments' Members Stats</b></p>
+						<p><strong>Comments' Members Stats</strong></p>
 						<input type="checkbox" name="stats_display[]" value="comment_members"<?php checked(1, $stats_display['comment_members']); ?> />&nbsp;&nbsp;Comment Members<br />
-						<p><b>Misc Stats</b></p>
+						<p><strong>Misc Stats</strong></p>
 						<input type="checkbox" name="stats_display[]" value="post_cats"<?php checked(1, $stats_display['post_cats']); ?> />&nbsp;&nbsp;Post Categories<br />
 						<input type="checkbox" name="stats_display[]" value="link_cats"<?php checked(1, $stats_display['link_cats']); ?> />&nbsp;&nbsp;Link Categories<br />
 					</td>

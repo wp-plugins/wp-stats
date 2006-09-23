@@ -46,32 +46,32 @@ function widget_stats_init() {
 			echo $before_widget.$before_title.$title.$after_title;
 			if(!empty($stats_total_options)) {
 				echo '<ul>'."\n";
-				echo '<li><b>Total Stats</b></li>'."\n";
+				echo '<li><strong>Total Stats</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				// Total Authors
 				if($stats_total_options['authors'] == 1) {
-					echo '<li><b>'.get_totalauthors(false).'</b> Authors</li>'."\n";
+					echo '<li><strong>'.get_totalauthors(false).'</strong> Authors</li>'."\n";
 				}
 				// Total Posts
 				if($stats_total_options['posts'] == 1) {
-					echo '<li><b>'.get_totalposts(false).'</b> Posts</li>'."\n";
+					echo '<li><strong>'.get_totalposts(false).'</strong> Posts</li>'."\n";
 				}
 				// Total Pages
 				if($stats_total_options['pages'] == 1) {
-					echo '<li><b>'.get_totalpages(false).'</b> Pages</li>'."\n";
+					echo '<li><strong>'.get_totalpages(false).'</strong> Pages</li>'."\n";
 				}
 				// Total Comments
 				if($stats_total_options['comments'] == 1) {
-					echo '<li><b>'.get_totalcomments(false).'</b> Comments</li>'."\n";
+					echo '<li><strong>'.get_totalcomments(false).'</strong> Comments</li>'."\n";
 				}
 				// Total Comment Posters
 				if($stats_total_options['commenters'] == 1) {
-					echo '<li><b>'.get_totalcommentposters(false).'</b> Comment Posters</li>'."\n";
+					echo '<li><strong>'.get_totalcommentposters(false).'</strong> Comment Posters</li>'."\n";
 				}
 				// Total Links
 				if($stats_total_options['links'] == 1) {
-					echo '<li><b>'.get_totallinks(false).'</b> Links</li>'."\n";
+					echo '<li><strong>'.get_totallinks(false).'</strong> Links</li>'."\n";
 				}
 				echo '</ul>'."\n";
 				echo '</li>'."\n";
@@ -80,7 +80,7 @@ function widget_stats_init() {
 			// Most Commented
 			if($stats_most_options['comments'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><b>'.$limit.' Most Commented</b></li>'."\n";
+				echo '<li><strong>'.$limit.' Most Commented</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				get_mostcommented('', $limit, $chars);
@@ -91,7 +91,7 @@ function widget_stats_init() {
 			// Most Emailed
 			if($stats_most_options['emails'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><b>'.$limit.' Most Emailed</b></li>'."\n";
+				echo '<li><strong>'.$limit.' Most Emailed</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				get_mostemailed('', $limit, $chars);
@@ -102,7 +102,7 @@ function widget_stats_init() {
 			// Highest Rated
 			if($stats_most_options['ratings_highest'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><b>'.$limit.' Highest Rated</b></li>'."\n";
+				echo '<li><strong>'.$limit.' Highest Rated</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				get_highest_rated('', $limit, $chars);
@@ -113,7 +113,7 @@ function widget_stats_init() {
 			// Most Rated
 			if($stats_most_options['ratings_highest'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><b>'.$limit.' Most Rated</b></li>'."\n";
+				echo '<li><strong>'.$limit.' Most Rated</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				get_most_rated('', $limit, $chars);
@@ -124,7 +124,7 @@ function widget_stats_init() {
 			// Most Viewed
 			if($stats_most_options['views'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><b>'.$limit.' Most Viewed</b></li>'."\n";
+				echo '<li><strong>'.$limit.' Most Viewed</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
 				get_most_viewed('', $limit, $chars);

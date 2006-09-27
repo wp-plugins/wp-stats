@@ -111,7 +111,7 @@ function widget_stats_init() {
 				echo '</ul>'."\n";
 			}
 			// Most Rated
-			if($stats_most_options['ratings_highest'] == 1) {
+			if($stats_most_options['ratings_most'] == 1) {
 				echo '<ul>'."\n";
 				echo '<li><strong>'.$limit.' Most Rated</strong></li>'."\n";
 				echo '<li>'."\n";

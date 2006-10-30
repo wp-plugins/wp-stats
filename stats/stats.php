@@ -3,7 +3,7 @@
 Plugin Name: WP-Stats
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Display Your WordPress Statistics.
-Version: 2.05
+Version: 2.06
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -27,14 +27,18 @@ Author URI: http://www.lesterchan.net
 */
 
 
+### Create Text Domain For Translation
+load_plugin_textdomain('wp-stats', 'wp-content/plugins/stats');
+
+
 ### Function: WP-Stats Menu
 add_action('admin_menu', 'stats_menu');
 function stats_menu() {
 	if (function_exists('add_submenu_page')) {
-		add_submenu_page('index.php',  __('WP-Stats'),  __('WP-Stats'), 1, 'stats/stats.php', 'display_stats');
+		add_submenu_page('index.php',  __('WP-Stats', 'wp-stats'),  __('WP-Stats', 'wp-stats'), 1, 'stats/stats.php', 'display_stats');
 	}
 	if (function_exists('add_options_page')) {
-		add_options_page(__('Stats'), __('Stats'), 'manage_options', 'stats/stats-options.php');
+		add_options_page(__('Stats', 'wp-stats'), __('Stats', 'wp-stats'), 'manage_options', 'stats/stats-options.php');
 	}
 }
 
@@ -139,7 +143,7 @@ function get_recentposts($mode = '', $limit = 10, $display = true) {
 			$temp .= "<li>$post_date - <a href=\"".get_permalink()."\">$post_title</a> ($display_name)</li>\n";
 		}
 	} else {
-		$temp = '<li>'.__('N/A').'</li>';
+		$temp = '<li>'.__('N/A', 'wp-stats').'</li>';
 	}
 	if($display) {
 		echo $temp;
@@ -170,7 +174,7 @@ function get_recentcomments($mode = '', $limit = 10, $display = true) {
 			$temp .= "<li>$comment_date - $comment_author (<a href=\"".get_permalink()."\">$post_title</a>)</li>\n";
 		}
 	} else {
-		$temp = '<li>'.__('N/A').'</li>';
+		$temp = '<li>'.__('N/A', 'wp-stats').'</li>';
 	}
 	if($display) {
 		echo $temp;
@@ -198,17 +202,17 @@ function get_mostcommented($mode = '', $limit = 10, $chars = 0, $display = true)
 			foreach ($mostcommenteds as $post) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));
 				$comment_total = intval($post->comment_total);
-				$temp .= "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> - $comment_total ".__('comments')."</li>";
+				$temp .= "<li><a href=\"".get_permalink()."\">".snippet_chars($post_title, $chars)."</a> - $comment_total ".__('comments', 'wp-stats')."</li>";
 			}
 		} else {
 			foreach ($mostcommenteds as $post) {
 				$post_title = htmlspecialchars(stripslashes($post->post_title));
 				$comment_total = intval($post->comment_total);
-				$temp .= "<li><a href=\"".get_permalink()."\">$post_title</a> - $comment_total ".__('comments')."</li>";
+				$temp .= "<li><a href=\"".get_permalink()."\">$post_title</a> - $comment_total ".__('comments', 'wp-stats')."</li>";
 			}
 		}
 	} else {
-		$temp = '<li>'.__('N/A').'</li>';
+		$temp = '<li>'.__('N/A', 'wp-stats').'</li>';
 	}
 	if($display) {
 		echo $temp;
@@ -245,7 +249,7 @@ function get_authorsstats($display = true) {
 				}
 		}
 	} else {
-		$temp = '<li>'.__('N/A').'</li>';
+		$temp = '<li>'.__('N/A', 'wp-stats').'</li>';
 	}
 	if($display) {
 		echo $temp;
@@ -274,7 +278,7 @@ function get_commentmembersstats($threshhold = -1, $display = true) {
 				}
 		}
 	} else {
-		$temp = '<li>'.__('N/A').'</li>';
+		$temp = '<li>'.__('N/A', 'wp-stats').'</li>';
 	}
 	if($display) {
 		echo $temp;
@@ -296,7 +300,7 @@ function get_linkcats($display = true) {
 				$temp .= "<li>$cat_name ($total_links)</li>\n";
 		}
 	} else {
-		$temp = '<li>'.__('N/A').'</li>';
+		$temp = '<li>'.__('N/A', 'wp-stats').'</li>';
 	}
 	if($display) {
 		echo $temp;
@@ -307,13 +311,15 @@ function get_linkcats($display = true) {
 
 
 ### Function: Snippet Characters
-function snippet_chars($text, $length = 0) {
-	$text = htmlspecialchars_decode($text);
-	 if (strlen($text) > $length){       
-		return htmlspecialchars(substr($text,0,$length)).'...';             
-	 } else {
-		return htmlspecialchars($text);
-	 }
+if(!function_exists('snippet_chars')) {
+	function snippet_chars($text, $length = 0) {
+		$text = htmlspecialchars_decode($text);
+		 if (strlen($text) > $length){       
+			return htmlspecialchars(substr($text,0,$length)).'...';             
+		 } else {
+			return htmlspecialchars($text);
+		 }
+	}
 }
 
 
@@ -365,78 +371,78 @@ function stats_page() {
 	if(empty($comment_author)) {
 		// General Stats
 		if($stats_display['total_stats'] == 1) {
-			$temp_stats .= '<h2>General Stats</h2>'."\n";
-			$temp_stats .= '<p><strong>Total Stats</strong></p>'."\n";
+			$temp_stats .= '<h2>'.__('General Stats', 'wp-stats').'</h2>'."\n";
+			$temp_stats .= '<p><strong>'.__('Total Stats', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalauthors(false).'</strong> Authors To This Blog.</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalposts(false).'</strong> Posts Were Posted.</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalpages(false).'</strong> Pages Were Created.</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalcomments(false).'</strong> Comments Were Posted.</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalcommentposters(false).'</strong> Different Nicks Were Represented In The Comments.</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totallinks(false).'</strong> Links Were Added.</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalauthors(false).'</strong> '.__('Authors To This Blog.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalposts(false).'</strong> '.__('Posts Were Posted.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalpages(false).'</strong> '.__('Pages Were Created.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalcomments(false).'</strong> '.__('Comments Were Posted.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalcommentposters(false).'</strong> '.__('Different Nicks Were Represented In The Comments.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totallinks(false).'</strong> '.__('Links Were Added', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '</ul>'."\n";
 		}
 
 		// Plugin Stats
 		if($stats_display['email'] == 1 || $stats_display['polls'] == 1 || $stats_display['ratings'] == 1 || $stats_display['views'] || $stats_display['useronline'] == 1) {
-			$temp_stats .= '<h2>Plugins Stats</h2>'."\n";
+			$temp_stats .= '<h2>'.__('Plugins Stats', 'wp-stats').'</h2>'."\n";
 		}
 
 		// WP-EMail Stats		
 		if(function_exists('wp_email') && $stats_display['email'] == 1) {
-			$temp_stats .= '<p><strong>WP-EMail</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.__('WP-EMail', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_emails(false).'</strong> Emails Were Sent.</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_emails_success(false).'</strong> Emails Were Sent Successfully.</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_emails_failed(false).'</strong> Emails Failed To Send.</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_emails(false).'</strong> '.__('Emails Were Sent.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_emails_success(false).'</strong> '.__('Emails Were Sent Successfully.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_emails_failed(false).'</strong> '.__('Emails Failed To Send.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '</ul>'."\n";
 		}
 		
 		// WP-Polls Stats		
 		if(function_exists('get_poll') && $stats_display['polls'] == 1) {
-			$temp_stats .= '<p><strong>WP-Polls</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.__('WP-Polls', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_pollquestions(false).'</strong> Polls Were Created.</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_pollanswers(false).'</strong> Polls\' Answers Were Given.</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_pollvotes(false).'</strong> Votes Were Casted.</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_pollquestions(false).'</strong> '.__('Polls Were Created.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_pollanswers(false).'</strong> '.__('Polls\' Answers Were Given.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_pollvotes(false).'</strong> '.__('Votes Were Casted.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '</ul>'."\n";
 		}
 		
 		// WP-PostRatings Stats		
 		if(function_exists('the_ratings') && $stats_display['ratings'] == 1) {
-			$temp_stats .= '<p><strong>WP-PostRatings</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.__('WP-PostRatings', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_ratings_votes(false).'</strong> Votes Were Casted.</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_ratings_users(false).'</strong> Users Casted Their Vote.</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_ratings_votes(false).'</strong> '.__('Votes Were Casted.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_ratings_users(false).'</strong> '.__('Users Casted Their Vote.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '</ul>'."\n";
 		}
 		
 		// WP-PostViews Stats		
 		if(function_exists('the_views') && $stats_display['views'] == 1) {
-			$temp_stats .= '<p><strong>WP-PostViews</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.__('WP-PostViews', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalviews(false).'</strong> Views Were Generated.</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalviews(false).'</strong> '.__('Views Were Generated.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '</ul>'."\n";
 		}
 
 		// WP-UserOnline Stats		
 		if(function_exists('useronline') && $stats_display['useronline'] == 1) {
-			$temp_stats .= '<p><strong>WP-UserOnline</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.__('WP-UserOnline', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_useronline('', '', false).'</strong> User(s) Online Now.</li>'."\n";
-			$temp_stats .= '<li>Most users ever online was <strong>'.get_most_useronline(false).'</strong>.</li>'."\n";
-			$temp_stats .= '<li>On <strong>'.get_most_useronline_date(false).'</strong>.</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_useronline('', '', false).'</strong> '.__('User(s) Online Now.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li>'.__('Most users ever online was', 'wp-stats').' <strong>'.get_most_useronline(false).'</strong>.</li>'."\n";
+			$temp_stats .= '<li>'.__('On', 'wp-stats').' <strong>'.get_most_useronline_date(false).'</strong>.</li>'."\n";
 			$temp_stats .= '</ul>'."\n";
 		}
 		
 		// Top Stats
 		if($stats_display['recent_posts'] == 1 || $stats_display['recent_commtents'] == 1 || $stats_display['commented_post'] == 1 || $stats_display['emailed_most'] == 1 || $stats_display['rated_highest'] == 1 || $stats_display['rated_most'] == 1 || $stats_display['viewed_most'] == 1) {
-			$temp_stats .= '<h2>Top '.$stats_mostlimit.' Stats</h2>'."\n";
+			$temp_stats .= '<h2>'.sprintf(__('Top %s Stats', 'wp-stats'), $stats_mostlimit).'</h2>'."\n";
 		}
 
 		// Recent Posts
 		if($stats_display['recent_posts'] == 1) {
-			$temp_stats .= '<p><strong>'.$stats_mostlimit.' Recent Posts</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Recent Posts', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_recentposts('', $stats_mostlimit, false);
 			$temp_stats .= '</ul>'."\n";
@@ -444,7 +450,7 @@ function stats_page() {
 
 		// Recent Comments
 		if($stats_display['recent_commtents'] == 1) {
-			$temp_stats .= '<p><strong>'.$stats_mostlimit.' Recent Comments</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Recent Comments', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_recentcomments('', $stats_mostlimit, false);
 			$temp_stats .= '</ul>'."\n";
@@ -452,7 +458,7 @@ function stats_page() {
 
 		// Most Commented Post
 		if($stats_display['commented_post'] == 1) {
-			$temp_stats .= '<p><strong>'.$stats_mostlimit.' Most Commented Post</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Most Commented Post', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_mostcommented('', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";
@@ -460,7 +466,7 @@ function stats_page() {
 
 		// WP-EMail (Most EMailed Post)
 		if(function_exists('wp_email') && $stats_display['emailed_most'] == 1) {
-			$temp_stats .= '<p><strong>'.$stats_mostlimit.' Most Emailed Post</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Most Emailed Post', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_mostemailed('', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";
@@ -469,13 +475,13 @@ function stats_page() {
 		// WP-PostRatings (Highest Rated Post) (Most Rated Post)
 		if(function_exists('the_ratings')) {
 			if($stats_display['rated_highest'] == 1) {
-				$temp_stats .= '<p><strong>'.$stats_mostlimit.' Highest Rated Post</strong></p>'."\n";
+				$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Highest Rated Post', 'wp-stats').'</strong></p>'."\n";
 				$temp_stats .= '<ul>'."\n";
 				$temp_stats .= get_highest_rated('', $stats_mostlimit, 0, false);
 				$temp_stats .= '</ul>'."\n";
 			}
 			if($stats_display['rated_most'] == 1) {
-				$temp_stats .= '<p><strong>'.$stats_mostlimit.' Most Rated Post</strong></p>'."\n";
+				$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Most Rated Post', 'wp-stats').'</strong></p>'."\n";
 				$temp_stats .= '<ul>'."\n";
 				$temp_stats .= get_most_rated('', $stats_mostlimit, 0, false);
 				$temp_stats .= '</ul>'."\n";
@@ -484,7 +490,7 @@ function stats_page() {
 		
 		// WP-PostViews (Most Viewed Post)
 		if(function_exists('the_views') && $stats_display['viewed_most'] == 1) {
-			$temp_stats .= '<p><strong>'.$stats_mostlimit.' Most Viewed Post</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Most Viewed Post', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_most_viewed('', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";
@@ -492,8 +498,8 @@ function stats_page() {
 		
 		// Author Stats
 		if($stats_display['authors'] == 1) {
-			$temp_stats .= '<h2>Authors Stats</h2>'."\n";
-			$temp_stats .= '<p><strong>Authors</strong></p>'."\n";
+			$temp_stats .= '<h2>'.__('Authors Stats', 'wp-stats').'</h2>'."\n";
+			$temp_stats .= '<p><strong>'.__('Authors', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ol>'."\n";
 			$temp_stats .= get_authorsstats(false);
 			$temp_stats .= '</ol>'."\n";
@@ -501,8 +507,8 @@ function stats_page() {
 		
 		// Comments' Members Stats
 		if($stats_display['comment_members'] == 1) {
-			$temp_stats .= '<h2>Comments\' Members Stats</h2>'."\n";
-			$temp_stats .= '<p><strong>Comment Members</strong></p>'."\n";
+			$temp_stats .= '<h2>'.__('Comments\' Members Stats', 'wp-stats').'</h2>'."\n";
+			$temp_stats .= '<p><strong>'.__('Comment Members', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ol>'."\n";
 			$temp_stats .= get_commentmembersstats(-1, false);
 			$temp_stats .= '</ol>'."\n";
@@ -510,12 +516,12 @@ function stats_page() {
 
 		// Misc Stats
 		if($stats_display['post_cats'] == 1 || $stats_display['link_cats'] == 1) {
-			$temp_stats .= '<h2>Misc Stats</h2>'."\n";
+			$temp_stats .= '<h2>'.__('Misc Stats', 'wp-stats').'</h2>'."\n";
 		}
 
 		// Post Categories
 		if($stats_display['post_cats'] == 1) {
-			$temp_stats .= '<p><strong>Post Categories</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.__('Post Categories', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= list_cats(1,'All','name','asc','',true,0,1,0,1,true,0,0,1,'','','',true);
 			$temp_stats .= '</ul>'."\n";
@@ -523,7 +529,7 @@ function stats_page() {
 
 		// Link Categories
 		if($stats_display['link_cats'] == 1) {
-			$temp_stats .= '<p><strong>Link Categories</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.__('Link Categories', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_linkcats(false);
 			$temp_stats .= '</ul>'."\n";
@@ -554,8 +560,8 @@ function stats_page() {
 		// Getting The Comments
 		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.ID, comment_author, comment_date, comment_content, ID, comment_ID, post_date, post_title, post_name, post_password FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
 
-		$temp_stats .= '<h2>Comments Posted By '.$comment_author.'</h2>'."\n";
-		$temp_stats .= '<p>Displaying <strong>'.$displayonpage.'</strong> To <strong>'.$maxonpage.'</strong> Of <strong>'.$totalcomments.'</strong> Comments</p>'."\n";
+		$temp_stats .= '<h2>'.__('Comments Posted By', 'wp-stats').' '.$comment_author.'</h2>'."\n";
+		$temp_stats .= '<p>'.sprintf(__('Displaying <strong>%s</strong> To <strong>%t</strong> Of <strong>%u</strong> Comments', 'wp-stats'), $displayonpage, $maxonpage, $totalcomments).'</p>'."\n";
 
 		// Get Comments
 		if($gmz_comments) {
@@ -571,20 +577,20 @@ function stats_page() {
 				if(!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {
 					// If New Title, Print It Out
 					if($post_title != $cache_post_title) {
-						$temp_stats .= "<p><strong><a href=\"".get_permalink()."\" title=\"Posted On $post_date\">Protected: $post_title</a></strong></p>\n";
-						$temp_stats .= "<blockquote>Comments Protected</blockquote>\n";	
+						$temp_stats .= "<p><strong><a href=\"".get_permalink()."\" title=\"".__('Posted On', 'wp-stats')." $post_date\">".__('Protected', 'wp-stats').": $post_title</a></strong></p>\n";
+						$temp_stats .= '<blockquote>'.__('Comments Protected', 'wp-stats').'</blockquote>'."\n";	
 					}							
 				} else {
 					// If New Title, Print It Out
 					if($post_title != $cache_post_title) {
-						$temp_stats .= "<p><strong><a href=\"".get_permalink()."\" title=\"Posted On $post_date\">$post_title</a></strong></p>\n";
+						$temp_stats .= "<p><strong><a href=\"".get_permalink()."\" title=\"".__('Posted On', 'wp-stats')." $post_date\">$post_title</a></strong></p>\n";
 					}
-					$temp_stats .= "<blockquote>$comment_content <a href=\"".get_permalink()."#comment-$comment_id\">Comment</a> Posted By <strong>$comment_author2</strong> On $comment_date</blockquote>\n";						
+					$temp_stats .= "<blockquote>$comment_content <a href=\"".get_permalink()."#comment-$comment_id\">Comment</a> ".__('Posted By', 'wp-stats')." <strong>$comment_author2</strong> ".__('On', 'wp-stats')." $comment_date</blockquote>\n";						
 				}
 				$cache_post_title = $post_title;
 			}
 		} else {
-				$temp_stats .= "<p>$comment_author has not made any comments yet.</p>\n";
+				$temp_stats .= "<p>$comment_author ".__('has not made any comments yet.', 'wp-stats')."</p>\n";
 		}
 
 		// If Total Pages Is More Than 1, Display Page Navigation
@@ -593,7 +599,7 @@ function stats_page() {
 			$temp_stats .= '<p>'."\n";
 			$temp_stats .= '<span style="float: left">'."\n";
 			if($page > 1 && ((($page*$perpage)-($perpage-1)) < $totalcomments)) {
-				$temp_stats .= '<strong>&laquo;</strong> <a href="'.stats_page_link($comment_author_link, $page-1).'" title="&laquo; '.__('Previous Page').'">'.__('Previous Page').'</a>'."\n";
+				$temp_stats .= '<strong>&laquo;</strong> <a href="'.stats_page_link($comment_author_link, $page-1).'" title="&laquo; '.__('Previous Page', 'wp-stats').'">'.__('Previous Page', 'wp-stats').'</a>'."\n";
 			} else {
 				$temp_stats .= '&nbsp;'."\n";
 			}
@@ -601,7 +607,7 @@ function stats_page() {
 			// Next Page
 			$temp_stats .= '<span style="float: right">'."\n";
 			if($page >= 1 && ((($page*$perpage)+1) <  $totalcomments)) {
-				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $page+1).'" title="'.__('Next Page').' &raquo;">'.__('Next Page').'</a> <strong>&raquo;</strong>'."\n";
+				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $page+1).'" title="'.__('Next Page', 'wp-stats').' &raquo;">'.__('Next Page', 'wp-stats').'</a> <strong>&raquo;</strong>'."\n";
 			} else {
 				$temp_stats .= '&nbsp;'."\n";
 			}
@@ -610,31 +616,31 @@ function stats_page() {
 			// Pages
 			$temp_stats .= '<br style="clear: both" />'."\n";
 			$temp_stats .= '<p align="center">'."\n";
-			$temp_stats .= 'Pages ('.$totalpages.') :'."\n";
+			$temp_stats .= sprintf(__('Pages (%s)', 'wp-stats'), $totalpages).':'."\n";
 			if ($page >= 4) {
-				$temp_stats .= '<strong><a href="'.stats_page_link($comment_author_link).'" title="'.__('Go to First Page').'">&laquo; '.__('First').'</a></strong> ... '."\n";
+				$temp_stats .= '<strong><a href="'.stats_page_link($comment_author_link).'" title="'.__('Go to First Page', 'wp-stats').'">&laquo; '.__('First', 'wp-stats').'</a></strong> ... '."\n";
 			}
 			if($page > 1) {
-				$temp_stats .= ' <strong><a href="'.stats_page_link($comment_author_link, $page-1).'" title="&laquo; '.__('Go to Page').' '.($page-1).'">&laquo;</a></strong> '."\n";
+				$temp_stats .= ' <strong><a href="'.stats_page_link($comment_author_link, $page-1).'" title="&laquo; '.__('Go to Page', 'wp-stats').' '.($page-1).'">&laquo;</a></strong> '."\n";
 			}
 			for($i = $page - 2 ; $i  <= $page +2; $i++) {
 				if ($i >= 1 && $i <= $totalpages) {
 					if($i == $page) {
 						$temp_stats .= "<strong>[$i]</strong> "."\n";
 					} else {
-						$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $i).'" title="'.__('Page').' '.$i.'">'.$i.'</a> '."\n";
+						$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $i).'" title="'.__('Page', 'wp-stats').' '.$i.'">'.$i.'</a> '."\n";
 					}
 				}
 			}
 			if($page < $totalpages) {
-				$temp_stats .= ' <strong><a href="'.stats_page_link($comment_author_link, $page+1).'" title="'.__('Go to Page').' '.($page+1).' &raquo;">&raquo;</a></strong> '."\n";
+				$temp_stats .= ' <strong><a href="'.stats_page_link($comment_author_link, $page+1).'" title="'.__('Go to Page', 'wp-stats').' '.($page+1).' &raquo;">&raquo;</a></strong> '."\n";
 			}
 			if (($page+2) < $totalpages) {
-				$temp_stats .= ' ... <strong><a href="'.stats_page_link($comment_author_link, $totalpages).'" title="'.__('Go to Last Page').'">'.__('Last').' &raquo;</a></strong>'."\n";
+				$temp_stats .= ' ... <strong><a href="'.stats_page_link($comment_author_link, $totalpages).'" title="'.__('Go to Last Page', 'wp-stats').'">'.__('Last', 'wp-stats').' &raquo;</a></strong>'."\n";
 			}
 			$temp_stats .= '</p>'."\n";
 		}
-		$temp_stats .= '<p><strong>&laquo;&laquo;</strong> <a href="'.$stats_url.'">Back To Stats Page</a></p>'."\n";
+		$temp_stats .= '<p><strong>&laquo;&laquo;</strong> <a href="'.$stats_url.'">'.__('Back To Stats Page', 'wp-stats').' </a></p>'."\n";
 	} // End If
 	
 	// Assign Back $post

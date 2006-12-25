@@ -139,7 +139,7 @@ function get_recentposts($mode = '', $limit = 10, $display = true) {
 		foreach ($recentposts as $post) {
 			$post_title = htmlspecialchars(stripslashes($post->post_title));
 			$post_date = mysql2date('d.m.Y', $post->post_date);
-			$display_name = htmlspecialchars(stripslashes($post->display_name));
+			$display_name = stripslashes($post->display_name);
 			$temp .= "<li>$post_date - <a href=\"".get_permalink()."\">$post_title</a> ($display_name)</li>\n";
 		}
 	} else {

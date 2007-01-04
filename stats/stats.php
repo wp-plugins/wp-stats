@@ -562,7 +562,7 @@ function stats_page() {
 		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.ID, comment_author, comment_date, comment_content, ID, comment_ID, post_date, post_title, post_name, post_password FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND (post_status = 'publish' OR post_status = 'static') ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
 
 		$temp_stats .= '<h2>'.__('Comments Posted By', 'wp-stats').' '.$comment_author.'</h2>'."\n";
-		$temp_stats .= '<p>'.sprintf(__('Displaying <strong>%s</strong> To <strong>%t</strong> Of <strong>%u</strong> Comments', 'wp-stats'), $displayonpage, $maxonpage, $totalcomments).'</p>'."\n";
+		$temp_stats .= '<p>'.sprintf(__('Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Comments', 'wp-stats'), $displayonpage, $maxonpage, $totalcomments).'</p>'."\n";
 
 		// Get Comments
 		if($gmz_comments) {
@@ -579,14 +579,14 @@ function stats_page() {
 					// If New Title, Print It Out
 					if($post_title != $cache_post_title) {
 						$temp_stats .= "<p><strong><a href=\"".get_permalink()."\" title=\"".__('Posted On', 'wp-stats')." $post_date\">".__('Protected', 'wp-stats').": $post_title</a></strong></p>\n";
-						$temp_stats .= '<blockquote>'.__('Comments Protected', 'wp-stats').'</blockquote>'."\n";	
+						$temp_stats .= '<blockquote>'.__('Comments Protected', 'wp-stats').'</blockquote>';	
 					}							
 				} else {
 					// If New Title, Print It Out
 					if($post_title != $cache_post_title) {
 						$temp_stats .= "<p><strong><a href=\"".get_permalink()."\" title=\"".__('Posted On', 'wp-stats')." $post_date\">$post_title</a></strong></p>\n";
 					}
-					$temp_stats .= "<blockquote>$comment_content <a href=\"".get_permalink()."#comment-$comment_id\">Comment</a> ".__('Posted By', 'wp-stats')." <strong>$comment_author2</strong> ".__('On', 'wp-stats')." $comment_date</blockquote>\n";						
+					$temp_stats .= "<blockquote>$comment_content <a href=\"".get_permalink()."#comment-$comment_id\">Comment</a> ".__('Posted By', 'wp-stats')." <strong>$comment_author2</strong> ".__('On', 'wp-stats')." $comment_date</blockquote>";						
 				}
 				$cache_post_title = $post_title;
 			}
@@ -597,51 +597,51 @@ function stats_page() {
 		// If Total Pages Is More Than 1, Display Page Navigation
 		if($totalpages > 1) {
 			// Previous Page
-			$temp_stats .= '<p>'."\n";
-			$temp_stats .= '<span style="float: left">'."\n";
+			$temp_stats .= '<p>';
+			$temp_stats .= '<span style="float: left">';
 			if($page > 1 && ((($page*$perpage)-($perpage-1)) < $totalcomments)) {
-				$temp_stats .= '<strong>&laquo;</strong> <a href="'.stats_page_link($comment_author_link, $page-1).'" title="&laquo; '.__('Previous Page', 'wp-stats').'">'.__('Previous Page', 'wp-stats').'</a>'."\n";
+				$temp_stats .= '<strong>&laquo;</strong> <a href="'.stats_page_link($comment_author_link, $page-1).'" title="&laquo; '.__('Previous Page', 'wp-stats').'">'.__('Previous Page', 'wp-stats').'</a>';
 			} else {
-				$temp_stats .= '&nbsp;'."\n";
+				$temp_stats .= '&nbsp;';
 			}
-			$temp_stats .= '</span>'."\n";
+			$temp_stats .= '</span>';
 			// Next Page
-			$temp_stats .= '<span style="float: right">'."\n";
+			$temp_stats .= '<span style="float: right">';
 			if($page >= 1 && ((($page*$perpage)+1) <  $totalcomments)) {
-				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $page+1).'" title="'.__('Next Page', 'wp-stats').' &raquo;">'.__('Next Page', 'wp-stats').'</a> <strong>&raquo;</strong>'."\n";
+				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $page+1).'" title="'.__('Next Page', 'wp-stats').' &raquo;">'.__('Next Page', 'wp-stats').'</a> <strong>&raquo;</strong>';
 			} else {
-				$temp_stats .= '&nbsp;'."\n";
+				$temp_stats .= '&nbsp;';
 			}
-			$temp_stats .= '</span>'."\n";
-			$temp_stats .= '</p>'."\n";
+			$temp_stats .= '</span>';
+			$temp_stats .= '</p>';
 			// Pages
-			$temp_stats .= '<br style="clear: both" />'."\n";
-			$temp_stats .= '<p align="center">'."\n";
-			$temp_stats .= sprintf(__('Pages (%s)', 'wp-stats'), $totalpages).':'."\n";
+			$temp_stats .= '<br style="clear: both" />';
+			$temp_stats .= '<p align="center">';
+			$temp_stats .= sprintf(__('Pages (%s)', 'wp-stats'), $totalpages).': ';
 			if ($page >= 4) {
-				$temp_stats .= '<strong><a href="'.stats_page_link($comment_author_link).'" title="'.__('Go to First Page', 'wp-stats').'">&laquo; '.__('First', 'wp-stats').'</a></strong> ... '."\n";
+				$temp_stats .= '<strong><a href="'.stats_page_link($comment_author_link).'" title="'.__('Go to First Page', 'wp-stats').'">&laquo; '.__('First', 'wp-stats').'</a></strong> ... ';
 			}
 			if($page > 1) {
-				$temp_stats .= ' <strong><a href="'.stats_page_link($comment_author_link, $page-1).'" title="&laquo; '.__('Go to Page', 'wp-stats').' '.($page-1).'">&laquo;</a></strong> '."\n";
+				$temp_stats .= ' <strong><a href="'.stats_page_link($comment_author_link, $page-1).'" title="&laquo; '.__('Go to Page', 'wp-stats').' '.($page-1).'">&laquo;</a></strong> ';
 			}
 			for($i = $page - 2 ; $i  <= $page +2; $i++) {
 				if ($i >= 1 && $i <= $totalpages) {
 					if($i == $page) {
-						$temp_stats .= "<strong>[$i]</strong> "."\n";
+						$temp_stats .= "<strong>[$i]</strong> ";
 					} else {
-						$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $i).'" title="'.__('Page', 'wp-stats').' '.$i.'">'.$i.'</a> '."\n";
+						$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $i).'" title="'.__('Page', 'wp-stats').' '.$i.'">'.$i.'</a> ';
 					}
 				}
 			}
 			if($page < $totalpages) {
-				$temp_stats .= ' <strong><a href="'.stats_page_link($comment_author_link, $page+1).'" title="'.__('Go to Page', 'wp-stats').' '.($page+1).' &raquo;">&raquo;</a></strong> '."\n";
+				$temp_stats .= ' <strong><a href="'.stats_page_link($comment_author_link, $page+1).'" title="'.__('Go to Page', 'wp-stats').' '.($page+1).' &raquo;">&raquo;</a></strong> ';
 			}
 			if (($page+2) < $totalpages) {
-				$temp_stats .= ' ... <strong><a href="'.stats_page_link($comment_author_link, $totalpages).'" title="'.__('Go to Last Page', 'wp-stats').'">'.__('Last', 'wp-stats').' &raquo;</a></strong>'."\n";
+				$temp_stats .= ' ... <strong><a href="'.stats_page_link($comment_author_link, $totalpages).'" title="'.__('Go to Last Page', 'wp-stats').'">'.__('Last', 'wp-stats').' &raquo;</a></strong>';
 			}
 			$temp_stats .= '</p>'."\n";
 		}
-		$temp_stats .= '<p><strong>&laquo;&laquo;</strong> <a href="'.$stats_url.'">'.__('Back To Stats Page', 'wp-stats').' </a></p>'."\n";
+		$temp_stats .= '<p><strong>&laquo;&laquo;</strong> <a href="'.$stats_url.'">'.__('Back To Stats Page', 'wp-stats').' </a></p>';
 	} // End If
 	
 	// Assign Back $post

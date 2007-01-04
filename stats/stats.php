@@ -239,7 +239,8 @@ function get_authorsstats($display = true) {
 		$using_permalink = get_settings('permalink_structure');
 		$permalink = $wp_rewrite->get_author_permastruct();
 		foreach ($posts as $post) {
-				$author_link = str_replace('%author%', strip_tags(stripslashes($post->user_nicename)), $permalink);
+				$post_author = strip_tags(stripslashes($post->user_nicename));
+				$author_link = str_replace('%author%', $post_author, $permalink);
 				$display_name = urlencode($post->display_name);
 				$posts_total = intval($post->posts_total);				
 				if($using_permalink) {

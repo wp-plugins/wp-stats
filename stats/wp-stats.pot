@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Stats 2.06\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-01-02 01:20+0800\n"
+"PO-Revision-Date: 2007-01-04 15:43+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@homtail.com>\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgid "Type Of Stats To Display"
 msgstr ""
 
 #: stats-options.php:81
-#: stats.php:374
+#: stats.php:375
 msgid "General Stats"
 msgstr ""
 
@@ -62,32 +62,32 @@ msgid "Plugin Stats"
 msgstr ""
 
 #: stats-options.php:88
-#: stats.php:393
+#: stats.php:394
 msgid "WP-EMail"
 msgstr ""
 
 #: stats-options.php:93
-#: stats.php:403
+#: stats.php:404
 msgid "WP-Polls"
 msgstr ""
 
 #: stats-options.php:98
-#: stats.php:413
+#: stats.php:414
 msgid "WP-PostRatings"
 msgstr ""
 
 #: stats-options.php:103
-#: stats.php:422
+#: stats.php:423
 msgid "WP-PostViews"
 msgstr ""
 
 #: stats-options.php:108
-#: stats.php:430
+#: stats.php:431
 msgid "WP-UserOnline"
 msgstr ""
 
 #: stats-options.php:111
-#: stats.php:440
+#: stats.php:441
 #, php-format
 msgid "Top %s Stats"
 msgstr ""
@@ -126,38 +126,38 @@ msgid "Most Viewed Posts"
 msgstr ""
 
 #: stats-options.php:135
-#: stats.php:501
+#: stats.php:502
 msgid "Authors Stats"
 msgstr ""
 
 #: stats-options.php:136
 #: stats-widget.php:54
-#: stats.php:502
+#: stats.php:503
 msgid "Authors"
 msgstr ""
 
 #: stats-options.php:137
-#: stats.php:510
+#: stats.php:511
 msgid "Comments' Members Stats"
 msgstr ""
 
 #: stats-options.php:138
-#: stats.php:511
+#: stats.php:512
 msgid "Comment Members"
 msgstr ""
 
 #: stats-options.php:139
-#: stats.php:519
+#: stats.php:520
 msgid "Misc Stats"
 msgstr ""
 
 #: stats-options.php:140
-#: stats.php:524
+#: stats.php:525
 msgid "Post Categories"
 msgstr ""
 
 #: stats-options.php:141
-#: stats.php:532
+#: stats.php:533
 msgid "Link Categories"
 msgstr ""
 
@@ -166,7 +166,7 @@ msgid "Update Options"
 msgstr ""
 
 #: stats-widget.php:49
-#: stats.php:375
+#: stats.php:376
 msgid "Total Stats"
 msgstr ""
 
@@ -281,9 +281,9 @@ msgstr ""
 #: stats.php:146
 #: stats.php:177
 #: stats.php:215
-#: stats.php:252
-#: stats.php:281
-#: stats.php:303
+#: stats.php:253
+#: stats.php:282
+#: stats.php:304
 msgid "N/A"
 msgstr ""
 
@@ -292,176 +292,176 @@ msgstr ""
 msgid "comments"
 msgstr ""
 
-#: stats.php:377
+#: stats.php:378
 msgid "Authors To This Blog."
 msgstr ""
 
-#: stats.php:378
+#: stats.php:379
 msgid "Posts Were Posted."
 msgstr ""
 
-#: stats.php:379
+#: stats.php:380
 msgid "Pages Were Created."
 msgstr ""
 
-#: stats.php:380
+#: stats.php:381
 msgid "Comments Were Posted."
 msgstr ""
 
-#: stats.php:381
+#: stats.php:382
 msgid "Different Nicks Were Represented In The Comments."
 msgstr ""
 
-#: stats.php:382
+#: stats.php:383
 msgid "Links Were Added"
 msgstr ""
 
-#: stats.php:388
+#: stats.php:389
 msgid "Plugins Stats"
 msgstr ""
 
-#: stats.php:395
+#: stats.php:396
 msgid "Emails Were Sent."
 msgstr ""
 
-#: stats.php:396
+#: stats.php:397
 msgid "Emails Were Sent Successfully."
 msgstr ""
 
-#: stats.php:397
+#: stats.php:398
 msgid "Emails Failed To Send."
 msgstr ""
 
-#: stats.php:405
+#: stats.php:406
 msgid "Polls Were Created."
 msgstr ""
 
-#: stats.php:406
+#: stats.php:407
 msgid "Polls' Answers Were Given."
 msgstr ""
 
-#: stats.php:407
-#: stats.php:415
+#: stats.php:408
+#: stats.php:416
 msgid "Votes Were Casted."
 msgstr ""
 
-#: stats.php:416
+#: stats.php:417
 msgid "Users Casted Their Vote."
 msgstr ""
 
-#: stats.php:424
+#: stats.php:425
 msgid "Views Were Generated."
 msgstr ""
 
-#: stats.php:432
+#: stats.php:433
 msgid "User(s) Online Now."
 msgstr ""
 
-#: stats.php:433
+#: stats.php:434
 msgid "Most users ever online was"
 msgstr ""
 
-#: stats.php:434
-#: stats.php:588
+#: stats.php:435
+#: stats.php:589
 msgid "On"
 msgstr ""
 
-#: stats.php:445
+#: stats.php:446
 msgid "Recent Posts"
 msgstr ""
 
-#: stats.php:453
+#: stats.php:454
 msgid "Recent Comments"
 msgstr ""
 
-#: stats.php:461
+#: stats.php:462
 msgid "Most Commented Post"
 msgstr ""
 
-#: stats.php:469
+#: stats.php:470
 msgid "Most Emailed Post"
 msgstr ""
 
-#: stats.php:478
+#: stats.php:479
 msgid "Highest Rated Post"
 msgstr ""
 
-#: stats.php:484
+#: stats.php:485
 msgid "Most Rated Post"
 msgstr ""
 
-#: stats.php:493
+#: stats.php:494
 msgid "Most Viewed Post"
 msgstr ""
 
-#: stats.php:563
+#: stats.php:564
 msgid "Comments Posted By"
 msgstr ""
 
-#: stats.php:564
+#: stats.php:565
 msgid "Displaying <strong>%s</strong> To <strong>%t</strong> Of <strong>%u</strong> Comments"
 msgstr ""
 
-#: stats.php:580
-#: stats.php:586
+#: stats.php:581
+#: stats.php:587
 msgid "Posted On"
 msgstr ""
 
-#: stats.php:580
+#: stats.php:581
 msgid "Protected"
 msgstr ""
 
-#: stats.php:581
+#: stats.php:582
 msgid "Comments Protected"
 msgstr ""
 
-#: stats.php:588
+#: stats.php:589
 msgid "Posted By"
 msgstr ""
 
-#: stats.php:593
+#: stats.php:594
 msgid "has not made any comments yet."
 msgstr ""
 
-#: stats.php:602
+#: stats.php:603
 msgid "Previous Page"
 msgstr ""
 
-#: stats.php:610
+#: stats.php:611
 msgid "Next Page"
 msgstr ""
 
-#: stats.php:619
+#: stats.php:620
 #, php-format
 msgid "Pages (%s)"
 msgstr ""
 
-#: stats.php:621
+#: stats.php:622
 msgid "Go to First Page"
 msgstr ""
 
-#: stats.php:621
+#: stats.php:622
 msgid "First"
 msgstr ""
 
-#: stats.php:624
-#: stats.php:636
+#: stats.php:625
+#: stats.php:637
 msgid "Go to Page"
 msgstr ""
 
-#: stats.php:631
+#: stats.php:632
 msgid "Page"
 msgstr ""
 
-#: stats.php:639
+#: stats.php:640
 msgid "Go to Last Page"
 msgstr ""
 
-#: stats.php:639
+#: stats.php:640
 msgid "Last"
 msgstr ""
 
-#: stats.php:643
+#: stats.php:644
 msgid "Back To Stats Page"
 msgstr ""
 

@@ -108,7 +108,7 @@ if($_POST['Submit']) {
 								echo ' />&nbsp;&nbsp;'.__('WP-UserOnline', 'wp-stats').'<br />'."\n";
 							}
 						?>
-						<p><strong><?php sprintf(_e('Top %s Stats', 'wp-stats'), get_settings('stats_mostlimit')); ?></strong></p>
+						<p><strong><?php printf(__('Top %s Stats', 'wp-stats'), get_settings('stats_mostlimit')); ?></strong></p>
 						<input type="checkbox" name="stats_display[]" value="recent_posts"<?php checked(1, $stats_display['recent_posts']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> <?php _e('Most Recent Posts', 'wp-stats'); ?><br />
 						<input type="checkbox" name="stats_display[]" value="recent_commtents"<?php checked(1, $stats_display['recent_commtents']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> <?php _e('Most Recent Comments', 'wp-stats'); ?><br />
 						<input type="checkbox" name="stats_display[]" value="commented_post"<?php checked(1, $stats_display['commented_post']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> <?php _e('Most Commented Posts', 'wp-stats'); ?><br />

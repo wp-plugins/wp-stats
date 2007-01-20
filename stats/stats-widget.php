@@ -3,7 +3,7 @@
 Plugin Name: WP-Stats Widget
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Adds a Sidebar Widget To Display Partial Stats From WP-Stats Plugin
-Version: 2.06
+Version: 2.10
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -83,7 +83,7 @@ function widget_stats_init() {
 				echo '<li><strong>'.$limit.' '.__('Most Commented', 'wp-stats').'</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
-				get_mostcommented('', $limit, $chars);
+				get_mostcommented('post', $limit, $chars);
 				echo '</ul>'."\n";
 				echo '</li>'."\n";
 				echo '</ul>'."\n";
@@ -94,7 +94,7 @@ function widget_stats_init() {
 				echo '<li><strong>'.$limit.' '.__('Most Emailed', 'wp-stats').'</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
-				get_mostemailed('', $limit, $chars);
+				get_mostemailed('post', $limit, $chars);
 				echo '</ul>'."\n";
 				echo '</li>'."\n";
 				echo '</ul>'."\n";
@@ -105,7 +105,7 @@ function widget_stats_init() {
 				echo '<li><strong>'.$limit.' '.__('Highest Rated', 'wp-stats').'</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
-				get_highest_rated('', $limit, $chars);
+				get_highest_rated('post', $limit, $chars);
 				echo '</ul>'."\n";
 				echo '</li>'."\n";
 				echo '</ul>'."\n";
@@ -116,7 +116,7 @@ function widget_stats_init() {
 				echo '<li><strong>'.$limit.' '.__('Most Rated', 'wp-stats').'</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
-				get_most_rated('', $limit, $chars);
+				get_most_rated('post', $limit, $chars);
 				echo '</ul>'."\n";
 				echo '</li>'."\n";
 				echo '</ul>'."\n";
@@ -127,7 +127,7 @@ function widget_stats_init() {
 				echo '<li><strong>'.$limit.' '.__('Most Viewed', 'wp-stats').'</strong></li>'."\n";
 				echo '<li>'."\n";
 				echo '<ul>'."\n";
-				get_most_viewed('', $limit, $chars);
+				get_most_viewed('post', $limit, $chars);
 				echo '</ul>'."\n";
 				echo '</li>'."\n";
 				echo '</ul>'."\n";

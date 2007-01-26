@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP-Stats
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
-Description: Display Your WordPress Statistics.
+Description: Display your WordPress blog statistics. Ranging from general total statistics, some of my plugins statistics and top 10 statistics.
 Version: 2.10
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
@@ -130,6 +130,8 @@ function get_recentposts($mode = '', $limit = 10, $display = true) {
 	$temp = '';
 	if(!empty($mode) || $mode != 'both') {
 		$where = "post_type = '$mode'";
+	} else {
+		$where = '1=1';
 	}
     $recentposts = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, user_login, display_name FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
 	if($recentposts) {
@@ -157,6 +159,8 @@ function get_recentcomments($mode = '', $limit = 10, $display = true) {
 	$temp = '';
 	if(!empty($mode) || $mode != 'both') {
 		$where = "post_type = '$mode'";
+	} else {
+		$where = '1=1';
 	}
     $recentcomments = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, comment_author, post_date, comment_date FROM $wpdb->posts INNER JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY comment_date DESC LIMIT $limit");
 	if($recentcomments) {
@@ -184,6 +188,8 @@ function get_mostcommented($mode = '', $limit = 10, $chars = 0, $display = true)
 	$temp = '';
 	if(!empty($mode) || $mode != 'both') {
 		$where = "post_type = '$mode'";
+	} else {
+		$where = '1=1';
 	}
     $mostcommenteds = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, COUNT($wpdb->comments.comment_post_ID) AS 'comment_total' FROM $wpdb->posts LEFT JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' GROUP BY $wpdb->comments.comment_post_ID ORDER  BY comment_total DESC LIMIT $limit");
 	if($mostcommenteds) {
@@ -218,6 +224,8 @@ function get_authorsstats($mode = '', $display = true) {
 	$temp = '';
 	if(!empty($mode) || $mode != 'both') {
 		$where = "post_type = '$mode'";
+	} else {
+		$where = '1=1';
 	}
 	$posts = $wpdb->get_results("SELECT COUNT($wpdb->posts.ID) AS 'posts_total', $wpdb->users.display_name,  $wpdb->users.user_nicename FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author AND user_activation_key = '' AND $where AND post_status = 'publish' GROUP BY $wpdb->posts.post_author");
 	if($posts) {

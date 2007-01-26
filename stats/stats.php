@@ -237,7 +237,7 @@ function get_authorsstats($mode = '', $display = true) {
 				$display_name = urlencode($post->display_name);
 				$posts_total = intval($post->posts_total);				
 				if($using_permalink) {
-					$temp .= "<li><a href=\"".get_settings('siteurl').$author_link."\" title=\"".sprintf(__('View posts posted by %s', 'wp-stats'), $display_name)."\">$display_name</a> ($posts_total)</li>\n";
+					$temp .= "<li><a href=\"".get_settings('home').$author_link."\" title=\"".sprintf(__('View posts posted by %s', 'wp-stats'), $display_name)."\">$display_name</a> ($posts_total)</li>\n";
 				} else {
 					$temp .= "<li><a href=\"".get_settings('siteurl')."/?author_name=$post_author\" title=\"".sprintf(__('View posts posted by %s', 'wp-stats'), $display_name)."\">$display_name</a> ($posts_total)</li>\n";
 				}

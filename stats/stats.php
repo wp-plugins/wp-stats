@@ -128,7 +128,7 @@ function get_recentposts($mode = '', $limit = 10, $display = true) {
     global $wpdb, $post;
 	$where = '';
 	$temp = '';
-	if(!empty($mode) || $mode != 'both') {
+	if(!empty($mode) && $mode != 'both') {
 		$where = "post_type = '$mode'";
 	} else {
 		$where = '1=1';
@@ -157,7 +157,7 @@ function get_recentcomments($mode = '', $limit = 10, $display = true) {
     global $wpdb, $post;
 	$where = '';
 	$temp = '';
-	if(!empty($mode) || $mode != 'both') {
+	if(!empty($mode) && $mode != 'both') {
 		$where = "post_type = '$mode'";
 	} else {
 		$where = '1=1';
@@ -186,7 +186,7 @@ function get_mostcommented($mode = '', $limit = 10, $chars = 0, $display = true)
     global $wpdb, $post;
 	$where = '';
 	$temp = '';
-	if(!empty($mode) || $mode != 'both') {
+	if(!empty($mode) && $mode != 'both') {
 		$where = "post_type = '$mode'";
 	} else {
 		$where = '1=1';
@@ -222,7 +222,7 @@ function get_authorsstats($mode = '', $display = true) {
 	global $wpdb, $wp_rewrite;
 	$where = '';
 	$temp = '';
-	if(!empty($mode) || $mode != 'both') {
+	if(!empty($mode) && $mode != 'both') {
 		$where = "post_type = '$mode'";
 	} else {
 		$where = '1=1';

@@ -20,8 +20,8 @@
 ### Variables Variables Variables
 $base_name = plugin_basename('stats/stats-options.php');
 $base_page = 'admin.php?page='.$base_name;
-$stats_mostlimit = intval(get_settings('stats_mostlimit'));
-$stats_display = get_settings('stats_display');
+$stats_mostlimit = intval(get_option('stats_mostlimit'));
+$stats_display = get_option('stats_display');
 
 ### If Form Is Submitted
 if($_POST['Submit']) {
@@ -66,7 +66,7 @@ if($_POST['Submit']) {
 				 <tr valign="top">
 					<th align="left" width="30%"><?php _e('Stats URL', 'wp-stats'); ?></th>
 					<td align="left">
-						<input type="text" name="stats_url" value="<?php echo get_settings('stats_url'); ?>" size="50" /><br /><?php _e('URL To Stats Page.<br />Example: http://www.yoursite.com/blogs/stats/<br />Example: http://www.yoursite.com/blogs/?page_id=2', 'wp-stats'); ?>
+						<input type="text" name="stats_url" value="<?php echo get_option('stats_url'); ?>" size="50" /><br /><?php _e('URL To Stats Page.<br />Example: http://www.yoursite.com/blogs/stats/<br />Example: http://www.yoursite.com/blogs/?page_id=2', 'wp-stats'); ?>
 					</td>
 				</tr>
 				 <tr valign="top">
@@ -108,7 +108,7 @@ if($_POST['Submit']) {
 								echo ' />&nbsp;&nbsp;'.__('WP-UserOnline', 'wp-stats').'<br />'."\n";
 							}
 						?>
-						<p><strong><?php printf(__('Top %s Post Stats', 'wp-stats'), get_settings('stats_mostlimit')); ?></strong></p>
+						<p><strong><?php printf(__('Top %s Post Stats', 'wp-stats'), get_option('stats_mostlimit')); ?></strong></p>
 						<input type="checkbox" name="stats_display[]" value="recent_posts"<?php checked(1, $stats_display['recent_posts']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> <?php _e('Most Recent Posts', 'wp-stats'); ?><br />
 						<input type="checkbox" name="stats_display[]" value="recent_commtents"<?php checked(1, $stats_display['recent_commtents']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> <?php _e('Most Recent Comments', 'wp-stats'); ?><br />
 						<input type="checkbox" name="stats_display[]" value="commented_post"<?php checked(1, $stats_display['commented_post']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> <?php _e('Most Commented Posts', 'wp-stats'); ?><br />

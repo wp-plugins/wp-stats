@@ -229,7 +229,7 @@ function get_authorsstats($mode = '', $display = true) {
 	}
 	$posts = $wpdb->get_results("SELECT COUNT($wpdb->posts.ID) AS 'posts_total', $wpdb->users.display_name,  $wpdb->users.user_nicename FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author AND user_activation_key = '' AND $where AND post_status = 'publish' GROUP BY $wpdb->posts.post_author");
 	if($posts) {
-		$using_permalink = get_settings('permalink_structure');
+		$using_permalink = get_option('permalink_structure');
 		$permalink = $wp_rewrite->get_author_permastruct();
 		foreach ($posts as $post) {
 				$post_author = strip_tags(stripslashes($post->user_nicename));
@@ -237,9 +237,9 @@ function get_authorsstats($mode = '', $display = true) {
 				$display_name = urlencode($post->display_name);
 				$posts_total = intval($post->posts_total);				
 				if($using_permalink) {
-					$temp .= "<li><a href=\"".get_settings('home').$author_link."\" title=\"".sprintf(__('View posts posted by %s', 'wp-stats'), $display_name)."\">$display_name</a> ($posts_total)</li>\n";
+					$temp .= "<li><a href=\"".get_option('home').$author_link."\" title=\"".sprintf(__('View posts posted by %s', 'wp-stats'), $display_name)."\">$display_name</a> ($posts_total)</li>\n";
 				} else {
-					$temp .= "<li><a href=\"".get_settings('siteurl')."/?author_name=$post_author\" title=\"".sprintf(__('View posts posted by %s', 'wp-stats'), $display_name)."\">$display_name</a> ($posts_total)</li>\n";
+					$temp .= "<li><a href=\"".get_option('siteurl')."/?author_name=$post_author\" title=\"".sprintf(__('View posts posted by %s', 'wp-stats'), $display_name)."\">$display_name</a> ($posts_total)</li>\n";
 				}
 		}
 	} else {
@@ -349,7 +349,7 @@ function place_stats($content){
 
 ### Function: Stats Page
 function stats_page_link($author, $page = 0) {
-	$stats_url = get_settings('stats_url');
+	$stats_url = get_option('stats_url');
 	if($page > 1) {
 		$page = "&amp;stats_page=$page";
 	} else {
@@ -372,8 +372,8 @@ function stats_page() {
 	$page = intval($_GET['stats_page']);
 	$temp_stats = '';
 	$temp_post = $post;
-	$stats_mostlimit = intval(get_settings('stats_mostlimit'));
-	$stats_display = get_settings('stats_display');
+	$stats_mostlimit = intval(get_option('stats_mostlimit'));
+	$stats_display = get_option('stats_display');
 
 	// Default wp-stats.php Page
 	if(empty($comment_author)) {
@@ -546,7 +546,7 @@ function stats_page() {
 	// Displaying Comments Posted By User
 	} else {
 		// Stats URL
-		$stats_url = get_settings('stats_url');
+		$stats_url = get_option('stats_url');
 		// Number Of Comments Per Page
 		$perpage = 10;
 		// Comment Author Link
@@ -666,6 +666,6 @@ function stats_init() {
 	$stats_display = array('total_stats'  => 1, 'email'  => 1, 'polls' => 1, 'ratings' => 1, 'views' => 1, 'useronline' => 1, 'recent_posts' => 1, 'recent_commtents' => 1, 'commented_post' => 1, 'emailed_most' => 1, 'rated_highest' => 1, 'rated_most' => 1, 'viewed_most' => 1, 'authors' => 1, 'comment_members' => 1, 'post_cats' => 1, 'link_cats' => 1);  
 	add_option('stats_mostlimit', '10', 'Stats Most Limit');
 	add_option('stats_display', $stats_display, 'Stats To Display');
-	add_option('stats_url', get_settings('siteurl').'/stats/', 'Stats URL');
+	add_option('stats_url', get_option('siteurl').'/stats/', 'Stats URL');
 }
 ?>

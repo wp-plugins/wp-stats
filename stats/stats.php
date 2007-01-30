@@ -234,7 +234,7 @@ function get_authorsstats($mode = '', $display = true) {
 		foreach ($posts as $post) {
 				$post_author = strip_tags(stripslashes($post->user_nicename));
 				$author_link = str_replace('%author%', $post_author, $permalink);
-				$display_name = urlencode($post->display_name);
+				$display_name = strip_tags(stripslashes($post->display_name));
 				$posts_total = intval($post->posts_total);				
 				if($using_permalink) {
 					$temp .= "<li><a href=\"".get_option('home').$author_link."\" title=\"".sprintf(__('View posts posted by %s', 'wp-stats'), $display_name)."\">$display_name</a> ($posts_total)</li>\n";

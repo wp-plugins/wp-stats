@@ -3,7 +3,7 @@
 Plugin Name: WP-Stats
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Display your WordPress blog statistics. Ranging from general total statistics, some of my plugins statistics and top 10 statistics.
-Version: 2.10
+Version: 2.11
 Author: GaMerZ
 Author URI: http://www.lesterchan.net
 */
@@ -566,7 +566,7 @@ function stats_page() {
 		// Count Total Pages
 		$totalpages = ceil($totalcomments/$perpage);
 		// Getting The Comments
-		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.ID, comment_author, comment_date, comment_content, ID, comment_ID, post_date, post_title, post_name, post_password FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
+		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.ID, comment_author, comment_date, comment_content, ID, comment_ID, post_date, post_title, post_name, post_password FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' AND post_password = '' ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
 
 		$temp_stats .= '<h2>'.__('Comments Posted By', 'wp-stats').' '.$comment_author.'</h2>';
 		$temp_stats .= '<p>'.sprintf(__('Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Comments', 'wp-stats'), $displayonpage, $maxonpage, $totalcomments).'</p>';

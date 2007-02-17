@@ -227,7 +227,7 @@ function get_authorsstats($mode = '', $display = true) {
 	} else {
 		$where = '1=1';
 	}
-	$posts = $wpdb->get_results("SELECT COUNT($wpdb->posts.ID) AS 'posts_total', $wpdb->users.display_name,  $wpdb->users.user_nicename FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author AND user_activation_key = '' AND $where AND post_status = 'publish' GROUP BY $wpdb->posts.post_author");
+	$posts = $wpdb->get_results("SELECT COUNT($wpdb->posts.ID) AS 'posts_total', $wpdb->users.display_name,  $wpdb->users.user_nicename FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE user_activation_key = '' AND $where AND post_status = 'publish' GROUP BY $wpdb->posts.post_author");
 	if($posts) {
 		$using_permalink = get_option('permalink_structure');
 		$permalink = $wp_rewrite->get_author_permastruct();

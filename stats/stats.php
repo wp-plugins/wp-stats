@@ -133,12 +133,12 @@ function get_recentposts($mode = '', $limit = 10, $display = true) {
 	} else {
 		$where = '1=1';
 	}
-    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, user_login, display_name FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
+    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.*, $wpdb->users.* FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
 	if($recentposts) {
 		foreach ($recentposts as $post) {
-			$post_title = htmlspecialchars(stripslashes($post->post_title));
-			$post_date = mysql2date('d.m.Y', $post->post_date);
-			$display_name = stripslashes($post->display_name);
+			$post_title = get_the_title();
+			$post_date = get_the_time(get_option('date_format').' @ '.get_option('time_format'));
+			$display_name = get_the_author();
 			$temp .= "<li>$post_date - <a href=\"".get_permalink()."\" title=\"".sprintf(__('View post %s', 'wp-stats'), $post_title)."\">$post_title</a> ($display_name)</li>\n";
 		}
 	} else {
@@ -162,12 +162,12 @@ function get_recentcomments($mode = '', $limit = 10, $display = true) {
 	} else {
 		$where = '1=1';
 	}
-    $recentcomments = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, comment_author, post_date, comment_date FROM $wpdb->posts INNER JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY comment_date DESC LIMIT $limit");
+    $recentcomments = $wpdb->get_results("SELECT $wpdb->posts.*, comment_date FROM $wpdb->posts INNER JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY comment_date DESC LIMIT $limit");
 	if($recentcomments) {
 		foreach ($recentcomments as $post) {
-			$post_title = htmlspecialchars(stripslashes($post->post_title));
+			$post_title = get_the_title();
 			$comment_author = htmlspecialchars(stripslashes($post->comment_author));
-			$comment_date = mysql2date('d.m.Y @ H:i', $post->comment_date);
+			$comment_date = get_the_time(get_option('date_format'));
 			$temp .= "<li>$comment_date - $comment_author (<a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a>)</li>\n";
 		}
 	} else {
@@ -191,17 +191,17 @@ function get_mostcommented($mode = '', $limit = 10, $chars = 0, $display = true)
 	} else {
 		$where = '1=1';
 	}
-    $mostcommenteds = $wpdb->get_results("SELECT $wpdb->posts.ID, post_title, post_name, post_status, post_date, COUNT($wpdb->comments.comment_post_ID) AS 'comment_total' FROM $wpdb->posts LEFT JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' GROUP BY $wpdb->comments.comment_post_ID ORDER  BY comment_total DESC LIMIT $limit");
+    $mostcommenteds = $wpdb->get_results("SELECT $wpdb->posts.*, COUNT($wpdb->comments.comment_post_ID) AS 'comment_total' FROM $wpdb->posts LEFT JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' GROUP BY $wpdb->comments.comment_post_ID ORDER  BY comment_total DESC LIMIT $limit");
 	if($mostcommenteds) {
 		if($chars > 0) {
 			foreach ($mostcommenteds as $post) {
-				$post_title = htmlspecialchars(stripslashes($post->post_title));
+				$post_title = get_the_title();
 				$comment_total = intval($post->comment_total);
 				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">".snippet_chars($post_title, $chars)."</a> - $comment_total ".__('comments', 'wp-stats')."</li>";
 			}
 		} else {
 			foreach ($mostcommenteds as $post) {
-				$post_title = htmlspecialchars(stripslashes($post->post_title));
+				$post_title = get_the_title();
 				$comment_total = intval($post->comment_total);
 				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a> - $comment_total ".__('comments', 'wp-stats')."</li>";
 			}
@@ -256,10 +256,14 @@ function get_authorsstats($mode = '', $display = true) {
 ### Function: Get Comments' Members Stats
 // Treshhold = Number Of Posts User Must Have Before It Will Display His Name Out
 // 5 = Default Treshhold; -1 = Disable Treshhold
-function get_commentmembersstats($threshhold = -1, $display = true) {
+function get_commentmembersstats($threshhold = -1, $limit = 0, $display = true) {
 	global $wpdb;
 	$temp = '';
-	$comments = $wpdb->get_results("SELECT comment_author, COUNT(comment_ID) AS 'comment_total' FROM $wpdb->comments WHERE comment_approved = '1' GROUP BY comment_author ORDER BY comment_total DESC");
+	$limit_sql = '';
+	if($limit > 0) {
+		$limit_sql = "LIMIT $limit";
+	}
+	$comments = $wpdb->get_results("SELECT comment_author, COUNT(comment_ID) AS 'comment_total' FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' AND post_password = '' GROUP BY comment_author ORDER BY comment_total DESC $limit_sql");
 	if($comments) {
 		foreach ($comments as $comment) {
 				$comment_author = strip_tags(stripslashes($comment->comment_author));
@@ -286,11 +290,12 @@ function get_commentmembersstats($threshhold = -1, $display = true) {
 function get_postcats($display = true) {
 	global $wpdb;
 	$temp = '';
-	$cats = get_categories("type=post");
-	if ($cats) {
-		foreach ($cats as $cat) {
-			$temp .= '<li><a href="'.get_category_link($cat->cat_ID).'" title="View all posts in '.$cat->cat_name.'">'.$cat->cat_name.'</a> ('.$cat->category_count.")</li>\n";
-		}
+	$defaults = array('type' => 'post', 'style' => 'list', 'show_count' => 1);
+	$categories = get_categories($defaults);
+	if (empty($categories)){
+		$temp .= '<li>'.__('No categories', 'wp-stats').'</li>';
+	} else {
+		$temp .= walk_category_tree($categories, 0, $defaults);
 	}
 	if($display) {
 		echo $temp;
@@ -518,7 +523,7 @@ function stats_page() {
 			$temp_stats .= '<h2>'.__('Comments\' Members Stats', 'wp-stats').'</h2>'."\n";
 			$temp_stats .= '<p><strong>'.__('Comment Members', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ol>'."\n";
-			$temp_stats .= get_commentmembersstats(-1, false);
+			$temp_stats .= get_commentmembersstats(-1, 0, false);
 			$temp_stats .= '</ol>'."\n";
 		}
 
@@ -554,7 +559,7 @@ function stats_page() {
 		// Comment Author SQL
 		$comment_author_sql = $wpdb->escape($comment_author);
 		// Total Comments Posted By User
-		$totalcomments = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_author='$comment_author_sql'");
+		$totalcomments = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' AND post_password = ''");
 		// Checking $page and $offset
 		if (empty($page) || $page == 0) { $page = 1; }
 		if (empty($offset)) { $offset = 0; }
@@ -566,20 +571,19 @@ function stats_page() {
 		// Count Total Pages
 		$totalpages = ceil($totalcomments/$perpage);
 		// Getting The Comments
-		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.ID, comment_author, comment_date, comment_content, ID, comment_ID, post_date, post_title, post_name, post_password FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' AND post_password = '' ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
-
+		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.*, $wpdb->comments.* FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' AND post_password = '' ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
 		$temp_stats .= '<h2>'.__('Comments Posted By', 'wp-stats').' '.$comment_author.'</h2>';
 		$temp_stats .= '<p>'.sprintf(__('Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Comments', 'wp-stats'), $displayonpage, $maxonpage, $totalcomments).'</p>';
 
 		// Get Comments
 		if($gmz_comments) {
 			foreach($gmz_comments as $post) {
-				$comment_id = intval($post-> comment_ID);
+				$comment_id = intval($post->comment_ID);
 				$comment_author2 = htmlspecialchars(stripslashes($post->comment_author));
-				$comment_date = mysql2date('d.m.Y @ H:i', $post->comment_date);
+				$comment_date = mysql2date(get_option('date_format').' @ '.get_option('time_format'), $post->comment_date);
 				$comment_content = wpautop(stripslashes($post->comment_content));
-				$post_date = mysql2date('d.m.Y @ H:i', $post->post_date);
-				$post_title = htmlspecialchars(stripslashes($post->post_title));
+				$post_date = get_the_time(get_option('date_format').' @ '.get_option('time_format'));
+				$post_title = get_the_title();
 
 				// Check For Password Protected Post
 				if(!empty($post->post_password) && stripslashes($_COOKIE['wp-postpass_'.COOKIEHASH]) != $post->post_password) {

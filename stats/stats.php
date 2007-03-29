@@ -133,7 +133,7 @@ function get_recentposts($mode = '', $limit = 10, $display = true) {
 	} else {
 		$where = '1=1';
 	}
-    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.*, $wpdb->users.* FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
+    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.* FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
 	if($recentposts) {
 		foreach ($recentposts as $post) {
 			$post_title = get_the_title();
@@ -369,9 +369,20 @@ function stats_page_link($author, $page = 0) {
 }
 
 
+### Function: Change Page Title
+if(isset($_GET['stats_author'])) {
+	add_filter('wp_title', 'stats_pagetitle');
+}
+function stats_pagetitle($content) {
+	$comment_author = urldecode(strip_tags(stripslashes(trim($_GET['stats_author']))));
+	$content = $comment_author.' - User Comments';
+	return $content;
+}
+
+
 ### Function: Statistics Page
 function stats_page() {
-	global $wpdb, $post;
+	global $wpdb, $post;			
 	// Variables Variables Variables
 	$comment_author = urldecode(strip_tags(stripslashes(trim($_GET['stats_author']))));
 	$page = intval($_GET['stats_page']);
@@ -574,6 +585,7 @@ function stats_page() {
 		$gmz_comments =  $wpdb->get_results("SELECT $wpdb->posts.*, $wpdb->comments.* FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' AND post_password = '' ORDER  BY comment_post_ID DESC, comment_date DESC  LIMIT $offset, $perpage");
 		$temp_stats .= '<h2>'.__('Comments Posted By', 'wp-stats').' '.$comment_author.'</h2>';
 		$temp_stats .= '<p>'.sprintf(__('Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Comments', 'wp-stats'), $displayonpage, $maxonpage, $totalcomments).'</p>';
+
 
 		// Get Comments
 		if($gmz_comments) {

@@ -369,17 +369,6 @@ function stats_page_link($author, $page = 0) {
 }
 
 
-### Function: Change Page Title
-if(isset($_GET['stats_author'])) {
-	add_filter('wp_title', 'stats_pagetitle');
-}
-function stats_pagetitle($content) {
-	$comment_author = urldecode(strip_tags(stripslashes(trim($_GET['stats_author']))));
-	$content = $comment_author.' - User Comments';
-	return $content;
-}
-
-
 ### Function: Statistics Page
 function stats_page() {
 	global $wpdb, $post;			

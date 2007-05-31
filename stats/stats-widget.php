@@ -2,9 +2,9 @@
 /*
 Plugin Name: WP-Stats Widget
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
-Description: Adds a Sidebar Widget To Display Partial Stats From WP-Stats Plugin
+Description: Adds a Stats Widget to display stats from WP-Stats Plugin. You will need to activate WP-Stats first.
 Version: 2.11
-Author: GaMerZ
+Author: Lester 'GaMerZ' Chan
 Author URI: http://www.lesterchan.net
 */
 

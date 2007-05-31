@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Stats 2.11\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-02-26 14:00+0800\n"
+"PO-Revision-Date: 2007-05-31 19:46+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@homtail.com>\n"
 "MIME-Version: 1.0\n"
@@ -389,7 +389,7 @@ msgid "Most users ever online was"
 msgstr ""
 
 #: stats.php:447
-#: stats.php:600
+#: stats.php:601
 msgid "On"
 msgstr ""
 
@@ -430,71 +430,71 @@ msgstr ""
 msgid "Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Comments"
 msgstr ""
 
-#: stats.php:592
-#: stats.php:598
+#: stats.php:593
+#: stats.php:599
 msgid "Posted On"
 msgstr ""
 
-#: stats.php:592
+#: stats.php:593
 msgid "Protected"
 msgstr ""
 
-#: stats.php:593
+#: stats.php:594
 msgid "Comments Protected"
 msgstr ""
 
-#: stats.php:600
+#: stats.php:601
 #, php-format
 msgid "View the comment posted by %s"
 msgstr ""
 
-#: stats.php:600
+#: stats.php:601
 msgid "Posted By"
 msgstr ""
 
-#: stats.php:605
+#: stats.php:606
 msgid "has not made any comments yet."
 msgstr ""
 
-#: stats.php:614
+#: stats.php:615
 msgid "Previous Page"
 msgstr ""
 
-#: stats.php:622
+#: stats.php:623
 msgid "Next Page"
 msgstr ""
 
-#: stats.php:631
+#: stats.php:632
 #, php-format
 msgid "Pages (%s)"
 msgstr ""
 
-#: stats.php:633
+#: stats.php:634
 msgid "Go to First Page"
 msgstr ""
 
-#: stats.php:633
+#: stats.php:634
 msgid "First"
 msgstr ""
 
-#: stats.php:636
-#: stats.php:648
+#: stats.php:637
+#: stats.php:649
 msgid "Go to Page"
 msgstr ""
 
-#: stats.php:643
+#: stats.php:644
 msgid "Page"
 msgstr ""
 
-#: stats.php:651
+#: stats.php:652
 msgid "Go to Last Page"
 msgstr ""
 
-#: stats.php:651
+#: stats.php:652
 msgid "Last"
 msgstr ""
 
-#: stats.php:655
+#: stats.php:656
 msgid "Back To Stats Page"
 msgstr ""
 

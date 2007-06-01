@@ -1,7 +1,7 @@
 === WP-Stats ===
 Contributors: GamerZ
 Donate link: http://www.lesterchan.net/wordpress
-Tags: stat, stats, statistics, wp-stats, wp-stat, top, most, widget, popular, information
+Tags: stat, stats, statistics, wp-stats, wp-stat, top, top 10, most, widget, popular, information
 Requires at least: 2.1.0
 Stable tag: 2.11
 

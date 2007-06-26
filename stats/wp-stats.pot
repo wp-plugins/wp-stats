@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP-Stats 2.11\n"
+"Project-Id-Version: WP-Stats 2.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-05-31 19:46+0800\n"
+"PO-Revision-Date: 2007-06-26 15:44+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@homtail.com>\n"
 "MIME-Version: 1.0\n"
@@ -14,156 +14,231 @@ msgstr ""
 "X-Poedit-Language: English\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: stats-options.php:43
-#: stats-options.php:67
+#: stats-options.php:31
+#: stats-options.php:211
+msgid "Update Options"
+msgstr ""
+
+#: stats-options.php:47
+#: stats-options.php:114
 msgid "Stats URL"
 msgstr ""
 
-#: stats-options.php:44
-#: stats-options.php:73
+#: stats-options.php:48
+#: stats-options.php:120
 msgid "Stats Most Limit"
 msgstr ""
 
-#: stats-options.php:45
+#: stats-options.php:49
 msgid "Stats Display Options"
 msgstr ""
 
-#: stats-options.php:50
+#: stats-options.php:54
 msgid "Updated"
 msgstr ""
 
-#: stats-options.php:55
+#: stats-options.php:59
 msgid "No Stats Option Updated"
 msgstr ""
 
-#: stats-options.php:61
-#: stats-options.php:64
-msgid "Stats Options"
+#: stats-options.php:63
+#: stats-options.php:249
+msgid "UNINSTALL WP-Stats"
 msgstr ""
 
-#: stats-options.php:69
-msgid "URL To Stats Page.<br />Example: http://www.yoursite.com/blogs/stats/<br />Example: http://www.yoursite.com/blogs/?page_id=2"
+#: stats-options.php:71
+#, php-format
+msgid "Setting Key '%s' has been deleted."
 msgstr ""
 
 #: stats-options.php:75
+#, php-format
+msgid "Error deleting Setting Key '%s'."
+msgstr ""
+
+#: stats-options.php:97
+#: stats-options.php:219
+msgid "Uninstall WP-Stats"
+msgstr ""
+
+#: stats-options.php:98
+#, php-format
+msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-Stats Will Be Deactivated Automatically."
+msgstr ""
+
+#: stats-options.php:109
+#: stats-options.php:111
+msgid "Stats Options"
+msgstr ""
+
+#: stats-options.php:116
+msgid "URL To Stats Page.<br />Example: http://www.yoursite.com/blogs/stats/<br />Example: http://www.yoursite.com/blogs/?page_id=2"
+msgstr ""
+
+#: stats-options.php:122
 msgid "Top X Stats, where X is the most limit."
 msgstr ""
 
-#: stats-options.php:79
+#: stats-options.php:126
 msgid "Type Of Stats To Display"
 msgstr ""
 
-#: stats-options.php:81
+#: stats-options.php:128
 #: stats.php:387
 msgid "General Stats"
 msgstr ""
 
-#: stats-options.php:83
+#: stats-options.php:130
 msgid "Plugin Stats"
 msgstr ""
 
-#: stats-options.php:88
-#: stats.php:406
+#: stats-options.php:135
+#: stats.php:409
 msgid "WP-EMail"
 msgstr ""
 
-#: stats-options.php:93
-#: stats.php:416
+#: stats-options.php:140
+#: stats.php:419
 msgid "WP-Polls"
 msgstr ""
 
-#: stats-options.php:98
-#: stats.php:426
+#: stats-options.php:145
+#: stats.php:429
 msgid "WP-PostRatings"
 msgstr ""
 
-#: stats-options.php:103
-#: stats.php:435
+#: stats-options.php:150
+#: stats.php:438
 msgid "WP-PostViews"
 msgstr ""
 
-#: stats-options.php:108
-#: stats.php:443
+#: stats-options.php:155
+#: stats.php:446
 msgid "WP-UserOnline"
 msgstr ""
 
-#: stats-options.php:111
-#: stats.php:453
+#: stats-options.php:160
+msgid "WP-DownloadManager"
+msgstr ""
+
+#: stats-options.php:163
+#: stats.php:456
 #, php-format
 msgid "Top %s Post Stats"
 msgstr ""
 
-#: stats-options.php:112
+#: stats-options.php:164
 msgid "Most Recent Posts"
 msgstr ""
 
-#: stats-options.php:113
+#: stats-options.php:165
 msgid "Most Recent Comments"
 msgstr ""
 
-#: stats-options.php:114
+#: stats-options.php:170
+msgid "Most Recent Downloads"
+msgstr ""
+
+#: stats-options.php:173
 #: stats-widget.php:202
 msgid "Most Commented Posts"
 msgstr ""
 
-#: stats-options.php:119
+#: stats-options.php:178
 #: stats-widget.php:206
 msgid "Most Emailed Posts"
 msgstr ""
 
-#: stats-options.php:124
+#: stats-options.php:183
 #: stats-widget.php:211
 msgid "Highest Rated Posts"
 msgstr ""
 
-#: stats-options.php:127
+#: stats-options.php:186
 #: stats-widget.php:214
 msgid "Most Rated Posts"
 msgstr ""
 
-#: stats-options.php:132
+#: stats-options.php:191
 #: stats-widget.php:219
 msgid "Most Viewed Posts"
 msgstr ""
 
-#: stats-options.php:135
-#: stats.php:514
+#: stats-options.php:196
+msgid "Most Downloaded File"
+msgstr ""
+
+#: stats-options.php:199
+#: stats.php:517
 msgid "Authors Stats"
 msgstr ""
 
-#: stats-options.php:136
+#: stats-options.php:200
 #: stats-widget.php:54
-#: stats.php:515
+#: stats.php:518
 msgid "Authors"
 msgstr ""
 
-#: stats-options.php:137
-#: stats.php:523
+#: stats-options.php:201
+#: stats.php:526
 msgid "Comments' Members Stats"
 msgstr ""
 
-#: stats-options.php:138
-#: stats.php:524
+#: stats-options.php:202
+#: stats.php:527
 msgid "Comment Members"
 msgstr ""
 
-#: stats-options.php:139
-#: stats.php:532
+#: stats-options.php:203
+#: stats.php:535
 msgid "Misc Stats"
 msgstr ""
 
-#: stats-options.php:140
-#: stats.php:537
+#: stats-options.php:204
+#: stats.php:540
 msgid "Post Categories"
 msgstr ""
 
-#: stats-options.php:141
-#: stats.php:545
+#: stats-options.php:205
+#: stats.php:548
 msgid "Link Categories"
 msgstr ""
 
-#: stats-options.php:147
-msgid "Update Options"
+#: stats-options.php:211
+msgid "Cancel"
+msgstr ""
+
+#: stats-options.php:221
+msgid "Deactivating WP-Stats plugin does not remove any data that may have been created, such as the stats options. To completely remove this plugin, you can uninstall it here."
+msgstr ""
+
+#: stats-options.php:224
+msgid "WARNING:"
+msgstr ""
+
+#: stats-options.php:225
+msgid "Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first."
+msgstr ""
+
+#: stats-options.php:228
+msgid "The following WordPress Options will be DELETED:"
+msgstr ""
+
+#: stats-options.php:232
+msgid "WordPress Options"
+msgstr ""
+
+#: stats-options.php:248
+#: stats-widget.php:230
+msgid "Yes"
+msgstr ""
+
+#: stats-options.php:249
+msgid ""
+"You Are About To Uninstall WP-Stats From WordPress.\\n"
+"This Action Is Not Reversible.\\n"
+"\\n"
+" Choose [Cancel] To Stop, [OK] To Uninstall."
 msgstr ""
 
 #: stats-widget.php:49
@@ -263,10 +338,6 @@ msgstr ""
 msgid "Show Link To Full Stats?"
 msgstr ""
 
-#: stats-widget.php:230
-msgid "Yes"
-msgstr ""
-
 #: stats-widget.php:232
 msgid "No"
 msgstr ""
@@ -343,158 +414,162 @@ msgstr ""
 msgid "Links Were Added"
 msgstr ""
 
-#: stats.php:401
+#: stats.php:397
+msgid "Spams Blocked"
+msgstr ""
+
+#: stats.php:404
 msgid "Plugins Stats"
 msgstr ""
 
-#: stats.php:408
+#: stats.php:411
 msgid "Emails Were Sent."
 msgstr ""
 
-#: stats.php:409
+#: stats.php:412
 msgid "Emails Were Sent Successfully."
 msgstr ""
 
-#: stats.php:410
+#: stats.php:413
 msgid "Emails Failed To Send."
 msgstr ""
 
-#: stats.php:418
+#: stats.php:421
 msgid "Polls Were Created."
 msgstr ""
 
-#: stats.php:419
+#: stats.php:422
 msgid "Polls' Answers Were Given."
 msgstr ""
 
-#: stats.php:420
-#: stats.php:428
+#: stats.php:423
+#: stats.php:431
 msgid "Votes Were Casted."
 msgstr ""
 
-#: stats.php:429
+#: stats.php:432
 msgid "Users Casted Their Vote."
 msgstr ""
 
-#: stats.php:437
+#: stats.php:440
 msgid "Views Were Generated."
 msgstr ""
 
-#: stats.php:445
+#: stats.php:448
 msgid "User(s) Online Now."
 msgstr ""
 
-#: stats.php:446
+#: stats.php:449
 msgid "Most users ever online was"
 msgstr ""
 
-#: stats.php:447
-#: stats.php:601
+#: stats.php:450
+#: stats.php:604
 msgid "On"
 msgstr ""
 
-#: stats.php:458
+#: stats.php:461
 msgid "Recent Posts"
 msgstr ""
 
-#: stats.php:466
+#: stats.php:469
 msgid "Recent Comments"
 msgstr ""
 
-#: stats.php:474
+#: stats.php:477
 msgid "Most Commented Post"
 msgstr ""
 
-#: stats.php:482
+#: stats.php:485
 msgid "Most Emailed Post"
 msgstr ""
 
-#: stats.php:491
+#: stats.php:494
 msgid "Highest Rated Post"
 msgstr ""
 
-#: stats.php:497
+#: stats.php:500
 msgid "Most Rated Post"
 msgstr ""
 
-#: stats.php:506
+#: stats.php:509
 msgid "Most Viewed Post"
 msgstr ""
 
-#: stats.php:575
+#: stats.php:578
 msgid "Comments Posted By"
 msgstr ""
 
-#: stats.php:576
+#: stats.php:579
 #, php-format
 msgid "Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Comments"
 msgstr ""
 
-#: stats.php:593
-#: stats.php:599
+#: stats.php:596
+#: stats.php:602
 msgid "Posted On"
 msgstr ""
 
-#: stats.php:593
+#: stats.php:596
 msgid "Protected"
 msgstr ""
 
-#: stats.php:594
+#: stats.php:597
 msgid "Comments Protected"
 msgstr ""
 
-#: stats.php:601
+#: stats.php:604
 #, php-format
 msgid "View the comment posted by %s"
 msgstr ""
 
-#: stats.php:601
+#: stats.php:604
 msgid "Posted By"
 msgstr ""
 
-#: stats.php:606
+#: stats.php:609
 msgid "has not made any comments yet."
 msgstr ""
 
-#: stats.php:615
+#: stats.php:618
 msgid "Previous Page"
 msgstr ""
 
-#: stats.php:623
+#: stats.php:626
 msgid "Next Page"
 msgstr ""
 
-#: stats.php:632
+#: stats.php:635
 #, php-format
 msgid "Pages (%s)"
 msgstr ""
 
-#: stats.php:634
+#: stats.php:637
 msgid "Go to First Page"
 msgstr ""
 
-#: stats.php:634
+#: stats.php:637
 msgid "First"
 msgstr ""
 
-#: stats.php:637
-#: stats.php:649
+#: stats.php:640
+#: stats.php:652
 msgid "Go to Page"
 msgstr ""
 
-#: stats.php:644
+#: stats.php:647
 msgid "Page"
 msgstr ""
 
-#: stats.php:652
+#: stats.php:655
 msgid "Go to Last Page"
 msgstr ""
 
-#: stats.php:652
+#: stats.php:655
 msgid "Last"
 msgstr ""
 
-#: stats.php:656
+#: stats.php:659
 msgid "Back To Stats Page"
 msgstr ""
 

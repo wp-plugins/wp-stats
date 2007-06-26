@@ -3,7 +3,7 @@
 Plugin Name: WP-Stats
 Plugin URI: http://www.lesterchan.net/portfolio/programming.php
 Description: Display your WordPress blog statistics. Ranging from general total statistics, some of my plugins statistics and top 10 statistics.
-Version: 2.11
+Version: 2.20
 Author: Lester 'GaMerZ' Chan
 Author URI: http://www.lesterchan.net
 */
@@ -393,6 +393,9 @@ function stats_page() {
 			$temp_stats .= '<li><strong>'.get_totalcomments(false).'</strong> '.__('Comments Were Posted.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '<li><strong>'.get_totalcommentposters(false).'</strong> '.__('Different Nicks Were Represented In The Comments.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '<li><strong>'.get_totallinks(false).'</strong> '.__('Links Were Added', 'wp-stats').'</li>'."\n";
+			if(function_exists('akismet_spam_count')) {
+				$temp_stats .= '<li><strong>'.number_format(akismet_spam_count()).'</strong> '.__('Spams Blocked', 'wp-stats').'</li>'."\n";
+			}
 			$temp_stats .= '</ul>'."\n";
 		}
 

@@ -127,82 +127,46 @@ switch($mode) {
 				<td align="left">
 					<p><strong><?php _e('General Stats', 'wp-stats'); ?></strong></p>
 					<input type="checkbox" name="stats_display[]" value="total_stats"<?php checked(1, $stats_display['total_stats']); ?> />&nbsp;&nbsp;Total<br />
+
+					<!-- Admin General Stats Filter -->
+					<?php echo apply_filters('wp_stats_page_admin_general', $page_admin_general_stats); ?>
+
 					<p><strong><?php _e('Plugin Stats', 'wp-stats'); ?></strong></p>
-					<?php 
-						if(function_exists('wp_email')) {
-							echo '<input type="checkbox" name="stats_display[]" value="email"';
-							checked(1, $stats_display['email']);
-							echo ' />&nbsp;&nbsp;'.__('WP-EMail', 'wp-stats').'<br />'."\n";
-						}
-						if(function_exists('get_poll')) {
-							echo '<input type="checkbox" name="stats_display[]" value="polls"';
-							checked(1, $stats_display['polls']);
-							echo ' />&nbsp;&nbsp;'.__('WP-Polls', 'wp-stats').'<br />'."\n";
-						}
-						if(function_exists('the_ratings')) {
-							echo '<input type="checkbox" name="stats_display[]" value="ratings"';
-							checked(1, $stats_display['ratings']);
-							echo ' />&nbsp;&nbsp;'.__('WP-PostRatings', 'wp-stats').'<br />'."\n";
-						}
-						if(function_exists('the_views')) {
-							echo '<input type="checkbox" name="stats_display[]" value="views"';
-							checked(1, $stats_display['views']);
-							echo ' />&nbsp;&nbsp;'.__('WP-PostViews', 'wp-stats').'<br />'."\n";
-						}
-						if(function_exists('useronline')) {
-							echo '<input type="checkbox" name="stats_display[]" value="useronline"';
-							checked(1, $stats_display['useronline']);
-							echo ' />&nbsp;&nbsp;'.__('WP-UserOnline', 'wp-stats').'<br />'."\n";
-						}
-						if(function_exists('download_file')) {
-							echo '<input type="checkbox" name="stats_display[]" value="downloads"';
-							checked(1, $stats_display['downloads']);
-							echo ' />&nbsp;&nbsp;'.__('WP-DownloadManager', 'wp-stats').'<br />'."\n";
-						}
-					?>
-					<p><strong><?php printf(__('Top %s Post Stats', 'wp-stats'), get_option('stats_mostlimit')); ?></strong></p>
+
+					<!-- Admin Plugins Stats Filter -->
+					<?php echo apply_filters('wp_stats_page_admin_plugins', $page_admin_plugins_stats); ?>
+
+					<p><strong><?php printf(__('Top %s Recent Stats', 'wp-stats'), get_option('stats_mostlimit')); ?></strong></p>
 					<input type="checkbox" name="stats_display[]" value="recent_posts"<?php checked(1, $stats_display['recent_posts']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> <?php _e('Most Recent Posts', 'wp-stats'); ?><br />
 					<input type="checkbox" name="stats_display[]" value="recent_commtents"<?php checked(1, $stats_display['recent_commtents']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> <?php _e('Most Recent Comments', 'wp-stats'); ?><br />
-					<?php
-						if(function_exists('download_file')) {
-							echo '<input type="checkbox" name="stats_display[]" value="recent_downloads"';
-							checked(1, $stats_display['recent_downloads']);
-							echo ' />&nbsp;&nbsp;'.$stats_mostlimit.' '.__('Most Recent Downloads', 'wp-stats').'<br />'."\n";
-						}
-					?>
+
+					<!-- Admin Recent Stats Filter -->
+					<?php echo apply_filters('wp_stats_page_admin_recent', $page_admin_recent_stats); ?>
+
+					<p><strong><?php printf(__('Top %s Most/Highest Stats', 'wp-stats'), get_option('stats_mostlimit')); ?></strong></p>
 					<input type="checkbox" name="stats_display[]" value="commented_post"<?php checked(1, $stats_display['commented_post']); ?> />&nbsp;&nbsp;<?php echo $stats_mostlimit ?> <?php _e('Most Commented Posts', 'wp-stats'); ?><br />
-					<?php 
-						if(function_exists('wp_email')) {
-							echo '<input type="checkbox" name="stats_display[]" value="emailed_most"';
-							checked(1, $stats_display['emailed_most']);
-							echo ' />&nbsp;&nbsp;'.$stats_mostlimit.' '.__('Most Emailed Posts', 'wp-stats').'<br />'."\n";
-						}
-						if(function_exists('the_ratings')) {
-							echo '<input type="checkbox" name="stats_display[]" value="rated_highest"';
-							checked(1, $stats_display['rated_highest']);
-							echo ' />&nbsp;&nbsp;'.$stats_mostlimit.' '.__('Highest Rated Posts', 'wp-stats').'<br />'."\n";
-							echo '<input type="checkbox" name="stats_display[]" value="rated_most"';
-							checked(1, $stats_display['rated_most']);
-							echo ' />&nbsp;&nbsp;'.$stats_mostlimit.' '.__('Most Rated Posts', 'wp-stats').'<br />'."\n";
-						}
-						if(function_exists('the_views')) {
-							echo '<input type="checkbox" name="stats_display[]" value="viewed_most"';
-							checked(1, $stats_display['viewed_most']);
-							echo ' />&nbsp;&nbsp;'.$stats_mostlimit.' '.__('Most Viewed Posts', 'wp-stats').'<br />'."\n";
-						}
-						if(function_exists('download_file')) {
-							echo '<input type="checkbox" name="stats_display[]" value="downloaded_most"';
-							checked(1, $stats_display['downloaded_most']);
-							echo ' />&nbsp;&nbsp;'.$stats_mostlimit.' '.__('Most Downloaded File', 'wp-stats').'<br />'."\n";
-						}
-					?>
+
+					<!-- Admin Most Stats Filter -->
+					<?php echo apply_filters('wp_stats_page_admin_most', $page_page_admin_most_stats); ?>
+
 					<p><strong><?php _e('Authors Stats', 'wp-stats'); ?></strong></p>
 					<input type="checkbox" name="stats_display[]" value="authors"<?php checked(1, $stats_display['authors']); ?> />&nbsp;&nbsp;<?php _e('Authors', 'wp-stats'); ?><br />
+
+					<!-- Admin Authors Stats Filter -->
+					<?php echo apply_filters('wp_stats_page_admin_authors', $page_admin_authors_stats); ?>
+
 					<p><strong><?php _e('Comments\' Members Stats', 'wp-stats'); ?></strong></p>
 					<input type="checkbox" name="stats_display[]" value="comment_members"<?php checked(1, $stats_display['comment_members']); ?> />&nbsp;&nbsp;<?php _e('Comment Members', 'wp-stats'); ?><br />
+
+					<!-- Admin Comments' Members Stats Filter -->
+					<?php echo apply_filters('wp_stats_page_admin_comments_members', $admin_comments_members_stats); ?>
+
 					<p><strong><?php _e('Misc Stats', 'wp-stats'); ?></strong></p>
 					<input type="checkbox" name="stats_display[]" value="post_cats"<?php checked(1, $stats_display['post_cats']); ?> />&nbsp;&nbsp;<?php _e('Post Categories', 'wp-stats'); ?><br />
 					<input type="checkbox" name="stats_display[]" value="link_cats"<?php checked(1, $stats_display['link_cats']); ?> />&nbsp;&nbsp;<?php _e('Link Categories', 'wp-stats'); ?><br />
+
+					<!-- Admin Misc Stats Filter -->
+					<?php echo apply_filters('wp_stats_page_admin_misc', $page_admin_misc_stats); ?>
 				</td>
 			</tr>
 		</table>

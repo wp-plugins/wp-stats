@@ -394,67 +394,21 @@ function stats_page() {
 			$temp_stats .= '<li><strong>'.get_totalcommentposters(false).'</strong> '.__('Different Nicks Were Represented In The Comments.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '<li><strong>'.get_totallinks(false).'</strong> '.__('Links Were Added', 'wp-stats').'</li>'."\n";
 			if(function_exists('akismet_spam_count')) {
-				$temp_stats .= '<li><strong>'.number_format(akismet_spam_count()).'</strong> '.__('Spams Blocked', 'wp-stats').'</li>'."\n";
+				$temp_stats .= '<li><strong>'.number_format(akismet_spam_count()).'</strong> '.__('Spam Blocked', 'wp-stats').'</li>'."\n";
 			}
+			// WP-Stats: General Stats Filter
+			$temp_stats = apply_filters('wp_stats_page_general', $temp_stats);
 			$temp_stats .= '</ul>'."\n";
 		}
 
 		// Plugin Stats
-		if((function_exists('wp_email') && $stats_display['email'] == 1) || (function_exists('get_poll') && $stats_display['polls'] == 1) || (function_exists('the_ratings') && $stats_display['ratings'] == 1) || (function_exists('the_views') && $stats_display['views'] == 1) || (function_exists('useronline') && $stats_display['useronline'] == 1)) {
-			$temp_stats .= '<h2>'.__('Plugins Stats', 'wp-stats').'</h2>'."\n";
-		}
+		$temp_stats .= '<h2>'.__('Plugins Stats', 'wp-stats').'</h2>'."\n";
+				
+		// WP-Stats: Plugins Stats Filter
+		$temp_stats = apply_filters('wp_stats_page_plugins', $temp_stats);
 
-		// WP-EMail Stats		
-		if(function_exists('wp_email') && $stats_display['email'] == 1) {
-			$temp_stats .= '<p><strong>'.__('WP-EMail', 'wp-stats').'</strong></p>'."\n";
-			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_emails(false).'</strong> '.__('Emails Were Sent.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_emails_success(false).'</strong> '.__('Emails Were Sent Successfully.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_emails_failed(false).'</strong> '.__('Emails Failed To Send.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '</ul>'."\n";
-		}
-		
-		// WP-Polls Stats		
-		if(function_exists('get_poll') && $stats_display['polls'] == 1) {
-			$temp_stats .= '<p><strong>'.__('WP-Polls', 'wp-stats').'</strong></p>'."\n";
-			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_pollquestions(false).'</strong> '.__('Polls Were Created.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_pollanswers(false).'</strong> '.__('Polls\' Answers Were Given.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_pollvotes(false).'</strong> '.__('Votes Were Casted.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '</ul>'."\n";
-		}
-		
-		// WP-PostRatings Stats		
-		if(function_exists('the_ratings') && $stats_display['ratings'] == 1) {
-			$temp_stats .= '<p><strong>'.__('WP-PostRatings', 'wp-stats').'</strong></p>'."\n";
-			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_ratings_votes(false).'</strong> '.__('Votes Were Casted.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_ratings_users(false).'</strong> '.__('Users Casted Their Vote.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '</ul>'."\n";
-		}
-		
-		// WP-PostViews Stats		
-		if(function_exists('the_views') && $stats_display['views'] == 1) {
-			$temp_stats .= '<p><strong>'.__('WP-PostViews', 'wp-stats').'</strong></p>'."\n";
-			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalviews(false).'</strong> '.__('Views Were Generated.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '</ul>'."\n";
-		}
-
-		// WP-UserOnline Stats		
-		if(function_exists('useronline') && $stats_display['useronline'] == 1) {
-			$temp_stats .= '<p><strong>'.__('WP-UserOnline', 'wp-stats').'</strong></p>'."\n";
-			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_useronline('', '', false).'</strong> '.__('User(s) Online Now.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li>'.__('Most users ever online was', 'wp-stats').' <strong>'.get_most_useronline(false).'</strong>.</li>'."\n";
-			$temp_stats .= '<li>'.__('On', 'wp-stats').' <strong>'.get_most_useronline_date(false).'</strong>.</li>'."\n";
-			$temp_stats .= '</ul>'."\n";
-		}
-		
-		// Top Stats
-		if($stats_display['recent_posts'] == 1 || $stats_display['recent_commtents'] == 1 || $stats_display['commented_post'] == 1 || $stats_display['emailed_most'] == 1 || $stats_display['rated_highest'] == 1 || $stats_display['rated_most'] == 1 || $stats_display['viewed_most'] == 1) {
-			$temp_stats .= '<h2>'.sprintf(__('Top %s Post Stats', 'wp-stats'), $stats_mostlimit).'</h2>'."\n";
-		}
+		// Top Recent Stats
+		$temp_stats .= '<h2>'.sprintf(__('Top %s Recent Stats', 'wp-stats'), $stats_mostlimit).'</h2>'."\n";
 
 		// Recent Posts
 		if($stats_display['recent_posts'] == 1) {
@@ -472,6 +426,12 @@ function stats_page() {
 			$temp_stats .= '</ul>'."\n";
 		}
 
+		// WP-Stats: Top Recent Stats Filter
+		$temp_stats = apply_filters('wp_stats_page_recent', $temp_stats);
+
+		// Top Most Stats
+		$temp_stats .= '<h2>'.sprintf(__('Top %s Most/Highest Stats', 'wp-stats'), $stats_mostlimit).'</h2>'."\n";
+
 		// Most Commented Post
 		if($stats_display['commented_post'] == 1) {
 			$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Most Commented Post', 'wp-stats').'</strong></p>'."\n";
@@ -479,61 +439,40 @@ function stats_page() {
 			$temp_stats .= get_mostcommented('post', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";
 		}
+		
+		// WP-Stats: Top Most/Highest Stats Filter
+		$temp_stats = apply_filters('wp_stats_page_most', $temp_stats);
+		
+		// Authors Stats
+		$temp_stats .= '<h2>'.__('Authors Stats', 'wp-stats').'</h2>'."\n";
 
-		// WP-EMail (Most EMailed Post)
-		if(function_exists('wp_email') && $stats_display['emailed_most'] == 1) {
-			$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Most Emailed Post', 'wp-stats').'</strong></p>'."\n";
-			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= get_mostemailed('post', $stats_mostlimit, 0, false);
-			$temp_stats .= '</ul>'."\n";
-		}
-		
-		// WP-PostRatings (Highest Rated Post) (Most Rated Post)
-		if(function_exists('the_ratings')) {
-			if($stats_display['rated_highest'] == 1) {
-				$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Highest Rated Post', 'wp-stats').'</strong></p>'."\n";
-				$temp_stats .= '<ul>'."\n";
-				$temp_stats .= get_highest_rated('post', $stats_mostlimit, 0, false);
-				$temp_stats .= '</ul>'."\n";
-			}
-			if($stats_display['rated_most'] == 1) {
-				$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Most Rated Post', 'wp-stats').'</strong></p>'."\n";
-				$temp_stats .= '<ul>'."\n";
-				$temp_stats .= get_most_rated('post', $stats_mostlimit, 0, false);
-				$temp_stats .= '</ul>'."\n";
-			}
-		}
-		
-		// WP-PostViews (Most Viewed Post)
-		if(function_exists('the_views') && $stats_display['viewed_most'] == 1) {
-			$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Most Viewed Post', 'wp-stats').'</strong></p>'."\n";
-			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= get_most_viewed('post', $stats_mostlimit, 0, false);
-			$temp_stats .= '</ul>'."\n";
-		}
-		
-		// Author Stats
+		// Authors
 		if($stats_display['authors'] == 1) {
-			$temp_stats .= '<h2>'.__('Authors Stats', 'wp-stats').'</h2>'."\n";
 			$temp_stats .= '<p><strong>'.__('Authors', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ol>'."\n";
 			$temp_stats .= get_authorsstats('post', false);
 			$temp_stats .= '</ol>'."\n";
 		}
-		
+
+		// WP-Stats: Authors Stats Filter
+		$temp_stats = apply_filters('wp_stats_page_authors', $temp_stats);			
+
 		// Comments' Members Stats
+		$temp_stats .= '<h2>'.__('Comments\' Members Stats', 'wp-stats').'</h2>'."\n";
+
+		// Comments' Member
 		if($stats_display['comment_members'] == 1) {
-			$temp_stats .= '<h2>'.__('Comments\' Members Stats', 'wp-stats').'</h2>'."\n";
 			$temp_stats .= '<p><strong>'.__('Comment Members', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ol>'."\n";
 			$temp_stats .= get_commentmembersstats(-1, 0, false);
 			$temp_stats .= '</ol>'."\n";
 		}
 
+		// WP-Stats: Comments' Members Stats Filter
+		$temp_stats = apply_filters('wp_stats_page_comments_members', $temp_stats);
+
 		// Misc Stats
-		if($stats_display['post_cats'] == 1 || $stats_display['link_cats'] == 1) {
-			$temp_stats .= '<h2>'.__('Misc Stats', 'wp-stats').'</h2>'."\n";
-		}
+		$temp_stats .= '<h2>'.__('Misc Stats', 'wp-stats').'</h2>'."\n";
 
 		// Post Categories
 		if($stats_display['post_cats'] == 1) {
@@ -550,6 +489,9 @@ function stats_page() {
 			$temp_stats .= get_linkcats(false);
 			$temp_stats .= '</ul>'."\n";
 		}
+
+		// WP-Stats: Plugin Misc Filter
+		$temp_stats = apply_filters('wp_stats_page_misc', $temp_stats);
 
 	// Displaying Comments Posted By User
 	} else {

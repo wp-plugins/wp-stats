@@ -73,6 +73,11 @@ function widget_stats_init() {
 				if($stats_total_options['links'] == 1) {
 					echo '<li><strong>'.get_totallinks(false).'</strong> '.__('Links', 'wp-stats').'</li>'."\n";
 				}
+				// Total Spam
+				if($stats_total_options['spam'] == 1) {
+					echo '<li><strong>'.number_format(akismet_spam_count()).'</strong> '.__('Spam Blocked', 'wp-stats').'</li>'."\n";
+				}
+				echo apply_filters('wp_stats_widget_general', $widget_general_stats);
 				echo '</ul>'."\n";
 				echo '</li>'."\n";
 				echo '</ul>'."\n";
@@ -88,50 +93,7 @@ function widget_stats_init() {
 				echo '</li>'."\n";
 				echo '</ul>'."\n";
 			}
-			// Most Emailed
-			if($stats_most_options['emails'] == 1) {
-				echo '<ul>'."\n";
-				echo '<li><strong>'.$limit.' '.__('Most Emailed', 'wp-stats').'</strong></li>'."\n";
-				echo '<li>'."\n";
-				echo '<ul>'."\n";
-				get_mostemailed('post', $limit, $chars);
-				echo '</ul>'."\n";
-				echo '</li>'."\n";
-				echo '</ul>'."\n";
-			}
-			// Highest Rated
-			if($stats_most_options['ratings_highest'] == 1) {
-				echo '<ul>'."\n";
-				echo '<li><strong>'.$limit.' '.__('Highest Rated', 'wp-stats').'</strong></li>'."\n";
-				echo '<li>'."\n";
-				echo '<ul>'."\n";
-				get_highest_rated('post', $limit, $chars);
-				echo '</ul>'."\n";
-				echo '</li>'."\n";
-				echo '</ul>'."\n";
-			}
-			// Most Rated
-			if($stats_most_options['ratings_most'] == 1) {
-				echo '<ul>'."\n";
-				echo '<li><strong>'.$limit.' '.__('Most Rated', 'wp-stats').'</strong></li>'."\n";
-				echo '<li>'."\n";
-				echo '<ul>'."\n";
-				get_most_rated('post', $limit, $chars);
-				echo '</ul>'."\n";
-				echo '</li>'."\n";
-				echo '</ul>'."\n";
-			}
-			// Most Viewed
-			if($stats_most_options['views'] == 1) {
-				echo '<ul>'."\n";
-				echo '<li><strong>'.$limit.' '.__('Most Viewed', 'wp-stats').'</strong></li>'."\n";
-				echo '<li>'."\n";
-				echo '<ul>'."\n";
-				get_most_viewed('post', $limit, $chars);
-				echo '</ul>'."\n";
-				echo '</li>'."\n";
-				echo '</ul>'."\n";
-			}
+			echo apply_filters('wp_stats_widget_most', $widget_most_stats);
 			if(intval($options['show_link']) == 1) {
 				echo '<ul>'."\n";
 				echo '<li><a href="'.stripslashes(get_option('stats_url')).'">'.__('My Blog Statistics', 'wp-stats').'</a></li>'."\n";
@@ -196,28 +158,18 @@ function widget_stats_init() {
 		echo ' />&nbsp;&nbsp;'.__('Total Comment Posters', 'wp-stats').'<br />'."\n";
 		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="links"';
 		checked(1, $options['stats_display_total']['links']);
-		echo ' />&nbsp;&nbsp;'.__('Total Links', 'wp-stats').'<br /><br />'."\n";
+		echo ' />&nbsp;&nbsp;'.__('Total Links', 'wp-stats').'<br />'."\n";
+		if(function_exists('akismet_spam_count')) {
+			echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="spam"';
+			checked(1, $options['stats_display_total']['spam']);
+			echo ' />&nbsp;&nbsp;'.__('Total Spam Blocked', 'wp-stats');
+		}
+		echo apply_filters('wp_stats_widget_admin_general', $widget_admin_general_stats);
+		echo '<br /><br />'."\n";
 		echo '<input type="checkbox" id="stats_display_most" name="stats_display_most[]" value="comments"';
 		checked(1, $options['stats_display_most']['comments']);
 		echo ' />&nbsp;&nbsp;'.$options['most_limit'].' '.__('Most Commented Posts', 'wp-stats').'<br />'."\n";
-		if(function_exists('wp_email')) {
-			echo '<input type="checkbox" id="stats_display_most" name="stats_display_most[]" value="emails"';
-			checked(1, $options['stats_display_most']['emails']);
-			echo ' />&nbsp;&nbsp;'.$options['most_limit'].' '.__('Most Emailed Posts', 'wp-stats').'<br />'."\n";
-		}
-		if(function_exists('the_ratings')) {
-			echo '<input type="checkbox" id="stats_display_most" name="stats_display_most[]" value="ratings_highest"';
-			checked(1, $options['stats_display_most']['ratings_highest']);
-			echo ' />&nbsp;&nbsp;'.$options['most_limit'].' '.__('Highest Rated Posts', 'wp-stats').'<br />'."\n";
-			echo '<input type="checkbox" id="stats_display_most" name="stats_display_most[]" value="ratings_most"';
-			checked(1, $options['stats_display_most']['ratings_most']);
-			echo ' />&nbsp;&nbsp;'.$options['most_limit'].' '.__('Most Rated Posts', 'wp-stats').'<br />'."\n";
-		}
-		if(function_exists('the_views')) {
-			echo '<input type="checkbox" id="stats_display_most" name="stats_display_most[]" value="views"';
-			checked(1, $options['stats_display_most']['views']);
-			echo ' />&nbsp;&nbsp;'.$options['most_limit'].' '.__('Most Viewed Posts', 'wp-stats').'<br />'."\n";
-		}
+		echo apply_filters('wp_stats_widget_admin_most', $widget_admin_most_stats);
 		echo '</p>'."\n";
 		echo '<p style="text-align: left;"><label for="most_limit">'.__('Post Title Length (Characters)', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;'."\n";
 		echo '<p style="text-align: left;"><input type="text" id="snippet_chars" name="snippet_chars" value="'.$options['snippet_chars'].'" size="3" maxlength="3" /></p>'."\n";

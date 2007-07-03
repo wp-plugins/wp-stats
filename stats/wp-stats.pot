@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Stats 2.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-06-28 16:06+0800\n"
+"PO-Revision-Date: 2007-07-04 01:56+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@homtail.com>\n"
 "MIME-Version: 1.0\n"
@@ -216,7 +216,6 @@ msgid "Links"
 msgstr ""
 
 #: stats-widget.php:78
-#: stats.php:397
 msgid "Spam Blocked"
 msgstr ""
 
@@ -333,27 +332,31 @@ msgid "No categories"
 msgstr ""
 
 #: stats.php:390
-msgid "Authors To This Blog."
+msgid "authors to this blog."
 msgstr ""
 
 #: stats.php:391
-msgid "Posts Were Posted."
+msgid "posts were posted."
 msgstr ""
 
 #: stats.php:392
-msgid "Pages Were Created."
+msgid "pages were created."
 msgstr ""
 
 #: stats.php:393
-msgid "Comments Were Posted."
+msgid "comments were posted."
 msgstr ""
 
 #: stats.php:394
-msgid "Different Nicks Were Represented In The Comments."
+msgid "different nicknames were represented in the comments."
 msgstr ""
 
 #: stats.php:395
-msgid "Links Were Added"
+msgid "links were added."
+msgstr ""
+
+#: stats.php:397
+msgid "spam blocked."
 msgstr ""
 
 #: stats.php:405

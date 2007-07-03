@@ -387,14 +387,14 @@ function stats_page() {
 			$temp_stats .= '<h2>'.__('General Stats', 'wp-stats').'</h2>'."\n";
 			$temp_stats .= '<p><strong>'.__('Total Stats', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalauthors(false).'</strong> '.__('Authors To This Blog.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalposts(false).'</strong> '.__('Posts Were Posted.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalpages(false).'</strong> '.__('Pages Were Created.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalcomments(false).'</strong> '.__('Comments Were Posted.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalcommentposters(false).'</strong> '.__('Different Nicks Were Represented In The Comments.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totallinks(false).'</strong> '.__('Links Were Added', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalauthors(false).'</strong> '.__('authors to this blog.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalposts(false).'</strong> '.__('posts were posted.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalpages(false).'</strong> '.__('pages were created.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalcomments(false).'</strong> '.__('comments were posted.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalcommentposters(false).'</strong> '.__('different nicknames were represented in the comments.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totallinks(false).'</strong> '.__('links were added.', 'wp-stats').'</li>'."\n";
 			if(function_exists('akismet_spam_count')) {
-				$temp_stats .= '<li><strong>'.number_format(akismet_spam_count()).'</strong> '.__('Spam Blocked', 'wp-stats').'</li>'."\n";
+				$temp_stats .= '<li><strong>'.number_format(akismet_spam_count()).'</strong> '.__('spam blocked.', 'wp-stats').'</li>'."\n";
 			}
 			// WP-Stats: General Stats Filter
 			$temp_stats = apply_filters('wp_stats_page_general', $temp_stats);

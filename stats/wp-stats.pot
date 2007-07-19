@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Stats 2.20\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-07-04 01:56+0800\n"
+"PO-Revision-Date: 2007-07-20 04:33+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@homtail.com>\n"
 "MIME-Version: 1.0\n"
@@ -382,6 +382,12 @@ msgstr ""
 #: stats.php:521
 #, php-format
 msgid "Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Comments"
+msgstr ""
+
+#: stats.php:529
+#: stats.php:531
+#, php-format
+msgid "%s @ %s"
 msgstr ""
 
 #: stats.php:538

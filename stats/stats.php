@@ -526,9 +526,9 @@ function stats_page() {
 			foreach($gmz_comments as $post) {
 				$comment_id = intval($post->comment_ID);
 				$comment_author2 = htmlspecialchars(stripslashes($post->comment_author));
-				$comment_date = mysql2date(get_option('date_format').' @ '.get_option('time_format'), $post->comment_date);
+				$comment_date = mysql2date(sprintf(__('%s @ %s', 'wp-stats'), get_option('date_format'), get_option('time_format')), $post->comment_date);
 				$comment_content = wpautop(stripslashes($post->comment_content));
-				$post_date = get_the_time(get_option('date_format').' @ '.get_option('time_format'));
+				$post_date = get_the_time(sprintf(__('%s @ %s', 'wp-stats'), get_option('date_format'), get_option('time_format')));
 				$post_title = get_the_title();
 
 				// Check For Password Protected Post

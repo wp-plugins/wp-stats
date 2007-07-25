@@ -133,7 +133,7 @@ function get_recentposts($mode = '', $limit = 10, $display = true) {
 	} else {
 		$where = '1=1';
 	}
-    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.* FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
+    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.*, $wpdb->users.display_name, $wpdb->users.user_nicename FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE user_activation_key = '' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
 	if($recentposts) {
 		foreach ($recentposts as $post) {
 			$post_title = get_the_title();
@@ -227,7 +227,7 @@ function get_authorsstats($mode = '', $display = true) {
 	} else {
 		$where = '1=1';
 	}
-	$posts = $wpdb->get_results("SELECT COUNT($wpdb->posts.ID) AS 'posts_total', $wpdb->users.display_name,  $wpdb->users.user_nicename FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE user_activation_key = '' AND $where AND post_status = 'publish' GROUP BY $wpdb->posts.post_author");
+	$posts = $wpdb->get_results("SELECT COUNT($wpdb->posts.ID) AS 'posts_total', $wpdb->users.display_name, $wpdb->users.user_nicename FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE user_activation_key = '' AND $where AND post_status = 'publish' GROUP BY $wpdb->posts.post_author");
 	if($posts) {
 		$using_permalink = get_option('permalink_structure');
 		$permalink = $wp_rewrite->get_author_permastruct();

@@ -111,6 +111,18 @@ function get_totalcommentposters($display = true) {
 }
 
 
+### Function: Get Total Post Categories
+function get_totalpost_categories($display = true) {
+	global $wpdb;
+	$totalpost_categories = $wpdb->get_var("SELECT COUNT(cat_ID) FROM $wpdb->categories WHERE link_count = 0");
+	if($display) {
+		echo number_format($totalpost_categories);
+	} else {
+		return number_format($totalpost_categories);
+	}
+}
+
+
 ### Function: Get Total Links
 function get_totallinks($display = true) {
 	global $wpdb;
@@ -119,6 +131,18 @@ function get_totallinks($display = true) {
 		echo number_format($totallinks);
 	} else {
 		return number_format($totallinks);
+	}
+}
+
+
+### Function: Get Total Link Categories
+function get_totallink_categories($display = true) {
+	global $wpdb;
+	$totallink_categories = $wpdb->get_var("SELECT COUNT(cat_ID) FROM $wpdb->categories WHERE category_count = 0");
+	if($display) {
+		echo number_format($totallink_categories);
+	} else {
+		return number_format($totallink_categories);
 	}
 }
 
@@ -389,12 +413,14 @@ function stats_page() {
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><strong>'.get_totalauthors(false).'</strong> '.__('authors to this blog.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '<li><strong>'.get_totalposts(false).'</strong> '.__('posts were posted.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalpages(false).'</strong> '.__('pages were created.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalpages(false).'</strong> '.__('pages were created.', 'wp-stats').'</li>'."\n";			
 			$temp_stats .= '<li><strong>'.get_totalcomments(false).'</strong> '.__('comments were posted.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '<li><strong>'.get_totalcommentposters(false).'</strong> '.__('different nicknames were represented in the comments.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '<li><strong>'.get_totallinks(false).'</strong> '.__('links were added.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totalpost_categories(false).'</strong> '.__('post categories were needed.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.get_totallink_categories(false).'</strong> '.__('link categories were needed.', 'wp-stats').'</li>'."\n";
 			if(function_exists('akismet_spam_count')) {
-				$temp_stats .= '<li><strong>'.number_format(akismet_spam_count()).'</strong> '.__('spam blocked.', 'wp-stats').'</li>'."\n";
+				$temp_stats .= '<li><strong>'.number_format(get_option('akismet_spam_count')).'</strong> '.__('spam blocked.', 'wp-stats').'</li>'."\n";
 			}
 			// WP-Stats: General Stats Filter
 			$temp_stats = apply_filters('wp_stats_page_general', $temp_stats);

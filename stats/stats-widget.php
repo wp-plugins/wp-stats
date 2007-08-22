@@ -73,6 +73,14 @@ function widget_stats_init() {
 				if($stats_total_options['links'] == 1) {
 					echo '<li><strong>'.get_totallinks(false).'</strong> '.__('Links', 'wp-stats').'</li>'."\n";
 				}
+				// Total Post Categories
+				if($stats_total_options['post_cats'] == 1) {
+					echo '<li><strong>'.get_totalpost_categories(false).'</strong> '.__('Post Categories', 'wp-stats').'</li>'."\n";
+				}
+				// Total Link Categories
+				if($stats_total_options['link_cats'] == 1) {
+					echo '<li><strong>'.get_totallink_categories(false).'</strong> '.__('Link Categories', 'wp-stats').'</li>'."\n";
+				}
 				// Total Spam
 				if($stats_total_options['spam'] == 1) {
 					echo '<li><strong>'.number_format(akismet_spam_count()).'</strong> '.__('Spam Blocked', 'wp-stats').'</li>'."\n";
@@ -159,6 +167,12 @@ function widget_stats_init() {
 		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="links"';
 		checked(1, $options['stats_display_total']['links']);
 		echo ' />&nbsp;&nbsp;'.__('Total Links', 'wp-stats').'<br />'."\n";
+		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="post_cats"';
+		checked(1, $options['stats_display_total']['post_cats']);
+		echo ' />&nbsp;&nbsp;'.__('Total Post Categories', 'wp-stats').'<br />'."\n";
+		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="link_cats"';
+		checked(1, $options['stats_display_total']['link_cats']);
+		echo ' />&nbsp;&nbsp;'.__('Total Link Categories', 'wp-stats').'<br />'."\n";
 		if(function_exists('akismet_spam_count')) {
 			echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="spam"';
 			checked(1, $options['stats_display_total']['spam']);

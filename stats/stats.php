@@ -111,18 +111,6 @@ function get_totalcommentposters($display = true) {
 }
 
 
-### Function: Get Total Post Categories
-function get_totalpost_categories($display = true) {
-	global $wpdb;
-	$totalpost_categories = $wpdb->get_var("SELECT COUNT(cat_ID) FROM $wpdb->categories WHERE link_count = 0");
-	if($display) {
-		echo number_format($totalpost_categories);
-	} else {
-		return number_format($totalpost_categories);
-	}
-}
-
-
 ### Function: Get Total Links
 function get_totallinks($display = true) {
 	global $wpdb;
@@ -131,18 +119,6 @@ function get_totallinks($display = true) {
 		echo number_format($totallinks);
 	} else {
 		return number_format($totallinks);
-	}
-}
-
-
-### Function: Get Total Link Categories
-function get_totallink_categories($display = true) {
-	global $wpdb;
-	$totallink_categories = $wpdb->get_var("SELECT COUNT(cat_ID) FROM $wpdb->categories WHERE category_count = 0");
-	if($display) {
-		echo number_format($totallink_categories);
-	} else {
-		return number_format($totallink_categories);
 	}
 }
 
@@ -333,10 +309,28 @@ function get_postcats($display = true) {
 function get_linkcats($display = true) {
 	global $wpdb;
 	$temp = '';
-	$cats = get_categories("type=link");
+	$cats = get_categories('type=link');
 	if ($cats) {
 		foreach ($cats as $cat) {
-			$temp .= '<li>'.$cat->cat_name.' ('.$cat->link_count.")</li>\n";
+			$temp .= '<li>'.$cat->cat_name.' ('.$cat->count.")</li>\n";
+		}
+	}
+	if($display) {
+		echo $temp;
+	} else {
+		return $temp;
+	}
+}
+
+
+### Function: Get Tags List
+function get_tags_list($display = true) {
+	global $wpdb;
+	$temp = '';
+	$tags = get_tags('orderby=count&order=DESC');
+	if ($tags) {
+		foreach ($tags as $tag) {
+			$temp .= '<li><a href="'.clean_url(get_tag_link($tag->term_id)).'" title="'.sprintf(__('%s topics', 'wp-stats'), $tag->count).'">'.$tag->name.'</a> ('.$tag->count.")</li>\n";
 		}
 	}
 	if($display) {
@@ -413,12 +407,13 @@ function stats_page() {
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><strong>'.get_totalauthors(false).'</strong> '.__('authors to this blog.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '<li><strong>'.get_totalposts(false).'</strong> '.__('posts were posted.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalpages(false).'</strong> '.__('pages were created.', 'wp-stats').'</li>'."\n";			
+			$temp_stats .= '<li><strong>'.get_totalpages(false).'</strong> '.__('pages were created.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.wp_count_terms('post_tag').'</strong> '.__('tags were created.', 'wp-stats').'</li>'."\n";		
 			$temp_stats .= '<li><strong>'.get_totalcomments(false).'</strong> '.__('comments were posted.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '<li><strong>'.get_totalcommentposters(false).'</strong> '.__('different nicknames were represented in the comments.', 'wp-stats').'</li>'."\n";
 			$temp_stats .= '<li><strong>'.get_totallinks(false).'</strong> '.__('links were added.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totalpost_categories(false).'</strong> '.__('post categories were needed.', 'wp-stats').'</li>'."\n";
-			$temp_stats .= '<li><strong>'.get_totallink_categories(false).'</strong> '.__('link categories were needed.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.wp_count_terms('category').'</strong> '.__('post categories were needed.', 'wp-stats').'</li>'."\n";
+			$temp_stats .= '<li><strong>'.wp_count_terms('link_category').'</strong> '.__('link categories were needed.', 'wp-stats').'</li>'."\n";
 			if(function_exists('akismet_spam_count')) {
 				$temp_stats .= '<li><strong>'.number_format(get_option('akismet_spam_count')).'</strong> '.__('spam blocked.', 'wp-stats').'</li>'."\n";
 			}
@@ -513,6 +508,13 @@ function stats_page() {
 			$temp_stats .= '<p><strong>'.__('Link Categories', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_linkcats(false);
+			$temp_stats .= '</ul>'."\n";
+		}
+
+		if($stats_display['tags_list'] == 1) {
+			$temp_stats .= '<p><strong>'.__('Tags List', 'wp-stats').'</strong></p>'."\n";
+			$temp_stats .= '<ul>'."\n";
+			$temp_stats .= get_tags_list(false);
 			$temp_stats .= '</ul>'."\n";
 		}
 

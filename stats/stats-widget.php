@@ -61,6 +61,10 @@ function widget_stats_init() {
 				if($stats_total_options['pages'] == 1) {
 					echo '<li><strong>'.get_totalpages(false).'</strong> '.__('Pages', 'wp-stats').'</li>'."\n";
 				}
+				// Total Tags
+				if($stats_total_options['tags'] == 1) {
+					echo '<li><strong>'.wp_count_terms('post_tag').'</strong> '.__('Tags', 'wp-stats').'</li>'."\n";
+				}
 				// Total Comments
 				if($stats_total_options['comments'] == 1) {
 					echo '<li><strong>'.get_totalcomments(false).'</strong> '.__('Comments', 'wp-stats').'</li>'."\n";
@@ -75,11 +79,11 @@ function widget_stats_init() {
 				}
 				// Total Post Categories
 				if($stats_total_options['post_cats'] == 1) {
-					echo '<li><strong>'.get_totalpost_categories(false).'</strong> '.__('Post Categories', 'wp-stats').'</li>'."\n";
+					echo '<li><strong>'.wp_count_terms('category').'</strong> '.__('Post Categories', 'wp-stats').'</li>'."\n";
 				}
 				// Total Link Categories
 				if($stats_total_options['link_cats'] == 1) {
-					echo '<li><strong>'.get_totallink_categories(false).'</strong> '.__('Link Categories', 'wp-stats').'</li>'."\n";
+					echo '<li><strong>'.wp_count_terms('link_category').'</strong> '.__('Link Categories', 'wp-stats').'</li>'."\n";
 				}
 				// Total Spam
 				if($stats_total_options['spam'] == 1) {
@@ -147,55 +151,58 @@ function widget_stats_init() {
 			update_option('widget_stats', $options);
 		}
 		echo '<p style="text-align: left;"><label for="stats-title">'.__('Widget Title', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;<input type="text" id="stats-title" name="stats-title" value="'.htmlspecialchars($options['title']).'" />';
-		echo '<p style="text-align: left;"><label for="stats_display">'.__('Statistics To Display?', 'wp-stats').'</label>&nbsp;&nbsp;&nbsp;'."\n";
+		echo '<p style="text-align: left;">'.__('Statistics To Display?', 'wp-stats').'&nbsp;&nbsp;&nbsp;'."\n";
 		echo '<p style="text-align: left;">'."\n";
-		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="authors"';
+		echo '<input type="checkbox" id="wpstats_widget_authors" name="stats_display_total[]" value="authors"';
 		checked(1, $options['stats_display_total']['authors']);
-		echo ' />&nbsp;&nbsp;'.__('Total Authors', 'wp-stats').'<br />'."\n";
-		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="posts"';
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_authors">'.__('Total Authors', 'wp-stats').'</label><br />'."\n";
+		echo '<input type="checkbox" id="wpstats_widget_posts" name="stats_display_total[]" value="posts"';
 		checked(1, $options['stats_display_total']['posts']);
-		echo ' />&nbsp;&nbsp;'.__('Total Posts', 'wp-stats').'<br />'."\n";
-		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="pages"';
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_posts">'.__('Total Posts', 'wp-stats').'</label><br />'."\n";
+		echo '<input type="checkbox" id="wpstats_widget_pages" name="stats_display_total[]" value="pages"';
 		checked(1, $options['stats_display_total']['pages']);
-		echo ' />&nbsp;&nbsp;'.__('Total Pages', 'wp-stats').'<br />'."\n";
-		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="comments"';
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_pages">'.__('Total Pages', 'wp-stats').'</label><br />'."\n";
+		echo '<input type="checkbox" id="wpstats_widget_tags" name="stats_display_total[]" value="tags"';
+		checked(1, $options['stats_display_total']['tags']);
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_tags">'.__('Total Tags', 'wp-stats').'</label><br />'."\n";
+		echo '<input type="checkbox" id="wpstats_widget_comments" name="stats_display_total[]" value="comments"';
 		checked(1, $options['stats_display_total']['comments']);
-		echo ' />&nbsp;&nbsp;'.__('Total Comments', 'wp-stats').'<br />'."\n";
-		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="commenters"';
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_comments">'.__('Total Comments', 'wp-stats').'</label><br />'."\n";
+		echo '<input type="checkbox" id="wpstats_widget_commenters" name="stats_display_total[]" value="commenters"';
 		checked(1, $options['stats_display_total']['commenters']);
-		echo ' />&nbsp;&nbsp;'.__('Total Comment Posters', 'wp-stats').'<br />'."\n";
-		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="links"';
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_commenters">'.__('Total Comment Posters', 'wp-stats').'</label><br />'."\n";
+		echo '<input type="checkbox" id="wpstats_widget_links" name="stats_display_total[]" value="links"';
 		checked(1, $options['stats_display_total']['links']);
-		echo ' />&nbsp;&nbsp;'.__('Total Links', 'wp-stats').'<br />'."\n";
-		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="post_cats"';
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_links">'.__('Total Links', 'wp-stats').'</label><br />'."\n";
+		echo '<input type="checkbox" id="wpstats_widget_post_cats" name="stats_display_total[]" value="post_cats"';
 		checked(1, $options['stats_display_total']['post_cats']);
-		echo ' />&nbsp;&nbsp;'.__('Total Post Categories', 'wp-stats').'<br />'."\n";
-		echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="link_cats"';
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_post_cats">'.__('Total Post Categories', 'wp-stats').'</label><br />'."\n";
+		echo '<input type="checkbox" id="wpstats_widget_link_cats" name="stats_display_total[]" value="link_cats"';
 		checked(1, $options['stats_display_total']['link_cats']);
-		echo ' />&nbsp;&nbsp;'.__('Total Link Categories', 'wp-stats').'<br />'."\n";
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_link_cats">'.__('Total Link Categories', 'wp-stats').'</label><br />'."\n";
 		if(function_exists('akismet_spam_count')) {
-			echo '<input type="checkbox" id="stats_display_total" name="stats_display_total[]" value="spam"';
+			echo '<input type="checkbox" id="wpstats_widget_spam" name="stats_display_total[]" value="spam"';
 			checked(1, $options['stats_display_total']['spam']);
-			echo ' />&nbsp;&nbsp;'.__('Total Spam Blocked', 'wp-stats');
+			echo ' />&nbsp;&nbsp;<label for="wpstats_widget_spam">'.__('Total Spam Blocked', 'wp-stats').'</label>';
 		}
 		echo apply_filters('wp_stats_widget_admin_general', $widget_admin_general_stats);
 		echo '<br /><br />'."\n";
-		echo '<input type="checkbox" id="stats_display_most" name="stats_display_most[]" value="comments"';
+		echo '<input type="checkbox" id="wpstats_widget_most_comments" name="stats_display_most[]" value="comments"';
 		checked(1, $options['stats_display_most']['comments']);
-		echo ' />&nbsp;&nbsp;'.$options['most_limit'].' '.__('Most Commented Posts', 'wp-stats').'<br />'."\n";
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_most_comments">'.$options['most_limit'].' '.__('Most Commented Posts', 'wp-stats').'</label><br />'."\n";
 		echo apply_filters('wp_stats_widget_admin_most', $widget_admin_most_stats);
 		echo '</p>'."\n";
 		echo '<p style="text-align: left;"><label for="most_limit">'.__('Post Title Length (Characters)', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;'."\n";
 		echo '<p style="text-align: left;"><input type="text" id="snippet_chars" name="snippet_chars" value="'.$options['snippet_chars'].'" size="3" maxlength="3" /></p>'."\n";
 		echo '<p style="text-align: left;"><label for="most_limit">'.__('Most Limit', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;'."\n";
 		echo '<p style="text-align: left;"><input type="text" id="most_limit" name="most_limit" value="'.$options['most_limit'].'" size="2" maxlength="2" /></p>'."\n";
-		echo '<p style="text-align: left;"><label for="show_link">'.__('Show Link To Full Stats?', 'wp-stats').'</label>&nbsp;&nbsp;&nbsp;'."\n";
+		echo '<p style="text-align: left;">'.__('Show Link To Full Stats?', 'wp-stats').'&nbsp;&nbsp;&nbsp;'."\n";
 		echo '<p style="text-align: left;">';
-		echo '<input type="radio" id="show_link" name="show_link" value="1"';
+		echo '<input type="radio" id="show_link-1" name="show_link" value="1"';
 		checked(1, intval($options['show_link']));
-		echo ' />&nbsp;'.__('Yes', 'wp-stats').'&nbsp;&nbsp;&nbsp;<input type="radio" id="show_link" name="show_link" value="0"';
+		echo ' />&nbsp;<label for="show_link-1">'.__('Yes', 'wp-stats').'</label>&nbsp;&nbsp;&nbsp;<input type="radio" id="show_link-0" name="show_link" value="0"';
 		checked(0, intval($options['show_link']));		
-		echo ' />&nbsp;'.__('No', 'wp-stats').'</p>'."\n";
+		echo ' />&nbsp;<label for="show_link-0">'.__('No', 'wp-stats').'</label></p>'."\n";
 		echo '<input type="hidden" id="stats-submit" name="stats-submit" value="1" />'."\n";
 	}
 

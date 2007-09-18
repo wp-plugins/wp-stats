@@ -28,8 +28,11 @@ Author URI: http://lesterchan.net
 */
 
 
-### Create Text Domain For Translation
-load_plugin_textdomain('wp-stats', 'wp-content/plugins/stats');
+### Create Text Domain For Translations
+add_action('init', 'stats_textdomain');
+function stats_textdomain() {
+	load_plugin_textdomain('wp-stats', 'wp-content/plugins/stats');
+}
 
 
 ### Function: WP-Stats Menu

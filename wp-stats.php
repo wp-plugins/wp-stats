@@ -3,7 +3,7 @@
 Plugin Name: WP-Stats
 Plugin URI: http://lesterchan.net/portfolio/programming.php
 Description: Display your WordPress blog statistics. Ranging from general total statistics, some of my plugins statistics and top 10 statistics.
-Version: 2.20
+Version: 2.30
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
@@ -31,7 +31,7 @@ Author URI: http://lesterchan.net
 ### Create Text Domain For Translations
 add_action('init', 'stats_textdomain');
 function stats_textdomain() {
-	load_plugin_textdomain('wp-stats', 'wp-content/plugins/stats');
+	load_plugin_textdomain('wp-stats', 'wp-content/plugins/wp-stats');
 }
 
 
@@ -39,10 +39,10 @@ function stats_textdomain() {
 add_action('admin_menu', 'stats_menu');
 function stats_menu() {
 	if (function_exists('add_submenu_page')) {
-		add_submenu_page('index.php',  __('WP-Stats', 'wp-stats'),  __('WP-Stats', 'wp-stats'), 1, 'stats/stats.php', 'display_stats');
+		add_submenu_page('index.php',  __('WP-Stats', 'wp-stats'),  __('WP-Stats', 'wp-stats'), 1, 'wp-stats/wp-stats.php', 'display_stats');
 	}
 	if (function_exists('add_options_page')) {
-		add_options_page(__('Stats', 'wp-stats'), __('Stats', 'wp-stats'), 'manage_options', 'stats/stats-options.php');
+		add_options_page(__('Stats', 'wp-stats'), __('Stats', 'wp-stats'), 'manage_options', 'wp-stats/stats-options.php');
 	}
 }
 
@@ -136,12 +136,12 @@ function get_recentposts($mode = '', $limit = 10, $display = true) {
 	} else {
 		$where = '1=1';
 	}
-    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.*, $wpdb->users.display_name, $wpdb->users.user_nicename FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE user_activation_key = '' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
+    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.*, $wpdb->users.* FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE user_activation_key = '' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
 	if($recentposts) {
 		foreach ($recentposts as $post) {
 			$post_title = get_the_title();
 			$post_date = get_the_time(get_option('date_format').' @ '.get_option('time_format'));
-			$display_name = get_the_author();
+			$display_name = stripslashes($post->display_name);
 			$temp .= "<li>$post_date - <a href=\"".get_permalink()."\" title=\"".sprintf(__('View post %s', 'wp-stats'), $post_title)."\">$post_title</a> ($display_name)</li>\n";
 		}
 	} else {
@@ -641,7 +641,7 @@ function stats_page() {
 
 
 ### Function: Stats Option
-add_action('activate_stats/stats.php', 'stats_init');
+add_action('activate_wp-stats/wp-stats.php', 'stats_init');
 function stats_init() {
 	global $wpdb;
 	$stats_display = array('total_stats'  => 1, 'email'  => 1, 'polls' => 1, 'ratings' => 1, 'views' => 1, 'useronline' => 1, 'recent_posts' => 1, 'recent_commtents' => 1, 'commented_post' => 1, 'emailed_most' => 1, 'rated_highest' => 1, 'rated_most' => 1, 'viewed_most' => 1, 'authors' => 1, 'comment_members' => 1, 'post_cats' => 1, 'link_cats' => 1);  

@@ -2,7 +2,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-Stats 2.20										|
+|	WordPress 2.1 Plugin: WP-Stats 2.30										|
 |	Copyright (c) 2007 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -11,55 +11,55 @@
 |																							|
 |	File Information:																	|
 |	- WordPress Statistics															|
-|	- wp-content/plugins/stats/stats-options.php							|
+|	- wp-content/plugins/wp-stats/stats-options.php						|
 |																							|
 +----------------------------------------------------------------+
 */
 
 
 ### Variables Variables Variables
-$base_name = plugin_basename('stats/stats-options.php');
+$base_name = plugin_basename('wp-stats/stats-options.php');
 $base_page = 'admin.php?page='.$base_name;
 $mode = trim($_GET['mode']);
 $stats_settings = array('stats_mostlimit', 'stats_display', 'stats_url', 'widget_stats');
 
 
-### Form Processing 
+### Form Processing
+// Update Options
+if(!empty($_POST['Submit'])) {
+	$stats_url = addslashes(trim($_POST['stats_url']));
+	$stats_mostlimit = intval(trim($_POST['stats_mostlimit']));
+	$stats_display = $_POST['stats_display'];
+	if($stats_display) {
+		foreach($stats_display as $stat_display) {
+			$stat_display = addslashes($stat_display);
+			$stats_display_array[$stat_display] = 1;
+		}
+	}
+	$stats_display = $stats_display_array;
+	$update_stats_queries = array();
+	$update_stats_text = array();
+	$update_stats_queries[] = update_option('stats_url', $stats_url);
+	$update_stats_queries[] = update_option('stats_mostlimit', $stats_mostlimit);
+	$update_stats_queries[] = update_option('stats_display', $stats_display);
+	$update_stats_text[] = __('Stats URL', 'wp-stats');
+	$update_stats_text[] = __('Stats Most Limit', 'wp-stats');
+	$update_stats_text[] = __('Stats Display Options', 'wp-stats');
+	$i=0;
+	$text = '';
+	foreach($update_stats_queries as $update_stats_query) {
+		if($update_stats_query) {
+			$text .= '<font color="green">'.$update_stats_text[$i].' '.__('Updated', 'wp-stats').'</font><br />';
+		}
+		$i++;
+	}
+	if(empty($text)) {
+		$text = '<font color="red">'.__('No Stats Option Updated', 'wp-stats').'</font>';
+	}
+}
+// Uninstall WP-Stats
 if(!empty($_POST['do'])) {
-	// Decide What To Do
-	switch($_POST['do']) {
-		case __('Update Options', 'wp-stats'):
-			$stats_url = addslashes(trim($_POST['stats_url']));
-			$stats_mostlimit = intval(trim($_POST['stats_mostlimit']));
-			$stats_display = $_POST['stats_display'];
-			if($stats_display) {
-				foreach($stats_display as $stat_display) {
-					$stat_display = addslashes($stat_display);
-					$stats_display_array[$stat_display] = 1;
-				}
-			}
-			$stats_display = $stats_display_array;
-			$update_stats_queries = array();
-			$update_stats_text = array();
-			$update_stats_queries[] = update_option('stats_url', $stats_url);
-			$update_stats_queries[] = update_option('stats_mostlimit', $stats_mostlimit);
-			$update_stats_queries[] = update_option('stats_display', $stats_display);
-			$update_stats_text[] = __('Stats URL', 'wp-stats');
-			$update_stats_text[] = __('Stats Most Limit', 'wp-stats');
-			$update_stats_text[] = __('Stats Display Options', 'wp-stats');
-			$i=0;
-			$text = '';
-			foreach($update_stats_queries as $update_stats_query) {
-				if($update_stats_query) {
-					$text .= '<font color="green">'.$update_stats_text[$i].' '.__('Updated', 'wp-stats').'</font><br />';
-				}
-				$i++;
-			}
-			if(empty($text)) {
-				$text = '<font color="red">'.__('No Stats Option Updated', 'wp-stats').'</font>';
-			}
-			break;
-		// Uninstall WP-Stats
+	switch($_POST['do']) {		
 		case __('UNINSTALL WP-Stats', 'wp-stats') :
 			if(trim($_POST['uninstall_stats_yes']) == 'yes') {
 				echo '<div id="message" class="updated fade">';
@@ -89,9 +89,9 @@ if(!empty($_POST['do'])) {
 switch($mode) {
 		//  Deactivating WP-Stats
 		case 'end-UNINSTALL':
-			$deactivate_url = 'plugins.php?action=deactivate&amp;plugin=stats/stats.php';
+			$deactivate_url = 'plugins.php?action=deactivate&amp;plugin=wp-stats/wp-stats.php';
 			if(function_exists('wp_nonce_url')) { 
-				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_stats/stats.php');
+				$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_wp-stats/wp-stats.php');
 			}
 			echo '<div class="wrap">';
 			echo '<h2>'.__('Uninstall WP-Stats', 'wp-stats').'</h2>';
@@ -107,6 +107,9 @@ switch($mode) {
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
 <div class="wrap"> 
 	<h2><?php _e('Stats Options', 'wp-stats'); ?></h2> 
+	<p class="submit">
+		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options &raquo;', 'wp-stats'); ?>" />
+	</p>
 	<fieldset class="options">
 		<legend><?php _e('Stats Options', 'wp-stats'); ?></legend>
 		<table width="100%"  border="0" cellspacing="3" cellpadding="3">
@@ -172,9 +175,9 @@ switch($mode) {
 			</tr>
 		</table>
 	</fieldset>
-	<div align="center">
-		<input type="submit" name="do" class="button" value="<?php _e('Update Options', 'wp-stats'); ?>" />&nbsp;&nbsp;<input type="button" name="cancel" value="<?php _e('Cancel', 'wp-stats'); ?>" class="button" onclick="javascript:history.go(-1)" /> 
-	</div>
+	<p class="submit">
+		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options &raquo;', 'wp-stats'); ?>" />
+	</p>
 </div>
 </form>
 

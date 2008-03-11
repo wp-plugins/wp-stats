@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Stats 2.30\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-10-21 22:49+0800\n"
+"PO-Revision-Date: 2008-03-11 21:51+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@homtail.com>\n"
 "MIME-Version: 1.0\n"
@@ -16,69 +16,53 @@ msgstr ""
 
 #: stats-options.php:45
 #: stats-options.php:117
-#: stats/stats-options.php:47
-#: stats/stats-options.php:114
 msgid "Stats URL"
 msgstr ""
 
 #: stats-options.php:46
 #: stats-options.php:123
-#: stats/stats-options.php:48
-#: stats/stats-options.php:120
 msgid "Stats Most Limit"
 msgstr ""
 
 #: stats-options.php:47
-#: stats/stats-options.php:49
 msgid "Stats Display Options"
 msgstr ""
 
 #: stats-options.php:52
-#: stats/stats-options.php:54
 msgid "Updated"
 msgstr ""
 
 #: stats-options.php:57
-#: stats/stats-options.php:59
 msgid "No Stats Option Updated"
 msgstr ""
 
 #: stats-options.php:63
 #: stats-options.php:217
-#: stats/stats-options.php:63
-#: stats/stats-options.php:214
 msgid "UNINSTALL WP-Stats"
 msgstr ""
 
 #: stats-options.php:71
-#: stats/stats-options.php:71
 #, php-format
 msgid "Setting Key '%s' has been deleted."
 msgstr ""
 
 #: stats-options.php:75
-#: stats/stats-options.php:75
 #, php-format
 msgid "Error deleting Setting Key '%s'."
 msgstr ""
 
 #: stats-options.php:97
 #: stats-options.php:187
-#: stats/stats-options.php:97
-#: stats/stats-options.php:184
 msgid "Uninstall WP-Stats"
 msgstr ""
 
 #: stats-options.php:98
-#: stats/stats-options.php:98
 #, php-format
 msgid "<a href=\"%s\">Click Here</a> To Finish The Uninstallation And WP-Stats Will Be Deactivated Automatically."
 msgstr ""
 
 #: stats-options.php:109
 #: stats-options.php:114
-#: stats/stats-options.php:109
-#: stats/stats-options.php:111
 msgid "Stats Options"
 msgstr ""
 
@@ -88,161 +72,120 @@ msgid "Update Options &raquo;"
 msgstr ""
 
 #: stats-options.php:119
-#: stats/stats-options.php:116
 msgid "URL To Stats Page.<br />Example: http://www.yoursite.com/blogs/stats/<br />Example: http://www.yoursite.com/blogs/?page_id=2"
 msgstr ""
 
 #: stats-options.php:125
-#: stats/stats-options.php:122
 msgid "Top X Stats, where X is the most limit."
 msgstr ""
 
 #: stats-options.php:129
-#: stats/stats-options.php:126
 msgid "Type Of Stats To Display"
 msgstr ""
 
 #: stats-options.php:131
-#: wp-stats.php:408
-#: stats/stats-options.php:128
-#: stats/stats.php:408
+#: wp-stats.php:400
 msgid "General Stats"
 msgstr ""
 
 #: stats-options.php:137
-#: stats/stats-options.php:134
 msgid "Plugin Stats"
 msgstr ""
 
 #: stats-options.php:142
-#: wp-stats.php:435
-#: stats/stats-options.php:139
-#: stats/stats.php:435
+#: wp-stats.php:427
 #, php-format
 msgid "Top %s Recent Stats"
 msgstr ""
 
 #: stats-options.php:143
-#: stats/stats-options.php:140
 msgid "Most Recent Posts"
 msgstr ""
 
 #: stats-options.php:144
-#: stats/stats-options.php:141
 msgid "Most Recent Comments"
 msgstr ""
 
 #: stats-options.php:149
-#: wp-stats.php:457
-#: stats/stats-options.php:146
-#: stats/stats.php:457
+#: wp-stats.php:449
 #, php-format
 msgid "Top %s Most/Highest Stats"
 msgstr ""
 
 #: stats-options.php:150
 #: wp-stats-widget.php:192
-#: stats/stats-options.php:147
-#: stats/stats-widget.php:192
 msgid "Most Commented Posts"
 msgstr ""
 
 #: stats-options.php:155
-#: wp-stats.php:471
-#: stats/stats-options.php:152
-#: stats/stats.php:471
+#: wp-stats.php:463
 msgid "Authors Stats"
 msgstr ""
 
 #: stats-options.php:156
 #: wp-stats-widget.php:54
-#: wp-stats.php:475
-#: stats/stats-options.php:153
-#: stats/stats-widget.php:54
-#: stats/stats.php:475
+#: wp-stats.php:467
 msgid "Authors"
 msgstr ""
 
 #: stats-options.php:161
-#: wp-stats.php:485
-#: stats/stats-options.php:158
-#: stats/stats.php:485
+#: wp-stats.php:477
 msgid "Comments' Members Stats"
 msgstr ""
 
 #: stats-options.php:162
-#: wp-stats.php:489
-#: stats/stats-options.php:159
-#: stats/stats.php:489
+#: wp-stats.php:481
 msgid "Comment Members"
 msgstr ""
 
 #: stats-options.php:167
-#: wp-stats.php:499
-#: stats/stats-options.php:164
-#: stats/stats.php:499
+#: wp-stats.php:491
 msgid "Misc Stats"
 msgstr ""
 
 #: stats-options.php:168
 #: wp-stats-widget.php:82
-#: wp-stats.php:503
-#: stats/stats-options.php:165
-#: stats/stats-widget.php:82
-#: stats/stats.php:503
+#: wp-stats.php:495
 msgid "Post Categories"
 msgstr ""
 
 #: stats-options.php:169
 #: wp-stats-widget.php:86
-#: wp-stats.php:511
-#: stats/stats-options.php:166
-#: stats/stats-widget.php:86
-#: stats/stats.php:511
+#: wp-stats.php:503
 msgid "Link Categories"
 msgstr ""
 
 #: stats-options.php:170
-#: wp-stats.php:518
-#: stats/stats-options.php:167
-#: stats/stats.php:518
+#: wp-stats.php:510
 msgid "Tags List"
 msgstr ""
 
 #: stats-options.php:189
-#: stats/stats-options.php:186
 msgid "Deactivating WP-Stats plugin does not remove any data that may have been created, such as the stats options. To completely remove this plugin, you can uninstall it here."
 msgstr ""
 
 #: stats-options.php:192
-#: stats/stats-options.php:189
 msgid "WARNING:"
 msgstr ""
 
 #: stats-options.php:193
-#: stats/stats-options.php:190
 msgid "Once uninstalled, this cannot be undone. You should use a Database Backup plugin of WordPress to back up all the data first."
 msgstr ""
 
 #: stats-options.php:196
-#: stats/stats-options.php:193
 msgid "The following WordPress Options will be DELETED:"
 msgstr ""
 
 #: stats-options.php:200
-#: stats/stats-options.php:197
 msgid "WordPress Options"
 msgstr ""
 
 #: stats-options.php:216
 #: wp-stats-widget.php:203
-#: stats/stats-options.php:213
-#: stats/stats-widget.php:203
 msgid "Yes"
 msgstr ""
 
 #: stats-options.php:217
-#: stats/stats-options.php:214
 msgid ""
 "You Are About To Uninstall WP-Stats From WordPress.\\n"
 "This Action Is Not Reversible.\\n"
@@ -251,154 +194,123 @@ msgid ""
 msgstr ""
 
 #: wp-stats-widget.php:49
-#: wp-stats.php:409
-#: stats/stats-widget.php:49
-#: stats/stats.php:409
+#: wp-stats.php:401
 msgid "Total Stats"
 msgstr ""
 
 #: wp-stats-widget.php:58
-#: stats/stats-widget.php:58
 msgid "Posts"
 msgstr ""
 
 #: wp-stats-widget.php:62
-#: stats/stats-widget.php:62
 msgid "Pages"
 msgstr ""
 
 #: wp-stats-widget.php:66
-#: stats/stats-widget.php:66
 msgid "Tags"
 msgstr ""
 
 #: wp-stats-widget.php:70
-#: stats/stats-widget.php:70
 msgid "Comments"
 msgstr ""
 
 #: wp-stats-widget.php:74
-#: stats/stats-widget.php:74
 msgid "Comment Posters"
 msgstr ""
 
 #: wp-stats-widget.php:78
-#: stats/stats-widget.php:78
 msgid "Links"
 msgstr ""
 
 #: wp-stats-widget.php:90
-#: stats/stats-widget.php:90
 msgid "Spam Blocked"
 msgstr ""
 
 #: wp-stats-widget.php:100
-#: stats/stats-widget.php:100
 msgid "Most Commented"
 msgstr ""
 
 #: wp-stats-widget.php:111
-#: stats/stats-widget.php:111
 msgid "My Blog Statistics"
 msgstr ""
 
 #: wp-stats-widget.php:125
-#: stats/stats-widget.php:125
 msgid "Statistics"
 msgstr ""
 
 #: wp-stats-widget.php:153
-#: stats/stats-widget.php:153
 msgid "Widget Title"
 msgstr ""
 
 #: wp-stats-widget.php:154
-#: stats/stats-widget.php:154
 msgid "Statistics To Display?"
 msgstr ""
 
 #: wp-stats-widget.php:158
-#: stats/stats-widget.php:158
 msgid "Total Authors"
 msgstr ""
 
 #: wp-stats-widget.php:161
-#: stats/stats-widget.php:161
 msgid "Total Posts"
 msgstr ""
 
 #: wp-stats-widget.php:164
-#: stats/stats-widget.php:164
 msgid "Total Pages"
 msgstr ""
 
 #: wp-stats-widget.php:167
-#: stats/stats-widget.php:167
 msgid "Total Tags"
 msgstr ""
 
 #: wp-stats-widget.php:170
-#: stats/stats-widget.php:170
 msgid "Total Comments"
 msgstr ""
 
 #: wp-stats-widget.php:173
-#: stats/stats-widget.php:173
 msgid "Total Comment Posters"
 msgstr ""
 
 #: wp-stats-widget.php:176
-#: stats/stats-widget.php:176
 msgid "Total Links"
 msgstr ""
 
 #: wp-stats-widget.php:179
-#: stats/stats-widget.php:179
 msgid "Total Post Categories"
 msgstr ""
 
 #: wp-stats-widget.php:182
-#: stats/stats-widget.php:182
 msgid "Total Link Categories"
 msgstr ""
 
 #: wp-stats-widget.php:186
-#: stats/stats-widget.php:186
 msgid "Total Spam Blocked"
 msgstr ""
 
 #: wp-stats-widget.php:195
-#: stats/stats-widget.php:195
 msgid "Post Title Length (Characters)"
 msgstr ""
 
 #: wp-stats-widget.php:197
-#: stats/stats-widget.php:197
 msgid "Most Limit"
 msgstr ""
 
 #: wp-stats-widget.php:199
-#: stats/stats-widget.php:199
 msgid "Show Link To Full Stats?"
 msgstr ""
 
 #: wp-stats-widget.php:205
-#: stats/stats-widget.php:205
 msgid "No"
 msgstr ""
 
 #: wp-stats.php:42
-#: stats/stats.php:42
 msgid "WP-Stats"
 msgstr ""
 
 #: wp-stats.php:45
-#: stats/stats.php:45
 msgid "Stats"
 msgstr ""
 
 #: wp-stats.php:145
-#: stats/stats.php:145
 #, php-format
 msgid "View post %s"
 msgstr ""
@@ -408,242 +320,181 @@ msgstr ""
 #: wp-stats.php:213
 #: wp-stats.php:249
 #: wp-stats.php:282
-#: stats/stats.php:148
-#: stats/stats.php:177
-#: stats/stats.php:213
-#: stats/stats.php:249
-#: stats/stats.php:282
 msgid "N/A"
 msgstr ""
 
 #: wp-stats.php:174
 #: wp-stats.php:203
 #: wp-stats.php:209
-#: stats/stats.php:174
-#: stats/stats.php:203
-#: stats/stats.php:209
 #, php-format
 msgid "View comments in post %s"
 msgstr ""
 
 #: wp-stats.php:203
 #: wp-stats.php:209
-#: stats/stats.php:203
-#: stats/stats.php:209
 msgid "comments"
 msgstr ""
 
 #: wp-stats.php:243
 #: wp-stats.php:245
-#: stats/stats.php:243
-#: stats/stats.php:245
 #, php-format
 msgid "View posts posted by %s"
 msgstr ""
 
 #: wp-stats.php:275
-#: stats/stats.php:275
 #, php-format
 msgid "View all comments posted by %s"
 msgstr ""
 
 #: wp-stats.php:299
-#: stats/stats.php:299
 msgid "No categories"
 msgstr ""
 
 #: wp-stats.php:336
-#: stats/stats.php:336
 #, php-format
 msgid "%s topics"
 msgstr ""
 
-#: wp-stats.php:411
-#: stats/stats.php:411
+#: wp-stats.php:403
 msgid "authors to this blog."
 msgstr ""
 
-#: wp-stats.php:412
-#: stats/stats.php:412
+#: wp-stats.php:404
 msgid "posts were posted."
 msgstr ""
 
-#: wp-stats.php:413
-#: stats/stats.php:413
+#: wp-stats.php:405
 msgid "pages were created."
 msgstr ""
 
-#: wp-stats.php:414
-#: stats/stats.php:414
+#: wp-stats.php:406
 msgid "tags were created."
 msgstr ""
 
-#: wp-stats.php:415
-#: stats/stats.php:415
+#: wp-stats.php:407
 msgid "comments were posted."
 msgstr ""
 
-#: wp-stats.php:416
-#: stats/stats.php:416
+#: wp-stats.php:408
 msgid "different nicknames were represented in the comments."
 msgstr ""
 
-#: wp-stats.php:417
-#: stats/stats.php:417
+#: wp-stats.php:409
 msgid "links were added."
 msgstr ""
 
-#: wp-stats.php:418
-#: stats/stats.php:418
+#: wp-stats.php:410
 msgid "post categories were needed."
 msgstr ""
 
-#: wp-stats.php:419
-#: stats/stats.php:419
+#: wp-stats.php:411
 msgid "link categories were needed."
 msgstr ""
 
-#: wp-stats.php:421
-#: stats/stats.php:421
+#: wp-stats.php:413
 msgid "spam blocked."
 msgstr ""
 
-#: wp-stats.php:429
-#: stats/stats.php:429
+#: wp-stats.php:421
 msgid "Plugins Stats"
 msgstr ""
 
-#: wp-stats.php:439
-#: stats/stats.php:439
+#: wp-stats.php:431
 msgid "Recent Posts"
 msgstr ""
 
-#: wp-stats.php:447
-#: stats/stats.php:447
+#: wp-stats.php:439
 msgid "Recent Comments"
 msgstr ""
 
-#: wp-stats.php:461
-#: stats/stats.php:461
+#: wp-stats.php:453
 msgid "Most Commented Post"
 msgstr ""
 
-#: wp-stats.php:551
-#: stats/stats.php:551
+#: wp-stats.php:543
 msgid "Comments Posted By"
 msgstr ""
 
-#: wp-stats.php:552
-#: stats/stats.php:552
+#: wp-stats.php:544
 #, php-format
 msgid "Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Comments"
 msgstr ""
 
-#: wp-stats.php:560
-#: wp-stats.php:562
-#: stats/stats.php:560
-#: stats/stats.php:562
+#: wp-stats.php:552
+#: wp-stats.php:554
 #, php-format
 msgid "%s @ %s"
 msgstr ""
 
-#: wp-stats.php:569
-#: wp-stats.php:575
-#: stats/stats.php:569
-#: stats/stats.php:575
+#: wp-stats.php:561
+#: wp-stats.php:567
 msgid "Posted On"
 msgstr ""
 
-#: wp-stats.php:569
-#: stats/stats.php:569
+#: wp-stats.php:561
 msgid "Protected"
 msgstr ""
 
-#: wp-stats.php:570
-#: stats/stats.php:570
+#: wp-stats.php:562
 msgid "Comments Protected"
 msgstr ""
 
-#: wp-stats.php:577
-#: stats/stats.php:577
+#: wp-stats.php:569
 #, php-format
 msgid "View the comment posted by %s"
 msgstr ""
 
-#: wp-stats.php:577
-#: stats/stats.php:577
+#: wp-stats.php:569
 msgid "Posted By"
 msgstr ""
 
-#: wp-stats.php:577
-#: stats/stats.php:577
+#: wp-stats.php:569
 msgid "On"
 msgstr ""
 
-#: wp-stats.php:582
-#: stats/stats.php:582
+#: wp-stats.php:574
 msgid "has not made any comments yet."
 msgstr ""
 
-#: wp-stats.php:591
-#: stats/stats.php:591
+#: wp-stats.php:583
 msgid "Previous Page"
 msgstr ""
 
-#: wp-stats.php:599
-#: stats/stats.php:599
+#: wp-stats.php:591
 msgid "Next Page"
 msgstr ""
 
-#: wp-stats.php:608
-#: stats/stats.php:608
+#: wp-stats.php:600
 #, php-format
 msgid "Pages (%s)"
 msgstr ""
 
-#: wp-stats.php:610
-#: stats/stats.php:610
+#: wp-stats.php:602
 msgid "Go to First Page"
 msgstr ""
 
-#: wp-stats.php:610
-#: stats/stats.php:610
+#: wp-stats.php:602
 msgid "First"
 msgstr ""
 
-#: wp-stats.php:613
-#: wp-stats.php:625
-#: stats/stats.php:613
-#: stats/stats.php:625
+#: wp-stats.php:605
+#: wp-stats.php:617
 msgid "Go to Page"
 msgstr ""
 
-#: wp-stats.php:620
-#: stats/stats.php:620
+#: wp-stats.php:612
 msgid "Page"
 msgstr ""
 
-#: wp-stats.php:628
-#: stats/stats.php:628
+#: wp-stats.php:620
 msgid "Go to Last Page"
 msgstr ""
 
-#: wp-stats.php:628
-#: stats/stats.php:628
+#: wp-stats.php:620
 msgid "Last"
 msgstr ""
 
-#: wp-stats.php:632
-#: stats/stats.php:632
+#: wp-stats.php:624
 msgid "Back To Stats Page"
-msgstr ""
-
-#: stats/stats-options.php:31
-#: stats/stats-options.php:176
-msgid "Update Options"
-msgstr ""
-
-#: stats/stats-options.php:176
-msgid "Cancel"
 msgstr ""
 

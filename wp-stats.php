@@ -200,7 +200,7 @@ function get_mostcommented($mode = '', $limit = 10, $chars = 0, $display = true)
 			foreach ($mostcommenteds as $post) {
 				$post_title = get_the_title();
 				$comment_total = intval($post->comment_total);
-				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">".snippet_chars($post_title, $chars)."</a> - $comment_total ".__('comments', 'wp-stats')."</li>";
+				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">".snippet_text($post_title, $chars)."</a> - $comment_total ".__('comments', 'wp-stats')."</li>";
 			}
 		} else {
 			foreach ($mostcommenteds as $post) {
@@ -344,24 +344,16 @@ function get_tags_list($display = true) {
 }
 
 
-### Function: Snippet Characters
-if(!function_exists('snippet_chars')) {
-	function snippet_chars($text, $length = 0) {
-		$text = htmlspecialchars_decode($text);
-		 if (strlen($text) > $length){       
-			return htmlspecialchars(substr($text,0,$length)).'...';             
+### Function: Snippet Text
+if(!function_exists('snippet_text')) {
+	function snippet_text($text, $length = 0) {
+		$text = html_entity_decode($text, ENT_QUOTES, get_option('blog_charset'));
+		 if (strlen($text) > $length) {
+			return htmlentities(substr($text,0,$length), ENT_COMPAT, get_option('blog_charset')).'...';
 		 } else {
-			return htmlspecialchars($text);
+			return htmlentities($text, ENT_COMPAT, get_option('blog_charset'));
 		 }
 	}
-}
-
-
-### Function: HTML Special Chars Decode
-if (!function_exists('htmlspecialchars_decode')) {
-   function htmlspecialchars_decode($text) {
-       return strtr($text, array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
-   }
 }
 
 

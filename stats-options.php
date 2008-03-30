@@ -2,8 +2,8 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress 2.1 Plugin: WP-Stats 2.30										|
-|	Copyright (c) 2007 Lester "GaMerZ" Chan									|
+|	WordPress 2.5 Plugin: WP-Stats 2.30										|
+|	Copyright (c) 2008 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
 |	- Lester "GaMerZ" Chan															|
@@ -107,79 +107,74 @@ switch($mode) {
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
 <div class="wrap"> 
 	<h2><?php _e('Stats Options', 'wp-stats'); ?></h2> 
+	<table class="form-table">
+		 <tr>
+			<th scope="row" valign="top"><?php _e('Stats URL', 'wp-stats'); ?></th>
+			<td>
+				<input type="text" name="stats_url" value="<?php echo get_option('stats_url'); ?>" size="50" /><br /><?php _e('URL To Stats Page.<br />Example: http://www.yoursite.com/blogs/stats/<br />Example: http://www.yoursite.com/blogs/?page_id=2', 'wp-stats'); ?>
+			</td>
+		</tr>
+		 <tr>
+			<th scope="row" valign="top"><?php _e('Stats Most Limit', 'wp-stats'); ?></th>
+			<td>
+				<input type="text" name="stats_mostlimit" value="<?php echo $stats_mostlimit ?>" size="2" /><br /><?php _e('Top X Stats, where X is the most limit.', 'wp-stats'); ?>
+			</td>
+		</tr>
+		 <tr>
+			<th scope="row" valign="top"><?php _e('Type Of Stats To Display', 'wp-stats'); ?></th>
+			<td>
+				<p><strong><?php _e('General Stats', 'wp-stats'); ?></strong></p>
+				<input type="checkbox" name="stats_display[]" id="wpstats_total_stats" value="total_stats"<?php checked(1, $stats_display['total_stats']); ?> />&nbsp;&nbsp;<label for="wpstats_total_stats">Total</label><br />
+
+				<!-- Admin General Stats Filter -->
+				<?php echo apply_filters('wp_stats_page_admin_general', $page_admin_general_stats); ?>
+
+				<p><strong><?php _e('Plugin Stats', 'wp-stats'); ?></strong></p>
+
+				<!-- Admin Plugins Stats Filter -->
+				<?php echo apply_filters('wp_stats_page_admin_plugins', $page_admin_plugins_stats); ?>
+
+				<p><strong><?php printf(__('Top %s Recent Stats', 'wp-stats'), get_option('stats_mostlimit')); ?></strong></p>
+				<input type="checkbox" name="stats_display[]" id="wpstats_recent_posts" value="recent_posts"<?php checked(1, $stats_display['recent_posts']); ?> />&nbsp;&nbsp;<label for="wpstats_recent_posts"><?php echo $stats_mostlimit ?> <?php _e('Most Recent Posts', 'wp-stats'); ?></label><br />
+				<input type="checkbox" name="stats_display[]" id="wpstats_recent_commtents" value="recent_commtents"<?php checked(1, $stats_display['recent_commtents']); ?> />&nbsp;&nbsp;<label for="wpstats_recent_commtents"><?php echo $stats_mostlimit ?> <?php _e('Most Recent Comments', 'wp-stats'); ?></label><br />
+
+				<!-- Admin Recent Stats Filter -->
+				<?php echo apply_filters('wp_stats_page_admin_recent', $page_admin_recent_stats); ?>
+
+				<p><strong><?php printf(__('Top %s Most/Highest Stats', 'wp-stats'), get_option('stats_mostlimit')); ?></strong></p>
+				<input type="checkbox" name="stats_display[]" id="wpstats_commented_post" value="commented_post"<?php checked(1, $stats_display['commented_post']); ?> />&nbsp;&nbsp;<label for="wpstats_commented_post"><?php echo $stats_mostlimit ?> <?php _e('Most Commented Posts', 'wp-stats'); ?></label><br />
+
+				<!-- Admin Most Stats Filter -->
+				<?php echo apply_filters('wp_stats_page_admin_most', $page_page_admin_most_stats); ?>
+
+				<p><strong><?php _e('Authors Stats', 'wp-stats'); ?></strong></p>
+				<input type="checkbox" name="stats_display[]" id="wpstats_authors" value="authors"<?php checked(1, $stats_display['authors']); ?> />&nbsp;&nbsp;<label for="wpstats_authors"><?php _e('Authors', 'wp-stats'); ?></label><br />
+
+				<!-- Admin Authors Stats Filter -->
+				<?php echo apply_filters('wp_stats_page_admin_authors', $page_admin_authors_stats); ?>
+
+				<p><strong><?php _e('Comments\' Members Stats', 'wp-stats'); ?></strong></p>
+				<input type="checkbox" name="stats_display[]" id="wpstats_comment_members" value="comment_members"<?php checked(1, $stats_display['comment_members']); ?> />&nbsp;&nbsp;<label for="wpstats_comment_members"><?php _e('Comment Members', 'wp-stats'); ?></label><br />
+
+				<!-- Admin Comments' Members Stats Filter -->
+				<?php echo apply_filters('wp_stats_page_admin_comments_members', $admin_comments_members_stats); ?>
+
+				<p><strong><?php _e('Misc Stats', 'wp-stats'); ?></strong></p>
+				<input type="checkbox" name="stats_display[]" id="wpstats_post_cats" value="post_cats"<?php checked(1, $stats_display['post_cats']); ?> />&nbsp;&nbsp;<label for="wpstats_post_cats"><?php _e('Post Categories', 'wp-stats'); ?></label><br />
+				<input type="checkbox" name="stats_display[]" id="wpstats_link_cats" value="link_cats"<?php checked(1, $stats_display['link_cats']); ?> />&nbsp;&nbsp;<label for="wpstats_link_cats"><?php _e('Link Categories', 'wp-stats'); ?></label><br />
+				<input type="checkbox" name="stats_display[]" id="wpstats_tags_list" value="tags_list"<?php checked(1, $stats_display['tags_list']); ?> />&nbsp;&nbsp;<label for="wpstats_tags_list"><?php _e('Tags List', 'wp-stats'); ?></label><br />
+
+				<!-- Admin Misc Stats Filter -->
+				<?php echo apply_filters('wp_stats_page_admin_misc', $page_admin_misc_stats); ?>
+			</td>
+		</tr>
+	</table>
 	<p class="submit">
-		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options &raquo;', 'wp-stats'); ?>" />
-	</p>
-	<fieldset class="options">
-		<legend><?php _e('Stats Options', 'wp-stats'); ?></legend>
-		<table width="100%"  border="0" cellspacing="3" cellpadding="3">
-			 <tr valign="top">
-				<th align="left" width="30%"><?php _e('Stats URL', 'wp-stats'); ?></th>
-				<td align="left">
-					<input type="text" name="stats_url" value="<?php echo get_option('stats_url'); ?>" size="50" /><br /><?php _e('URL To Stats Page.<br />Example: http://www.yoursite.com/blogs/stats/<br />Example: http://www.yoursite.com/blogs/?page_id=2', 'wp-stats'); ?>
-				</td>
-			</tr>
-			 <tr valign="top">
-				<th align="left" width="30%"><?php _e('Stats Most Limit', 'wp-stats'); ?></th>
-				<td align="left">
-					<input type="text" name="stats_mostlimit" value="<?php echo $stats_mostlimit ?>" size="2" /><br /><?php _e('Top X Stats, where X is the most limit.', 'wp-stats'); ?>
-				</td>
-			</tr>
-			 <tr valign="top">
-				<th align="left" width="30%"><?php _e('Type Of Stats To Display', 'wp-stats'); ?></th>
-				<td align="left">
-					<p><strong><?php _e('General Stats', 'wp-stats'); ?></strong></p>
-					<input type="checkbox" name="stats_display[]" id="wpstats_total_stats" value="total_stats"<?php checked(1, $stats_display['total_stats']); ?> />&nbsp;&nbsp;<label for="wpstats_total_stats">Total</label><br />
-
-					<!-- Admin General Stats Filter -->
-					<?php echo apply_filters('wp_stats_page_admin_general', $page_admin_general_stats); ?>
-
-					<p><strong><?php _e('Plugin Stats', 'wp-stats'); ?></strong></p>
-
-					<!-- Admin Plugins Stats Filter -->
-					<?php echo apply_filters('wp_stats_page_admin_plugins', $page_admin_plugins_stats); ?>
-
-					<p><strong><?php printf(__('Top %s Recent Stats', 'wp-stats'), get_option('stats_mostlimit')); ?></strong></p>
-					<input type="checkbox" name="stats_display[]" id="wpstats_recent_posts" value="recent_posts"<?php checked(1, $stats_display['recent_posts']); ?> />&nbsp;&nbsp;<label for="wpstats_recent_posts"><?php echo $stats_mostlimit ?> <?php _e('Most Recent Posts', 'wp-stats'); ?></label><br />
-					<input type="checkbox" name="stats_display[]" id="wpstats_recent_commtents" value="recent_commtents"<?php checked(1, $stats_display['recent_commtents']); ?> />&nbsp;&nbsp;<label for="wpstats_recent_commtents"><?php echo $stats_mostlimit ?> <?php _e('Most Recent Comments', 'wp-stats'); ?></label><br />
-
-					<!-- Admin Recent Stats Filter -->
-					<?php echo apply_filters('wp_stats_page_admin_recent', $page_admin_recent_stats); ?>
-
-					<p><strong><?php printf(__('Top %s Most/Highest Stats', 'wp-stats'), get_option('stats_mostlimit')); ?></strong></p>
-					<input type="checkbox" name="stats_display[]" id="wpstats_commented_post" value="commented_post"<?php checked(1, $stats_display['commented_post']); ?> />&nbsp;&nbsp;<label for="wpstats_commented_post"><?php echo $stats_mostlimit ?> <?php _e('Most Commented Posts', 'wp-stats'); ?></label><br />
-
-					<!-- Admin Most Stats Filter -->
-					<?php echo apply_filters('wp_stats_page_admin_most', $page_page_admin_most_stats); ?>
-
-					<p><strong><?php _e('Authors Stats', 'wp-stats'); ?></strong></p>
-					<input type="checkbox" name="stats_display[]" id="wpstats_authors" value="authors"<?php checked(1, $stats_display['authors']); ?> />&nbsp;&nbsp;<label for="wpstats_authors"><?php _e('Authors', 'wp-stats'); ?></label><br />
-
-					<!-- Admin Authors Stats Filter -->
-					<?php echo apply_filters('wp_stats_page_admin_authors', $page_admin_authors_stats); ?>
-
-					<p><strong><?php _e('Comments\' Members Stats', 'wp-stats'); ?></strong></p>
-					<input type="checkbox" name="stats_display[]" id="wpstats_comment_members" value="comment_members"<?php checked(1, $stats_display['comment_members']); ?> />&nbsp;&nbsp;<label for="wpstats_comment_members"><?php _e('Comment Members', 'wp-stats'); ?></label><br />
-
-					<!-- Admin Comments' Members Stats Filter -->
-					<?php echo apply_filters('wp_stats_page_admin_comments_members', $admin_comments_members_stats); ?>
-
-					<p><strong><?php _e('Misc Stats', 'wp-stats'); ?></strong></p>
-					<input type="checkbox" name="stats_display[]" id="wpstats_post_cats" value="post_cats"<?php checked(1, $stats_display['post_cats']); ?> />&nbsp;&nbsp;<label for="wpstats_post_cats"><?php _e('Post Categories', 'wp-stats'); ?></label><br />
-					<input type="checkbox" name="stats_display[]" id="wpstats_link_cats" value="link_cats"<?php checked(1, $stats_display['link_cats']); ?> />&nbsp;&nbsp;<label for="wpstats_link_cats"><?php _e('Link Categories', 'wp-stats'); ?></label><br />
-					<input type="checkbox" name="stats_display[]" id="wpstats_tags_list" value="tags_list"<?php checked(1, $stats_display['tags_list']); ?> />&nbsp;&nbsp;<label for="wpstats_tags_list"><?php _e('Tags List', 'wp-stats'); ?></label><br />
-
-					<!-- Admin Misc Stats Filter -->
-					<?php echo apply_filters('wp_stats_page_admin_misc', $page_admin_misc_stats); ?>
-				</td>
-			</tr>
-		</table>
-	</fieldset>
-	<p class="submit">
-		<input type="submit" name="Submit" class="button" value="<?php _e('Update Options &raquo;', 'wp-stats'); ?>" />
+		<input type="submit" name="Submit" class="button" value="<?php _e('Save Changes', 'wp-stats'); ?>" />
 	</p>
 </div>
 </form>
+<p>&nbsp;</p>
 
 <!-- Uninstall WP-Stats -->
 <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>"> 
@@ -195,12 +190,14 @@ switch($mode) {
 	<p style="text-align: left; color: red">
 		<strong><?php _e('The following WordPress Options will be DELETED:', 'wp-stats'); ?></strong><br />
 	</p>
-	<table width="70%"  border="0" cellspacing="3" cellpadding="3">
-		<tr class="thead">
-			<td align="center"><strong><?php _e('WordPress Options', 'wp-stats'); ?></strong></td>
-		</tr>
+	<table class="widefat">
+		<thead>
+			<tr>
+				<th><?php _e('WordPress Options', 'wp-stats'); ?></th>
+			</tr>
+		</thead>
 		<tr>
-			<td valign="top" style="background-color: #eee;">
+			<td valign="top">
 				<ol>
 				<?php
 					foreach($stats_settings as $settings) {

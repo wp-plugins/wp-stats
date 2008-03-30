@@ -10,7 +10,7 @@ Author URI: http://lesterchan.net
 
 
 /*  
-	Copyright 2007  Lester Chan  (email : gamerz84@hotmail.com)
+	Copyright 2008  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -357,11 +357,10 @@ if(!function_exists('snippet_text')) {
 }
 
 
-### Function: Place Statistics Page In Content
-add_filter('the_content', 'place_stats', '7');
-function place_stats($content){
-     $content = preg_replace( "/\[page_stats\]/ise", "stats_page()", $content); 
-    return $content;
+### Function: Short Code For Inserting Stats Into Page
+add_shortcode('page_stats', 'stats_page_shortcode');
+function stats_page_shortcode($atts) {
+	return stats_page();
 }
 
 

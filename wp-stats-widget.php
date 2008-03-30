@@ -9,7 +9,7 @@ Author URI: http://lesterchan.net
 */
 
 
-/*  Copyright 2006  Lester Chan  (email : gamerz84@hotmail.com)
+/*  Copyright 2008  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -86,7 +86,7 @@ function widget_stats_init() {
 					echo '<li><strong>'.wp_count_terms('link_category').'</strong> '.__('Link Categories', 'wp-stats').'</li>'."\n";
 				}
 				// Total Spam
-				if($stats_total_options['spam'] == 1) {
+				if($stats_total_options['spam'] == 1 && function_exists('akismet_spam_count')) {
 					echo '<li><strong>'.number_format(akismet_spam_count()).'</strong> '.__('Spam Blocked', 'wp-stats').'</li>'."\n";
 				}
 				echo apply_filters('wp_stats_widget_general', $widget_general_stats);

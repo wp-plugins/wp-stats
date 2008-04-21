@@ -396,7 +396,7 @@ function stats_page() {
 	if(empty($comment_author)) {
 		// General Stats
 		if($stats_display['total_stats'] == 1) {
-			$temp_stats .= '<h2>'.__('General Stats', 'wp-stats').'</h2>'."\n";
+			$temp_stats .= '<h2 id="GeneralStats">'.__('General Stats', 'wp-stats').'</h2>'."\n";
 			$temp_stats .= '<p><strong>'.__('Total Stats', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= '<li><strong>'.get_totalauthors(false).'</strong> '.__('authors to this blog.', 'wp-stats').'</li>'."\n";
@@ -417,13 +417,13 @@ function stats_page() {
 		}
 
 		// Plugin Stats
-		$temp_stats .= '<h2>'.__('Plugins Stats', 'wp-stats').'</h2>'."\n";
+		$temp_stats .= '<h2 id="PluginsStats">'.__('Plugins Stats', 'wp-stats').'</h2>'."\n";
 				
 		// WP-Stats: Plugins Stats Filter
 		$temp_stats = apply_filters('wp_stats_page_plugins', $temp_stats);
 
 		// Top Recent Stats
-		$temp_stats .= '<h2>'.sprintf(__('Top %s Recent Stats', 'wp-stats'), $stats_mostlimit).'</h2>'."\n";
+		$temp_stats .= '<h2 id="TopRecentStats">'.sprintf(__('Top %s Recent Stats', 'wp-stats'), $stats_mostlimit).'</h2>'."\n";
 
 		// Recent Posts
 		if($stats_display['recent_posts'] == 1) {
@@ -445,7 +445,7 @@ function stats_page() {
 		$temp_stats = apply_filters('wp_stats_page_recent', $temp_stats);
 
 		// Top Most Stats
-		$temp_stats .= '<h2>'.sprintf(__('Top %s Most/Highest Stats', 'wp-stats'), $stats_mostlimit).'</h2>'."\n";
+		$temp_stats .= '<h2 id="TopMostHighestStats">'.sprintf(__('Top %s Most/Highest Stats', 'wp-stats'), $stats_mostlimit).'</h2>'."\n";
 
 		// Most Commented Post
 		if($stats_display['commented_post'] == 1) {
@@ -459,7 +459,7 @@ function stats_page() {
 		$temp_stats = apply_filters('wp_stats_page_most', $temp_stats);
 		
 		// Authors Stats
-		$temp_stats .= '<h2>'.__('Authors Stats', 'wp-stats').'</h2>'."\n";
+		$temp_stats .= '<h2 id="AuthorsStats">'.__('Authors Stats', 'wp-stats').'</h2>'."\n";
 
 		// Authors
 		if($stats_display['authors'] == 1) {
@@ -473,7 +473,7 @@ function stats_page() {
 		$temp_stats = apply_filters('wp_stats_page_authors', $temp_stats);			
 
 		// Comments' Members Stats
-		$temp_stats .= '<h2>'.__('Comments\' Members Stats', 'wp-stats').'</h2>'."\n";
+		$temp_stats .= '<h2 id="CommentsMembersStats">'.__('Comments\' Members Stats', 'wp-stats').'</h2>'."\n";
 
 		// Comments' Member
 		if($stats_display['comment_members'] == 1) {
@@ -487,7 +487,7 @@ function stats_page() {
 		$temp_stats = apply_filters('wp_stats_page_comments_members', $temp_stats);
 
 		// Misc Stats
-		$temp_stats .= '<h2>'.__('Misc Stats', 'wp-stats').'</h2>'."\n";
+		$temp_stats .= '<h2 id="MiscStats">'.__('Misc Stats', 'wp-stats').'</h2>'."\n";
 
 		// Post Categories
 		if($stats_display['post_cats'] == 1) {

@@ -57,7 +57,7 @@ function display_stats() {
 ### Function: Get Total Authors
 function get_totalauthors($display = true) {
 	global $wpdb;
-	$totalauthors = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->users WHERE user_activation_key = ''");
+	$totalauthors = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->users LEFT JOIN $wpdb->usermeta ON $wpdb->usermeta.user_id = $wpdb->users.ID WHERE $wpdb->users.user_activation_key = '' AND $wpdb->usermeta.meta_key = 'wp_user_level' AND (meta_value+0.00) > 1");
 	if($display) {
 		echo number_format($totalauthors);
 	} else {
@@ -105,7 +105,7 @@ function get_totalcomments($display = true) {
 ### Function: Get Total Comments Poster
 function get_totalcommentposters($display = true) {
 	global $wpdb;
-	$totalcommentposters = $wpdb->get_var("SELECT COUNT(DISTINCT comment_author) FROM $wpdb->comments WHERE comment_approved = '1'");
+	$totalcommentposters = $wpdb->get_var("SELECT COUNT(DISTINCT comment_author) FROM $wpdb->comments WHERE comment_approved = '1' AND comment_type = ''");
 	if($display) {
 		echo number_format($totalcommentposters);
 	} else {
@@ -165,7 +165,7 @@ function get_recentcomments($mode = '', $limit = 10, $display = true) {
 	} else {
 		$where = '1=1';
 	}
-    $recentcomments = $wpdb->get_results("SELECT $wpdb->posts.*, comment_date FROM $wpdb->posts INNER JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY comment_date DESC LIMIT $limit");
+    $recentcomments = $wpdb->get_results("SELECT $wpdb->posts.*, comment_date FROM $wpdb->posts INNER JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND comment_type = '' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY comment_date DESC LIMIT $limit");
 	if($recentcomments) {
 		foreach ($recentcomments as $post) {
 			$post_title = get_the_title();
@@ -266,7 +266,7 @@ function get_commentmembersstats($threshhold = -1, $limit = 0, $display = true) 
 	if($limit > 0) {
 		$limit_sql = "LIMIT $limit";
 	}
-	$comments = $wpdb->get_results("SELECT comment_author, COUNT(comment_ID) AS 'comment_total' FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_approved = '1' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' AND post_password = '' GROUP BY comment_author ORDER BY comment_total DESC $limit_sql");
+	$comments = $wpdb->get_results("SELECT comment_author, COUNT(comment_ID) AS 'comment_total' FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_approved = '1' AND comment_type = '' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' AND post_password = '' GROUP BY comment_author ORDER BY comment_total DESC $limit_sql");
 	if($comments) {
 		foreach ($comments as $comment) {
 				$comment_author = strip_tags(stripslashes($comment->comment_author));
@@ -383,7 +383,7 @@ function stats_page_link($author, $page = 0) {
 
 ### Function: Statistics Page
 function stats_page() {
-	global $wpdb, $post;			
+	global $wpdb, $post;	
 	// Variables Variables Variables
 	$comment_author = urldecode(strip_tags(stripslashes(trim($_GET['stats_author']))));
 	$page = intval($_GET['stats_page']);
@@ -526,7 +526,7 @@ function stats_page() {
 		// Comment Author SQL
 		$comment_author_sql = $wpdb->escape($comment_author);
 		// Total Comments Posted By User
-		$totalcomments = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' AND post_password = ''");
+		$totalcomments = $wpdb->get_var("SELECT COUNT(comment_ID) FROM $wpdb->comments INNER  JOIN $wpdb->posts ON $wpdb->comments.comment_post_ID = $wpdb->posts.ID WHERE comment_author =  '$comment_author_sql' AND comment_approved = '1' AND comment_type = '' AND post_date < '".current_time('mysql')."' AND post_status = 'publish' AND post_password = ''");
 		// Checking $page and $offset
 		if (empty($page) || $page == 0) { $page = 1; }
 		if (empty($offset)) { $offset = 0; }

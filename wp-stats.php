@@ -165,13 +165,13 @@ function get_recentcomments($mode = '', $limit = 10, $display = true) {
 	} else {
 		$where = '1=1';
 	}
-    $recentcomments = $wpdb->get_results("SELECT $wpdb->posts.*, comment_date FROM $wpdb->posts INNER JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND comment_type = '' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY comment_date DESC LIMIT $limit");
+    $recentcomments = $wpdb->get_results("SELECT * FROM $wpdb->posts INNER JOIN $wpdb->comments ON $wpdb->posts.ID = $wpdb->comments.comment_post_ID WHERE comment_approved = '1' AND comment_type = '' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY comment_date DESC LIMIT $limit");
 	if($recentcomments) {
 		foreach ($recentcomments as $post) {
 			$post_title = get_the_title();
 			$comment_author = htmlspecialchars(stripslashes($post->comment_author));
-			$comment_date = get_the_time(get_option('date_format'));
-			$temp .= "<li>$comment_date - $comment_author (<a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a>)</li>\n";
+			$comment_date = mysql2date(get_option('date_format').' @ '.get_option('time_format'), $post->comment_date);
+			$temp .= "<li>$comment_date - $comment_author (<a href=\"".get_permalink()."#comment-".$post->comment_ID."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a>)</li>\n";
 		}
 	} else {
 		$temp = '<li>'.__('N/A', 'wp-stats').'</li>';

@@ -150,7 +150,7 @@ function widget_stats_init() {
 			$options['title'] = strip_tags($_POST['stats-title']);
 			update_option('widget_stats', $options);
 		}
-		echo '<p style="text-align: left;"><label for="stats-title">'.__('Widget Title', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;<input type="text" id="stats-title" name="stats-title" value="'.htmlspecialchars($options['title']).'" />';
+		echo '<p style="text-align: left;"><label for="stats-title">'.__('Widget Title', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;<input type="text" id="stats-title" name="stats-title" value="'.htmlspecialchars(stripslashes($options['title'])).'" />';
 		echo '<p style="text-align: left;">'.__('Statistics To Display?', 'wp-stats').'&nbsp;&nbsp;&nbsp;'."\n";
 		echo '<p style="text-align: left;">'."\n";
 		echo '<input type="checkbox" id="wpstats_widget_authors" name="stats_display_total[]" value="authors"';

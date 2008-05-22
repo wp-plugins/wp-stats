@@ -41,7 +41,7 @@ function widget_stats_init() {
 		$stats_most_options = $options['stats_display_most'];
 		$limit = intval($options['most_limit']);
 		$chars = intval($options['snippet_chars']);
-		$title = htmlspecialchars($options['title']);
+		$title = htmlspecialchars(stripslashes($options['title']));
 		if (function_exists('display_stats')) {
 			echo $before_widget.$before_title.$title.$after_title;
 			if(!empty($stats_total_options)) {
@@ -147,7 +147,7 @@ function widget_stats_init() {
 			$options['most_limit'] = $most_limit;
 			$options['show_link'] = $show_link;
 			$options['snippet_chars'] = $snippet_chars;
-			$options['title'] = strip_tags(stripslashes($_POST['stats-title']));
+			$options['title'] = strip_tags($_POST['stats-title']);
 			update_option('widget_stats', $options);
 		}
 		echo '<p style="text-align: left;"><label for="stats-title">'.__('Widget Title', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;<input type="text" id="stats-title" name="stats-title" value="'.htmlspecialchars($options['title']).'" />';

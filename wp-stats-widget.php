@@ -3,7 +3,7 @@
 Plugin Name: WP-Stats Widget
 Plugin URI: http://lesterchan.net/portfolio/programming.php
 Description: Adds a Stats Widget to display stats from WP-Stats Plugin. You will need to activate WP-Stats first.
-Version: 2.30
+Version: 2.31
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */

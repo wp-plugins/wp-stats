@@ -72,7 +72,7 @@ function display_stats() {
 ### Function: Get Total Authors
 function get_totalauthors($display = true) {
 	global $wpdb;
-	$totalauthors = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->users LEFT JOIN $wpdb->usermeta ON $wpdb->usermeta.user_id = $wpdb->users.ID WHERE $wpdb->users.user_activation_key = '' AND $wpdb->usermeta.meta_key = 'wp_user_level' AND (meta_value+0.00) > 1");
+	$totalauthors = $wpdb->get_var("SELECT COUNT(ID) FROM $wpdb->users LEFT JOIN $wpdb->usermeta ON $wpdb->usermeta.user_id = $wpdb->users.ID WHERE $wpdb->users.user_activation_key = '' AND $wpdb->usermeta.meta_key = '".$wpdb->prefix."user_level' AND (meta_value+0.00) > 1");
 	if($display) {
 		echo number_format($totalauthors);
 	} else {

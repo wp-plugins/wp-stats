@@ -214,13 +214,13 @@ function get_mostcommented($mode = '', $limit = 10, $chars = 0, $display = true)
 		if($chars > 0) {
 			foreach ($mostcommenteds as $post) {
 				$post_title = get_the_title();
-				$comment_total = intval($post->comment_total);
+				$comment_total = number_format_i18n($post->comment_total);
 				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">".snippet_text($post_title, $chars)."</a> - $comment_total ".__('comments', 'wp-stats')."</li>";
 			}
 		} else {
 			foreach ($mostcommenteds as $post) {
 				$post_title = get_the_title();
-				$comment_total = intval($post->comment_total);
+				$comment_total = number_format_i18n($post->comment_total);
 				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a> - $comment_total ".__('comments', 'wp-stats')."</li>";
 			}
 		}
@@ -253,7 +253,7 @@ function get_authorsstats($mode = '', $display = true) {
 				$post_author = strip_tags(stripslashes($post->user_nicename));
 				$author_link = str_replace('%author%', $post_author, $permalink);
 				$display_name = strip_tags(stripslashes($post->display_name));
-				$posts_total = intval($post->posts_total);				
+				$posts_total = number_format_i18n($post->posts_total);				
 				if($using_permalink) {
 					$temp .= "<li><a href=\"".get_option('home').$author_link."\" title=\"".sprintf(__('View posts posted by %s', 'wp-stats'), $display_name)."\">$display_name</a> ($posts_total)</li>\n";
 				} else {
@@ -329,7 +329,7 @@ function get_linkcats($display = true) {
 	$cats = get_categories('type=link');
 	if ($cats) {
 		foreach ($cats as $cat) {
-			$temp .= '<li>'.$cat->cat_name.' ('.$cat->count.")</li>\n";
+			$temp .= '<li>'.$cat->cat_name.' ('.number_format_i18n($cat->count).")</li>\n";
 		}
 	}
 	if($display) {
@@ -347,7 +347,7 @@ function get_tags_list($display = true) {
 	$tags = get_tags('orderby=count&order=DESC');
 	if ($tags) {
 		foreach ($tags as $tag) {
-			$temp .= '<li><a href="'.clean_url(get_tag_link($tag->term_id)).'" title="'.sprintf(__('%s topics', 'wp-stats'), $tag->count).'">'.$tag->name.'</a> ('.$tag->count.")</li>\n";
+			$temp .= '<li><a href="'.clean_url(get_tag_link($tag->term_id)).'" title="'.sprintf(__('%s topics', 'wp-stats'), number_format_i18n($tag->count)).'">'.$tag->name.'</a> ('.number_format_i18n($tag->count).")</li>\n";
 		}
 	}
 	if($display) {

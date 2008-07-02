@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Stats 2.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-28 14:04+0800\n"
-"PO-Revision-Date: 2008-06-28 14:04+0800\n"
+"POT-Creation-Date: 2008-07-03 00:45+0800\n"
+"PO-Revision-Date: 2008-07-03 00:45+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgid "Type Of Stats To Display"
 msgstr ""
 
 #: stats-options.php:126
-#: wp-stats.php:413
+#: wp-stats.php:432
 msgid "General Stats"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgid "Plugin Stats"
 msgstr ""
 
 #: stats-options.php:137
-#: wp-stats.php:440
+#: wp-stats.php:459
 #, php-format
 msgid "Top %s Recent Stats"
 msgstr ""
@@ -102,7 +102,7 @@ msgid "Most Recent Comments"
 msgstr ""
 
 #: stats-options.php:144
-#: wp-stats.php:462
+#: wp-stats.php:481
 #, php-format
 msgid "Top %s Most/Highest Stats"
 msgstr ""
@@ -113,45 +113,45 @@ msgid "Most Commented Posts"
 msgstr ""
 
 #: stats-options.php:150
-#: wp-stats.php:476
+#: wp-stats.php:495
 msgid "Authors Stats"
 msgstr ""
 
 #: stats-options.php:151
 #: wp-stats-widget.php:54
-#: wp-stats.php:480
+#: wp-stats.php:499
 msgid "Authors"
 msgstr ""
 
 #: stats-options.php:156
-#: wp-stats.php:490
+#: wp-stats.php:509
 msgid "Comments' Members Stats"
 msgstr ""
 
 #: stats-options.php:157
-#: wp-stats.php:494
+#: wp-stats.php:513
 msgid "Comment Members"
 msgstr ""
 
 #: stats-options.php:162
-#: wp-stats.php:504
+#: wp-stats.php:523
 msgid "Misc Stats"
 msgstr ""
 
 #: stats-options.php:163
 #: wp-stats-widget.php:82
-#: wp-stats.php:508
+#: wp-stats.php:527
 msgid "Post Categories"
 msgstr ""
 
 #: stats-options.php:164
 #: wp-stats-widget.php:86
-#: wp-stats.php:516
+#: wp-stats.php:535
 msgid "Link Categories"
 msgstr ""
 
 #: stats-options.php:165
-#: wp-stats.php:523
+#: wp-stats.php:542
 msgid "Tags List"
 msgstr ""
 
@@ -193,7 +193,7 @@ msgid ""
 msgstr ""
 
 #: wp-stats-widget.php:49
-#: wp-stats.php:414
+#: wp-stats.php:433
 msgid "Total Stats"
 msgstr ""
 
@@ -301,161 +301,161 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: wp-stats.php:42
+#: wp-stats.php:61
 msgid "WP-Stats"
 msgstr ""
 
-#: wp-stats.php:45
+#: wp-stats.php:64
 msgid "Stats"
 msgstr ""
 
-#: wp-stats.php:160
+#: wp-stats.php:179
 #, php-format
 msgid "View post %s"
 msgstr ""
 
-#: wp-stats.php:163
-#: wp-stats.php:192
-#: wp-stats.php:228
-#: wp-stats.php:264
-#: wp-stats.php:296
+#: wp-stats.php:182
+#: wp-stats.php:211
+#: wp-stats.php:247
+#: wp-stats.php:283
+#: wp-stats.php:315
 msgid "N/A"
 msgstr ""
 
-#: wp-stats.php:189
-#: wp-stats.php:218
-#: wp-stats.php:224
+#: wp-stats.php:208
+#: wp-stats.php:237
+#: wp-stats.php:243
 #, php-format
 msgid "View comments in post %s"
 msgstr ""
 
-#: wp-stats.php:218
-#: wp-stats.php:224
+#: wp-stats.php:237
+#: wp-stats.php:243
 msgid "comments"
 msgstr ""
 
-#: wp-stats.php:258
-#: wp-stats.php:260
+#: wp-stats.php:277
+#: wp-stats.php:279
 #, php-format
 msgid "View posts posted by %s"
 msgstr ""
 
-#: wp-stats.php:292
+#: wp-stats.php:311
 #, php-format
 msgid "View all comments posted by %s"
 msgstr ""
 
-#: wp-stats.php:313
+#: wp-stats.php:332
 msgid "No categories"
 msgstr ""
 
-#: wp-stats.php:350
+#: wp-stats.php:369
 #, php-format
 msgid "%s topics"
 msgstr ""
 
-#: wp-stats.php:416
+#: wp-stats.php:435
 msgid "authors to this blog."
 msgstr ""
 
-#: wp-stats.php:417
+#: wp-stats.php:436
 msgid "posts were posted."
 msgstr ""
 
-#: wp-stats.php:418
+#: wp-stats.php:437
 msgid "pages were created."
 msgstr ""
 
-#: wp-stats.php:419
+#: wp-stats.php:438
 msgid "tags were created."
 msgstr ""
 
-#: wp-stats.php:420
+#: wp-stats.php:439
 msgid "comments were posted."
 msgstr ""
 
-#: wp-stats.php:421
+#: wp-stats.php:440
 msgid "different nicknames were represented in the comments."
 msgstr ""
 
-#: wp-stats.php:422
+#: wp-stats.php:441
 msgid "links were added."
 msgstr ""
 
-#: wp-stats.php:423
+#: wp-stats.php:442
 msgid "post categories were needed."
 msgstr ""
 
-#: wp-stats.php:424
+#: wp-stats.php:443
 msgid "link categories were needed."
 msgstr ""
 
-#: wp-stats.php:426
+#: wp-stats.php:445
 msgid "spam blocked."
 msgstr ""
 
-#: wp-stats.php:434
+#: wp-stats.php:453
 msgid "Plugins Stats"
 msgstr ""
 
-#: wp-stats.php:444
+#: wp-stats.php:463
 msgid "Recent Posts"
 msgstr ""
 
-#: wp-stats.php:452
+#: wp-stats.php:471
 msgid "Recent Comments"
 msgstr ""
 
-#: wp-stats.php:466
+#: wp-stats.php:485
 msgid "Most Commented Post"
 msgstr ""
 
-#: wp-stats.php:584
+#: wp-stats.php:603
 msgid "Comments Posted By"
 msgstr ""
 
-#: wp-stats.php:585
+#: wp-stats.php:604
 #, php-format
 msgid "Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Comments"
 msgstr ""
 
-#: wp-stats.php:593
-#: wp-stats.php:595
+#: wp-stats.php:612
+#: wp-stats.php:614
 #, php-format
 msgid "%s @ %s"
 msgstr ""
 
-#: wp-stats.php:602
-#: wp-stats.php:608
+#: wp-stats.php:621
+#: wp-stats.php:627
 msgid "Posted On"
 msgstr ""
 
-#: wp-stats.php:602
+#: wp-stats.php:621
 msgid "Protected"
 msgstr ""
 
-#: wp-stats.php:603
+#: wp-stats.php:622
 msgid "Comments Protected"
 msgstr ""
 
-#: wp-stats.php:610
+#: wp-stats.php:629
 #, php-format
 msgid "View the comment posted by %s"
 msgstr ""
 
-#: wp-stats.php:610
+#: wp-stats.php:629
 msgid "Posted By"
 msgstr ""
 
-#: wp-stats.php:610
+#: wp-stats.php:629
 msgid "On"
 msgstr ""
 
-#: wp-stats.php:615
+#: wp-stats.php:634
 msgid "has not made any comments yet."
 msgstr ""
 
-#: wp-stats.php:645
+#: wp-stats.php:664
 msgid "Back To Stats Page"
 msgstr ""
 

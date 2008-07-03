@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Stats 2.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-03 00:45+0800\n"
-"PO-Revision-Date: 2008-07-03 00:45+0800\n"
+"POT-Creation-Date: 2008-07-04 01:56+0800\n"
+"PO-Revision-Date: 2008-07-04 01:56+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -83,6 +83,10 @@ msgstr ""
 msgid "General Stats"
 msgstr ""
 
+#: stats-options.php:127
+msgid "Total"
+msgstr ""
+
 #: stats-options.php:132
 msgid "Plugin Stats"
 msgstr ""
@@ -109,6 +113,7 @@ msgstr ""
 
 #: stats-options.php:145
 #: wp-stats-widget.php:192
+#: wp-stats.php:485
 msgid "Most Commented Posts"
 msgstr ""
 
@@ -404,10 +409,6 @@ msgstr ""
 
 #: wp-stats.php:471
 msgid "Recent Comments"
-msgstr ""
-
-#: wp-stats.php:485
-msgid "Most Commented Post"
 msgstr ""
 
 #: wp-stats.php:603

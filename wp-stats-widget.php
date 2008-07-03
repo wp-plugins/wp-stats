@@ -207,8 +207,8 @@ function widget_stats_init() {
 	}
 
 	// Register Widgets
-	register_sidebar_widget('Statistics', 'widget_stats');
-	register_widget_control('Statistics', 'widget_stats_options', 400, 550);
+	register_sidebar_widget('WP-Stats', 'widget_stats');
+	register_widget_control('WP-Stats', 'widget_stats_options', 400, 550);
 }
 
 

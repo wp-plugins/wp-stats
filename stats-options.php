@@ -124,7 +124,7 @@ switch($mode) {
 			<th scope="row" valign="top"><?php _e('Type Of Stats To Display', 'wp-stats'); ?></th>
 			<td>
 				<p><strong><?php _e('General Stats', 'wp-stats'); ?></strong></p>
-				<input type="checkbox" name="stats_display[]" id="wpstats_total_stats" value="total_stats"<?php checked(1, $stats_display['total_stats']); ?> />&nbsp;&nbsp;<label for="wpstats_total_stats">Total</label><br />
+				<input type="checkbox" name="stats_display[]" id="wpstats_total_stats" value="total_stats"<?php checked(1, $stats_display['total_stats']); ?> />&nbsp;&nbsp;<label for="wpstats_total_stats"><?php _e('Total', 'wp-stats'); ?></label><br />
 
 				<!-- Admin General Stats Filter -->
 				<?php echo apply_filters('wp_stats_page_admin_general', $page_admin_general_stats); ?>

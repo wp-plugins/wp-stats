@@ -482,7 +482,7 @@ function stats_page() {
 
 		// Most Commented Post
 		if($stats_display['commented_post'] == 1) {
-			$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Most Commented Post', 'wp-stats').'</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.$stats_mostlimit.' '.__('Most Commented Posts', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_mostcommented('post', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";

@@ -51,43 +51,43 @@ function widget_stats_init() {
 				echo '<ul>'."\n";
 				// Total Authors
 				if($stats_total_options['authors'] == 1) {
-					echo '<li><strong>'.get_totalauthors(false).'</strong> '.__('Authors', 'wp-stats').'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Author', '<strong>%s</strong> Authors', get_totalauthors(false), 'wp-stats'), get_totalauthors(false)).'</li>'."\n";
 				}
 				// Total Posts
 				if($stats_total_options['posts'] == 1) {
-					echo '<li><strong>'.get_totalposts(false).'</strong> '.__('Posts', 'wp-stats').'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Post', '<strong>%s</strong> Posts', get_totalposts(false), 'wp-stats'), get_totalposts(false)).'</li>'."\n";
 				}
 				// Total Pages
 				if($stats_total_options['pages'] == 1) {
-					echo '<li><strong>'.get_totalpages(false).'</strong> '.__('Pages', 'wp-stats').'</li>'."\n";
+					'<li>'.sprintf(__ngettext('<strong>%s</strong> Page', '<strong>%s</strong> Pages', get_totalpages(false), 'wp-stats'), get_totalpages(false)).'</li>'."\n";
 				}
 				// Total Tags
 				if($stats_total_options['tags'] == 1) {
-					echo '<li><strong>'.wp_count_terms('post_tag').'</strong> '.__('Tags', 'wp-stats').'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Tag', '<strong>%s</strong> Tags', wp_count_terms('post_tag'), 'wp-stats'), wp_count_terms('post_tag')).'</li>'."\n";
 				}
 				// Total Comments
 				if($stats_total_options['comments'] == 1) {
-					echo '<li><strong>'.get_totalcomments(false).'</strong> '.__('Comments', 'wp-stats').'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Comment', '<strong>%s</strong> Comments', get_totalcomments(false), 'wp-stats'), get_totalcomments(false)).'</li>'."\n";
 				}
 				// Total Comment Posters
 				if($stats_total_options['commenters'] == 1) {
-					echo '<li><strong>'.get_totalcommentposters(false).'</strong> '.__('Comment Posters', 'wp-stats').'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Comment Poster', '<strong>%s</strong> Comment Posters', get_totalcommentposters(false), 'wp-stats'), get_totalcommentposters(false)).'</li>'."\n";
 				}
 				// Total Links
 				if($stats_total_options['links'] == 1) {
-					echo '<li><strong>'.get_totallinks(false).'</strong> '.__('Links', 'wp-stats').'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Link', '<strong>%s</strong> Links', get_totallinks(false), 'wp-stats'), get_totallinks(false)).'</li>'."\n";
 				}
 				// Total Post Categories
 				if($stats_total_options['post_cats'] == 1) {
-					echo '<li><strong>'.wp_count_terms('category').'</strong> '.__('Post Categories', 'wp-stats').'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Post Category', '<strong>%s</strong> Post Categories', wp_count_terms('category'), 'wp-stats'), wp_count_terms('category')).'</li>'."\n";
 				}
 				// Total Link Categories
 				if($stats_total_options['link_cats'] == 1) {
-					echo '<li><strong>'.wp_count_terms('link_category').'</strong> '.__('Link Categories', 'wp-stats').'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Link Category', '<strong>%s</strong> Link Categories', wp_count_terms('link_category'), 'wp-stats'), wp_count_terms('link_category')).'</li>'."\n";
 				}
 				// Total Spam
 				if($stats_total_options['spam'] == 1 && function_exists('akismet_spam_count')) {
-					echo '<li><strong>'.number_format(akismet_spam_count()).'</strong> '.__('Spam Blocked', 'wp-stats').'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Spam Blocked', '<strong>%s</strong> Spam Blockeds', number_format(akismet_spam_count()), 'wp-stats'), number_format(akismet_spam_count())).'</li>'."\n";
 				}
 				echo apply_filters('wp_stats_widget_general', $widget_general_stats);
 				echo '</ul>'."\n";
@@ -189,7 +189,7 @@ function widget_stats_init() {
 		echo '<br /><br />'."\n";
 		echo '<input type="checkbox" id="wpstats_widget_most_comments" name="stats_display_most[]" value="comments"';
 		checked(1, $options['stats_display_most']['comments']);
-		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_most_comments">'.$options['most_limit'].' '.__('Most Commented Posts', 'wp-stats').'</label><br />'."\n";
+		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_most_comments">'.sprintf(__ngettext('%s Most Commented Post', '%s Most Commented Posts', $options['most_limit'], 'wp-stats'), $options['most_limit']).'</label><br />'."\n";
 		echo apply_filters('wp_stats_widget_admin_most', $widget_admin_most_stats);
 		echo '</p>'."\n";
 		echo '<p style="text-align: left;"><label for="most_limit">'.__('Post Title Length (Characters)', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;'."\n";

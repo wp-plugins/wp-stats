@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: WP-Stats
+Plugin Name: WordPress Statistics
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Display your WordPress blog statistics. Ranging from general total statistics, some of my plugins statistics and top 10 statistics.
 Version: 2.31
@@ -234,13 +234,13 @@ function get_mostcommented($mode = '', $limit = 10, $chars = 0, $display = true)
 			foreach ($mostcommenteds as $post) {
 				$post_title = get_the_title();
 				$comment_total = number_format_i18n($post->comment_total);
-				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">".snippet_text($post_title, $chars)."</a> - $comment_total ".__('comments', 'wp-stats')."</li>";
+				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">".snippet_text($post_title, $chars)."</a> - ".sprintf(__ngettext('%s comment', '%s comments', $comment_total, 'wp-stats'), $comment_total)."</li>";
 			}
 		} else {
 			foreach ($mostcommenteds as $post) {
 				$post_title = get_the_title();
 				$comment_total = number_format_i18n($post->comment_total);
-				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a> - $comment_total ".__('comments', 'wp-stats')."</li>";
+				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a> - ".sprintf(__ngettext('%s comment', '%s comments', $comment_total, 'wp-stats'), $comment_total)."</li>";
 			}
 		}
 	} else {
@@ -366,7 +366,7 @@ function get_tags_list($display = true) {
 	$tags = get_tags('orderby=count&order=DESC');
 	if ($tags) {
 		foreach ($tags as $tag) {
-			$temp .= '<li><a href="'.clean_url(get_tag_link($tag->term_id)).'" title="'.sprintf(__('%s topics', 'wp-stats'), number_format_i18n($tag->count)).'">'.$tag->name.'</a> ('.number_format_i18n($tag->count).")</li>\n";
+			$temp .= '<li><a href="'.clean_url(get_tag_link($tag->term_id)).'" title="'.sprintf(__ngettext('%s topic', '%s topics', number_format_i18n($tag->count), 'wp-stats'), number_format_i18n($tag->count)).'">'.$tag->name.'</a> ('.number_format_i18n($tag->count).")</li>\n";
 		}
 	}
 	if($display) {

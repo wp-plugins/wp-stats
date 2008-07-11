@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Stats 2.31\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-11 02:28+0800\n"
-"PO-Revision-Date: 2008-07-11 02:28+0800\n"
+"POT-Creation-Date: 2008-07-11 10:26+0800\n"
+"PO-Revision-Date: 2008-07-11 10:26+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -387,8 +387,11 @@ msgstr ""
 
 #: wp-stats.php:237
 #: wp-stats.php:243
-msgid "comments"
-msgstr ""
+#, php-format
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] ""
+msgstr[1] ""
 
 #: wp-stats.php:277
 #: wp-stats.php:279
@@ -407,8 +410,10 @@ msgstr ""
 
 #: wp-stats.php:369
 #, php-format
-msgid "%s topics"
-msgstr ""
+msgid "%s topic"
+msgid_plural "%s topics"
+msgstr[0] ""
+msgstr[1] ""
 
 #: wp-stats.php:435
 #, php-format

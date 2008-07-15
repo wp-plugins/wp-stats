@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: WordPress Statistics
+Plugin Name: WP-Stats
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Display your WordPress blog statistics. Ranging from general total statistics, some of my plugins statistics and top 10 statistics.
 Version: 2.31

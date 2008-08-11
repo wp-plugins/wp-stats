@@ -3,7 +3,7 @@
 Plugin Name: WP-Stats Widget
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Adds a Stats Widget to display stats from WP-Stats Plugin. You will need to activate WP-Stats first.
-Version: 2.31
+Version: 2.40
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
@@ -51,43 +51,43 @@ function widget_stats_init() {
 				echo '<ul>'."\n";
 				// Total Authors
 				if($stats_total_options['authors'] == 1) {
-					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Author', '<strong>%s</strong> Authors', get_totalauthors(false), 'wp-stats'), get_totalauthors(false)).'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Author', '<strong>%s</strong> Authors', get_totalauthors(false), 'wp-stats'), number_format_i18n(get_totalauthors(false))).'</li>'."\n";
 				}
 				// Total Posts
 				if($stats_total_options['posts'] == 1) {
-					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Post', '<strong>%s</strong> Posts', get_totalposts(false), 'wp-stats'), get_totalposts(false)).'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Post', '<strong>%s</strong> Posts', get_totalposts(false), 'wp-stats'), number_format_i18n(get_totalposts(false))).'</li>'."\n";
 				}
 				// Total Pages
 				if($stats_total_options['pages'] == 1) {
-					'<li>'.sprintf(__ngettext('<strong>%s</strong> Page', '<strong>%s</strong> Pages', get_totalpages(false), 'wp-stats'), get_totalpages(false)).'</li>'."\n";
+					'<li>'.sprintf(__ngettext('<strong>%s</strong> Page', '<strong>%s</strong> Pages', get_totalpages(false), 'wp-stats'), number_format_i18n(get_totalpages(false))).'</li>'."\n";
 				}
 				// Total Tags
 				if($stats_total_options['tags'] == 1) {
-					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Tag', '<strong>%s</strong> Tags', wp_count_terms('post_tag'), 'wp-stats'), wp_count_terms('post_tag')).'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Tag', '<strong>%s</strong> Tags', wp_count_terms('post_tag'), 'wp-stats'), number_format_i18n(wp_count_terms('post_tag'))).'</li>'."\n";
 				}
 				// Total Comments
 				if($stats_total_options['comments'] == 1) {
-					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Comment', '<strong>%s</strong> Comments', get_totalcomments(false), 'wp-stats'), get_totalcomments(false)).'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Comment', '<strong>%s</strong> Comments', get_totalcomments(false), 'wp-stats'), number_format_i18n(get_totalcomments(false))).'</li>'."\n";
 				}
 				// Total Comment Posters
 				if($stats_total_options['commenters'] == 1) {
-					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Comment Poster', '<strong>%s</strong> Comment Posters', get_totalcommentposters(false), 'wp-stats'), get_totalcommentposters(false)).'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Comment Poster', '<strong>%s</strong> Comment Posters', get_totalcommentposters(false), 'wp-stats'), number_format_i18n(get_totalcommentposters(false))).'</li>'."\n";
 				}
 				// Total Links
 				if($stats_total_options['links'] == 1) {
-					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Link', '<strong>%s</strong> Links', get_totallinks(false), 'wp-stats'), get_totallinks(false)).'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Link', '<strong>%s</strong> Links', get_totallinks(false), 'wp-stats'), number_format_i18n(get_totallinks(false))).'</li>'."\n";
 				}
 				// Total Post Categories
 				if($stats_total_options['post_cats'] == 1) {
-					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Post Category', '<strong>%s</strong> Post Categories', wp_count_terms('category'), 'wp-stats'), wp_count_terms('category')).'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Post Category', '<strong>%s</strong> Post Categories', wp_count_terms('category'), 'wp-stats'), number_format_i18n(wp_count_terms('category'))).'</li>'."\n";
 				}
 				// Total Link Categories
 				if($stats_total_options['link_cats'] == 1) {
-					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Link Category', '<strong>%s</strong> Link Categories', wp_count_terms('link_category'), 'wp-stats'), wp_count_terms('link_category')).'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Link Category', '<strong>%s</strong> Link Categories', wp_count_terms('link_category'), 'wp-stats'), number_format_i18n(wp_count_terms('link_category'))).'</li>'."\n";
 				}
 				// Total Spam
 				if($stats_total_options['spam'] == 1 && function_exists('akismet_spam_count')) {
-					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Spam Blocked', '<strong>%s</strong> Spam Blockeds', number_format(akismet_spam_count()), 'wp-stats'), number_format(akismet_spam_count())).'</li>'."\n";
+					echo '<li>'.sprintf(__ngettext('<strong>%s</strong> Spam Blocked', '<strong>%s</strong> Spam Blockeds', akismet_spam_count(), 'wp-stats'), number_format_i18n(akismet_spam_count())).'</li>'."\n";
 				}
 				echo apply_filters('wp_stats_widget_general', $widget_general_stats);
 				echo '</ul>'."\n";

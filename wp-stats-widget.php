@@ -46,8 +46,7 @@ function widget_stats_init() {
 			echo $before_widget.$before_title.$title.$after_title;
 			if(!empty($stats_total_options)) {
 				echo '<ul>'."\n";
-				echo '<li><strong>'.__('Total Stats', 'wp-stats').'</strong></li>'."\n";
-				echo '<li>'."\n";
+				echo '<li><strong>'.__('Total Stats', 'wp-stats').'</strong>'."\n";
 				echo '<ul>'."\n";
 				// Total Authors
 				if($stats_total_options['authors'] == 1) {
@@ -97,8 +96,7 @@ function widget_stats_init() {
 			// Most Commented
 			if($stats_most_options['comments'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><strong>'.$limit.' '.__('Most Commented', 'wp-stats').'</strong></li>'."\n";
-				echo '<li>'."\n";
+				echo '<li><strong>'.$limit.' '.__('Most Commented', 'wp-stats').'</strong>'."\n";
 				echo '<ul>'."\n";
 				get_mostcommented('post', $limit, $chars);
 				echo '</ul>'."\n";
@@ -150,9 +148,9 @@ function widget_stats_init() {
 			$options['title'] = strip_tags($_POST['stats-title']);
 			update_option('widget_stats', $options);
 		}
-		echo '<p style="text-align: left;"><label for="stats-title">'.__('Widget Title', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;<input type="text" id="stats-title" name="stats-title" value="'.htmlspecialchars(stripslashes($options['title'])).'" />';
-		echo '<p style="text-align: left;">'.__('Statistics To Display?', 'wp-stats').'&nbsp;&nbsp;&nbsp;'."\n";
-		echo '<p style="text-align: left;">'."\n";
+		echo '<p><label for="stats-title">'.__('Widget Title', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;<input type="text" id="stats-title" name="stats-title" value="'.htmlspecialchars(stripslashes($options['title'])).'" />';
+		echo '<p>'.__('Statistics To Display?', 'wp-stats').'&nbsp;&nbsp;&nbsp;'."\n";
+		echo '<p>'."\n";
 		echo '<input type="checkbox" id="wpstats_widget_authors" name="stats_display_total[]" value="authors"';
 		checked(1, $options['stats_display_total']['authors']);
 		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_authors">'.__('Total Authors', 'wp-stats').'</label><br />'."\n";
@@ -192,12 +190,12 @@ function widget_stats_init() {
 		echo ' />&nbsp;&nbsp;<label for="wpstats_widget_most_comments">'.sprintf(__ngettext('%s Most Commented Post', '%s Most Commented Posts', $options['most_limit'], 'wp-stats'), $options['most_limit']).'</label><br />'."\n";
 		echo apply_filters('wp_stats_widget_admin_most', $widget_admin_most_stats);
 		echo '</p>'."\n";
-		echo '<p style="text-align: left;"><label for="most_limit">'.__('Post Title Length (Characters)', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;'."\n";
-		echo '<p style="text-align: left;"><input type="text" id="snippet_chars" name="snippet_chars" value="'.$options['snippet_chars'].'" size="3" maxlength="3" /></p>'."\n";
-		echo '<p style="text-align: left;"><label for="most_limit">'.__('Most Limit', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;'."\n";
-		echo '<p style="text-align: left;"><input type="text" id="most_limit" name="most_limit" value="'.$options['most_limit'].'" size="2" maxlength="2" /></p>'."\n";
-		echo '<p style="text-align: left;">'.__('Show Link To Full Stats?', 'wp-stats').'&nbsp;&nbsp;&nbsp;'."\n";
-		echo '<p style="text-align: left;">';
+		echo '<p><label for="most_limit">'.__('Post Title Length (Characters)', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;'."\n";
+		echo '<p><input type="text" id="snippet_chars" name="snippet_chars" value="'.$options['snippet_chars'].'" size="3" maxlength="3" /></p>'."\n";
+		echo '<p><label for="most_limit">'.__('Most Limit', 'wp-stats').':</label>&nbsp;&nbsp;&nbsp;'."\n";
+		echo '<p><input type="text" id="most_limit" name="most_limit" value="'.$options['most_limit'].'" size="2" maxlength="2" /></p>'."\n";
+		echo '<p>'.__('Show Link To Full Stats?', 'wp-stats').'&nbsp;&nbsp;&nbsp;'."\n";
+		echo '<p>';
 		echo '<input type="radio" id="show_link-1" name="show_link" value="1"';
 		checked(1, intval($options['show_link']));
 		echo ' />&nbsp;<label for="show_link-1">'.__('Yes', 'wp-stats').'</label>&nbsp;&nbsp;&nbsp;<input type="radio" id="show_link-0" name="show_link" value="0"';

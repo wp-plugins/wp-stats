@@ -156,7 +156,7 @@ function get_recentposts($mode = '', $limit = 10, $display = true) {
 	if($recentposts) {
 		foreach ($recentposts as $post) {
 			$post_title = get_the_title();
-			$post_date = get_the_time(get_option('date_format').' @ '.get_option('time_format'));
+			$post_date = get_the_time(sprintf(__('%s @ %s', 'wp-stats'), get_option('date_format'), get_option('time_format')));
 			$display_name = stripslashes($post->display_name);
 			$temp .= "<li>$post_date - <a href=\"".get_permalink()."\" title=\"".sprintf(__('View post %s', 'wp-stats'), $post_title)."\">$post_title</a> ($display_name)</li>\n";
 		}
@@ -186,7 +186,7 @@ function get_recentcomments($mode = '', $limit = 10, $display = true) {
 		foreach ($recentcomments as $post) {
 			$post_title = get_the_title();
 			$comment_author = htmlspecialchars(stripslashes($post->comment_author));
-			$comment_date = mysql2date(get_option('date_format').' @ '.get_option('time_format'), $post->comment_date);
+			$comment_date = mysql2date(sprintf(__('%s @ %s', 'wp-stats'), get_option('date_format'), get_option('time_format')), $post->comment_date);
 			$temp .= "<li>$comment_date - $comment_author (<a href=\"".get_permalink()."#comment-".$post->comment_ID."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a>)</li>\n";
 		}
 	} else {
@@ -652,7 +652,7 @@ function stats_page() {
 	$post = $temp_post;
 
 	// Output Stats Page
-	return $temp_stats;
+	return apply_filters('stats_page', $temp_stats);
 }
 
 

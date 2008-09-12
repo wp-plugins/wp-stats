@@ -111,7 +111,7 @@ switch($mode) {
 		 <tr>
 			<th scope="row" valign="top"><?php _e('Stats URL', 'wp-stats'); ?></th>
 			<td>
-				<input type="text" name="stats_url" value="<?php echo get_option('stats_url'); ?>" size="50" /><br /><?php _e('URL To Stats Page.<br />Example: http://www.yoursite.com/blogs/stats/<br />Example: http://www.yoursite.com/blogs/?page_id=2', 'wp-stats'); ?>
+				<input type="text" name="stats_url" value="<?php echo get_option('stats_url'); ?>" size="50" dir="ltr" /><br /><?php _e('URL To Stats Page.<br />Example: http://www.yoursite.com/blogs/stats/<br />Example: http://www.yoursite.com/blogs/?page_id=2', 'wp-stats'); ?>
 			</td>
 		</tr>
 		 <tr>

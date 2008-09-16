@@ -440,11 +440,11 @@ function stats_page() {
 		$temp_stats = apply_filters('wp_stats_page_plugins', $temp_stats);
 
 		// Top Recent Stats
-		$temp_stats .= '<h2 id="TopRecentStats">'.sprintf(__ngettext('Top %s Recent Stat', 'Top %s Recent Stats', $stats_mostlimit, 'wp-stats'), $stats_mostlimit).'</h2>'."\n";
+		$temp_stats .= '<h2 id="TopRecentStats">'.sprintf(__ngettext('Top %s Recent Stat', 'Top %s Recent Stats', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</h2>'."\n";
 
 		// Recent Posts
 		if($stats_display['recent_posts'] == 1) {
-			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Recent Post', '%s Recent Posts', $stats_mostlimit, 'wp-stats'), $stats_mostlimit).'</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Recent Post', '%s Recent Posts', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_recentposts('post', $stats_mostlimit, false);
 			$temp_stats .= '</ul>'."\n";
@@ -452,7 +452,7 @@ function stats_page() {
 
 		// Recent Comments
 		if($stats_display['recent_commtents'] == 1) {
-			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Recent Comment', '%s Recent Comments', $stats_mostlimit, 'wp-stats'), $stats_mostlimit).'</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Recent Comment', '%s Recent Comments', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_recentcomments('post', $stats_mostlimit, false);
 			$temp_stats .= '</ul>'."\n";
@@ -462,11 +462,11 @@ function stats_page() {
 		$temp_stats = apply_filters('wp_stats_page_recent', $temp_stats);
 
 		// Top Most Stats
-		$temp_stats .= '<h2 id="TopMostHighestStats">'.sprintf(__ngettext('%s Most/Highest Stat', '%s Most/Highest Stats', $stats_mostlimit, 'wp-stats'), $stats_mostlimit).'</h2>'."\n";
+		$temp_stats .= '<h2 id="TopMostHighestStats">'.sprintf(__ngettext('%s Most/Highest Stat', '%s Most/Highest Stats', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</h2>'."\n";
 
 		// Most Commented Post
 		if($stats_display['commented_post'] == 1) {
-			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Most Commented Post', '%s Most Commented Posts', $stats_mostlimit, 'wp-stats'), $stats_mostlimit).'</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Most Commented Post', '%s Most Commented Posts', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_mostcommented('post', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";

@@ -96,7 +96,7 @@ function widget_stats_init() {
 			// Most Commented
 			if($stats_most_options['comments'] == 1) {
 				echo '<ul>'."\n";
-				echo '<li><strong>'.$limit.' '.__('Most Commented', 'wp-stats').'</strong>'."\n";
+				echo '<li><strong>'.number_format_i18n($limit).' '.__('Most Commented', 'wp-stats').'</strong>'."\n";
 				echo '<ul>'."\n";
 				get_mostcommented('post', $limit, $chars);
 				echo '</ul>'."\n";

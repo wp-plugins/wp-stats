@@ -215,13 +215,13 @@ function get_mostcommented($mode = '', $limit = 10, $chars = 0, $display = true)
 		if($chars > 0) {
 			foreach ($mostcommenteds as $post) {
 				$post_title = get_the_title();
-				$comment_total = number_format_i18n($post->comment_total);
+				$comment_total = $post->comment_total;
 				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">".snippet_text($post_title, $chars)."</a> - ".sprintf(__ngettext('%s comment', '%s comments', $comment_total, 'wp-stats'), number_format_i18n($comment_total))."</li>";
 			}
 		} else {
 			foreach ($mostcommenteds as $post) {
 				$post_title = get_the_title();
-				$comment_total = number_format_i18n($post->comment_total);
+				$comment_total = $post->comment_total;
 				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a> - ".sprintf(__ngettext('%s comment', '%s comments', $comment_total, 'wp-stats'), number_format_i18n($comment_total))."</li>";
 			}
 		}

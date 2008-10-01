@@ -626,30 +626,32 @@ function stats_page() {
 		} else {
 				$temp_stats .= "<p>$comment_author ".__('has not made any comments yet.', 'wp-stats')."</p>";
 		}
+
+		// Comments Paging
 		if($max_page > 1) {
 			$temp_stats = apply_filters('wp_stats_paging_start', $temp_stats);
 			$temp_stats .= '<div class="wp-pagenavi">'."\n";
-			$temp_stats .= '<span class="pages">Page '.$page.' of '.$max_page.'</span>';			
+			$temp_stats .= '<span class="pages">&#8201;'.sprintf(__('Page %s of %s', 'wp-stats'), number_format_i18n($page), number_format_i18n($max_page)).'&#8201;</span>';
 			if ($start_page >= 2 && $pages_to_show < $max_page) {
-				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, 1).'" title="&laquo; First">&laquo; First</a>';
+				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, 1).'" title="'.__('&laquo; First', 'wp-stats').'">&#8201;'.__('&laquo; First', 'wp-stats').'&#8201;</a>';
 				$temp_stats .= '<span class="extend">...</span>';
 			}
 			if($page > 1) {
-				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, ($page-1)).'" title="&laquo;">&laquo;</a>';
+				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, ($page-1)).'" title="'.__('&laquo;', 'wp-stats').'">&#8201;'.__('&laquo;', 'wp-stats').'&#8201;</a>';
 			}
 			for($i = $start_page; $i  <= $end_page; $i++) {						
 				if($i == $page) {
-					$temp_stats .= '<span class="current">'.$i.'</span>';
+					$temp_stats .= '<span class="current">&#8201;'.number_format_i18n($i).'&#8201;</span>';
 				} else {
-					$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $i).'" title="'.$i.'">'.$i.'</a>';
+					$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $i).'" title="'.number_format_i18n($i).'">&#8201;'.number_format_i18n($i).'&#8201;</a>';
 				}
 			}
 			if(empty($page) || ($page+1) <= $max_page) {
-				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, ($page+1)).'" title="&raquo;">&raquo;</a>';
+				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, ($page+1)).'" title="'.__('&raquo;', 'wp-stats').'">&#8201;'.__('&raquo;', 'wp-stats').'&#8201;</a>';
 			}
 			if ($end_page < $max_page) {
 				$temp_stats .= '<span class="extend">...</span>';
-				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $max_page).'" title="Last &raquo;">Last &raquo;</a>';
+				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, $max_page).'" title="'.__('Last &raquo;', 'wp-stats').'">&#8201;'.__('Last &raquo;', 'wp-stats').'&#8201;</a>';
 			}
 			$temp_stats .= '</div>';
 			$temp_stats = apply_filters('wp_stats_paging_end', $temp_stats);

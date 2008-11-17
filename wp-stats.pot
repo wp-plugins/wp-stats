@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-Stats 2.40\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-01 20:43+0800\n"
-"PO-Revision-Date: 2008-10-01 20:43+0800\n"
+"POT-Creation-Date: 2008-11-17 23:58+0800\n"
+"PO-Revision-Date: 2008-11-17 23:58+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -368,7 +368,7 @@ msgstr ""
 #: wp-stats.php:159
 #: wp-stats.php:189
 #: wp-stats.php:605
-#: wp-stats.php:607
+#: wp-stats.php:608
 #, php-format
 msgid "%s @ %s"
 msgstr ""
@@ -527,58 +527,58 @@ msgstr ""
 msgid "Displaying <strong>%s</strong> To <strong>%s</strong> Of <strong>%s</strong> Comments"
 msgstr ""
 
-#: wp-stats.php:614
-#: wp-stats.php:620
+#: wp-stats.php:615
+#: wp-stats.php:621
 msgid "Posted On"
 msgstr ""
 
-#: wp-stats.php:614
+#: wp-stats.php:615
 msgid "Protected"
 msgstr ""
 
-#: wp-stats.php:615
+#: wp-stats.php:616
 msgid "Comments Protected"
 msgstr ""
 
-#: wp-stats.php:622
+#: wp-stats.php:623
 #, php-format
 msgid "View the comment posted by %s"
 msgstr ""
 
-#: wp-stats.php:622
+#: wp-stats.php:623
 msgid "Posted By"
 msgstr ""
 
-#: wp-stats.php:622
+#: wp-stats.php:623
 msgid "On"
 msgstr ""
 
-#: wp-stats.php:627
+#: wp-stats.php:628
 msgid "has not made any comments yet."
 msgstr ""
 
-#: wp-stats.php:634
+#: wp-stats.php:635
 #, php-format
 msgid "Page %s of %s"
 msgstr ""
 
-#: wp-stats.php:636
+#: wp-stats.php:637
 msgid "&laquo; First"
 msgstr ""
 
-#: wp-stats.php:640
+#: wp-stats.php:641
 msgid "&laquo;"
 msgstr ""
 
-#: wp-stats.php:650
+#: wp-stats.php:651
 msgid "&raquo;"
 msgstr ""
 
-#: wp-stats.php:654
+#: wp-stats.php:655
 msgid "Last &raquo;"
 msgstr ""
 
-#: wp-stats.php:659
+#: wp-stats.php:660
 msgid "Back To Stats Page"
 msgstr ""
 

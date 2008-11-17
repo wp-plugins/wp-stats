@@ -603,7 +603,8 @@ function stats_page() {
 				$comment_id = intval($post->comment_ID);
 				$comment_author2 = htmlspecialchars(stripslashes($post->comment_author));
 				$comment_date = mysql2date(sprintf(__('%s @ %s', 'wp-stats'), get_option('date_format'), get_option('time_format')), $post->comment_date);
-				$comment_content = stripslashes(strip_tags($post->comment_content));
+//			$comment_content = stripslashes(strip_tags($post->comment_content));
+				$comment_content = apply_filters('comment_text', $post->comment_content);
 				$post_date = get_the_time(sprintf(__('%s @ %s', 'wp-stats'), get_option('date_format'), get_option('time_format')));
 				$post_title = get_the_title();
 
@@ -619,7 +620,7 @@ function stats_page() {
 					if($post_title != $cache_post_title) {
 						$temp_stats .= "<p><strong><a href=\"".get_permalink()."\" title=\"".__('Posted On', 'wp-stats')." $post_date\">$post_title</a></strong></p>";
 					}
-					$temp_stats .= "<blockquote><p>$comment_content<br /><a href=\"".get_permalink()."#comment-$comment_id\" title=\"".sprintf(__('View the comment posted by %s', 'wp-stats'), $comment_author2)."\">Comment</a> ".__('Posted By', 'wp-stats')." <strong>$comment_author2</strong> ".__('On', 'wp-stats')." $comment_date</p></blockquote>";						
+					$temp_stats .= "<blockquote>$comment_content<p><a href=\"".get_permalink()."#comment-$comment_id\" title=\"".sprintf(__('View the comment posted by %s', 'wp-stats'), $comment_author2)."\">&raquo;</a> ".__('Posted By', 'wp-stats')." <strong>$comment_author2</strong> ".__('On', 'wp-stats')." $comment_date</p></blockquote>";
 				}
 				$cache_post_title = $post_title;
 			}

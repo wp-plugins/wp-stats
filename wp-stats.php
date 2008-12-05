@@ -66,7 +66,10 @@ function stats_css() {
 ### Display WP-Stats Admin Page
 function display_stats() {
 	$stats_page = stats_page();
-	echo "<div class=\"wrap\">\n$stats_page</div>\n";
+	echo '<div class="wrap">';
+	screen_icon();
+	echo $stats_page;
+	echo '</div>';
 }
 
 

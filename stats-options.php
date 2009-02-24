@@ -143,7 +143,9 @@ switch($mode) {
 				<?php echo apply_filters('wp_stats_page_admin_recent', $page_admin_recent_stats); ?>
 
 				<p><strong><?php printf(__ngettext('Top %s Most/Highest Stat', 'Top %s Most/Highest Stats', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)); ?></strong></p>
-				<input type="checkbox" name="stats_display[]" id="wpstats_commented_post" value="commented_post"<?php checked(1, $stats_display['commented_post']); ?> />&nbsp;&nbsp;<label for="wpstats_commented_post"><?php printf(__ngettext( '%s Most Commented Post', '%s Most Commented Posts', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)); ?></label><br />
+				<input type="checkbox" name="stats_display[]" id="wpstats_commented_post" value="commented_post"<?php checked(1, $stats_display['commented_post']); ?> />&nbsp;&nbsp;<label for="wpstats_commented_post"><?php printf(__ngettext( '%s Most Commented Posts', '%s Most Commented Posts', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)); ?></label><br />
+				<input type="checkbox" name="stats_display[]" id="wpstats_commented_page" value="commented_page"<?php checked(1, $stats_display['commented_page']); ?> />&nbsp;&nbsp;<label for="wpstats_commented_page"><?php printf(__ngettext( '%s Most Commented Pages', '%s Most Commented Pages', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)); ?></label><br />
+
 
 				<!-- Admin Most Stats Filter -->
 				<?php echo apply_filters('wp_stats_page_admin_most', $page_page_admin_most_stats); ?>

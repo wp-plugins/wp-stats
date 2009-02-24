@@ -463,7 +463,7 @@ function stats_page() {
 		if($stats_display['recent_commtents'] == 1) {
 			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Recent Comment', '%s Recent Comments', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= get_recentcomments('post', $stats_mostlimit, false);
+			$temp_stats .= get_recentcomments('both', $stats_mostlimit, false);
 			$temp_stats .= '</ul>'."\n";
 		}
 
@@ -473,7 +473,7 @@ function stats_page() {
 		// Top Most Stats
 		$temp_stats .= '<h2 id="TopMostHighestStats">'.sprintf(__ngettext('%s Most/Highest Stat', '%s Most/Highest Stats', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</h2>'."\n";
 
-		// Most Commented Post
+		// Most Commented Posts
 		if($stats_display['commented_post'] == 1) {
 			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Most Commented Post', '%s Most Commented Posts', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
@@ -481,6 +481,14 @@ function stats_page() {
 			$temp_stats .= '</ul>'."\n";
 		}
 		
+		// Most Commented Pages
+		if($stats_display['commented_page'] == 1) {
+			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Most Commented Page', '%s Most Commented Pages', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
+			$temp_stats .= '<ul>'."\n";
+			$temp_stats .= get_mostcommented('page', $stats_mostlimit, 0, false);
+			$temp_stats .= '</ul>'."\n";
+		}
+
 		// WP-Stats: Top Most/Highest Stats Filter
 		$temp_stats = apply_filters('wp_stats_page_most', $temp_stats);
 		
@@ -671,7 +679,7 @@ function stats_page() {
 add_action('activate_wp-stats/wp-stats.php', 'stats_init');
 function stats_init() {
 	global $wpdb;
-	$stats_display = array('total_stats'  => 1, 'email'  => 1, 'polls' => 1, 'ratings' => 1, 'views' => 1, 'useronline' => 1, 'recent_posts' => 1, 'recent_commtents' => 1, 'commented_post' => 1, 'emailed_most' => 1, 'rated_highest' => 1, 'rated_most' => 1, 'viewed_most' => 1, 'authors' => 1, 'comment_members' => 1, 'post_cats' => 1, 'link_cats' => 1);  
+	$stats_display = array('total_stats'  => 1, 'email'  => 1, 'polls' => 1, 'ratings' => 1, 'views' => 1, 'useronline' => 1, 'recent_posts' => 1, 'recent_commtents' => 1, 'commented_post' => 1, 'commented_page' => 0, 'emailed_most_post' => 1, 'emailed_most_page' => 0, 'rated_highest_post' => 1, 'rated_highest_page' => 0, 'rated_most_post' => 1, 'rated_most_page' => 0, 'viewed_most_post' => 1, 'viewed_most_page' => 0, 'authors' => 1, 'comment_members' => 1, 'post_cats' => 1, 'link_cats' => 1);  
 	add_option('stats_mostlimit', '10', 'Stats Most Limit');
 	add_option('stats_display', $stats_display, 'Stats To Display');
 	add_option('stats_url', get_option('siteurl').'/stats/', 'Stats URL');

@@ -216,13 +216,13 @@ function get_mostcommented($mode = '', $limit = 10, $chars = 0, $display = true)
 			foreach ($mostcommenteds as $post) {
 				$post_title = get_the_title();
 				$comment_total = $post->comment_total;
-				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">".snippet_text($post_title, $chars)."</a> - ".sprintf(__ngettext('%s comment', '%s comments', $comment_total, 'wp-stats'), number_format_i18n($comment_total))."</li>";
+				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">".snippet_text($post_title, $chars)."</a> - ".sprintf(_n('%s comment', '%s comments', $comment_total, 'wp-stats'), number_format_i18n($comment_total))."</li>";
 			}
 		} else {
 			foreach ($mostcommenteds as $post) {
 				$post_title = get_the_title();
 				$comment_total = $post->comment_total;
-				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a> - ".sprintf(__ngettext('%s comment', '%s comments', $comment_total, 'wp-stats'), number_format_i18n($comment_total))."</li>";
+				$temp .= "<li><a href=\"".get_permalink()."\" title=\"".sprintf(__('View comments in post %s', 'wp-stats'), $post_title)."\">$post_title</a> - ".sprintf(_n('%s comment', '%s comments', $comment_total, 'wp-stats'), number_format_i18n($comment_total))."</li>";
 			}
 		}
 	} else {
@@ -348,7 +348,7 @@ function get_tags_list($display = true) {
 	$tags = get_tags('orderby=count&order=DESC');
 	if ($tags) {
 		foreach ($tags as $tag) {
-			$temp .= '<li><a href="'.clean_url(get_tag_link($tag->term_id)).'" title="'.sprintf(__ngettext('%s topic', '%s topics', $tag->count, 'wp-stats'), number_format_i18n($tag->count)).'">'.$tag->name.'</a> ('.number_format_i18n($tag->count).")</li>\n";
+			$temp .= '<li><a href="'.clean_url(get_tag_link($tag->term_id)).'" title="'.sprintf(_n('%s topic', '%s topics', $tag->count, 'wp-stats'), number_format_i18n($tag->count)).'">'.$tag->name.'</a> ('.number_format_i18n($tag->count).")</li>\n";
 		}
 	}
 	if($display) {
@@ -423,19 +423,19 @@ function stats_page() {
 			$temp_stats .= '<h2 id="GeneralStats">'.__('General Stats', 'wp-stats').'</h2>'."\n";
 			$temp_stats .= '<p><strong>'.__('Total Stats', 'wp-stats').'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
-			$temp_stats .= '<li>'.sprintf(__ngettext('<strong>%s</strong> author to this blog.', '<strong>%s</strong> authors to this blog.', get_totalauthors(false), 'wp-stats'), number_format_i18n(get_totalauthors(false))).'</li>'."\n";
-			$temp_stats .= '<li>'.sprintf(__ngettext('<strong>%s</strong> post was posted.', '<strong>%s</strong> posts were posted.', get_totalposts(false), 'wp-stats'), number_format_i18n(get_totalposts(false))).'</li>'."\n";
-			$temp_stats .= '<li>'.sprintf(__ngettext('<strong>%s</strong> page was created.', '<strong>%s</strong> pages were created.', get_totalpages(false), 'wp-stats'), number_format_i18n(get_totalpages(false))).'</li>'."\n";
-			$temp_stats .= '<li>'.sprintf(__ngettext('<strong>%s</strong> tag was created.', '<strong>%s</strong> tags were created.', wp_count_terms('post_tag'), 'wp-stats'), number_format_i18n(wp_count_terms('post_tag'))).'</li>'."\n";		
+			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> author to this blog.', '<strong>%s</strong> authors to this blog.', get_totalauthors(false), 'wp-stats'), number_format_i18n(get_totalauthors(false))).'</li>'."\n";
+			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> post was posted.', '<strong>%s</strong> posts were posted.', get_totalposts(false), 'wp-stats'), number_format_i18n(get_totalposts(false))).'</li>'."\n";
+			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> page was created.', '<strong>%s</strong> pages were created.', get_totalpages(false), 'wp-stats'), number_format_i18n(get_totalpages(false))).'</li>'."\n";
+			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> tag was created.', '<strong>%s</strong> tags were created.', wp_count_terms('post_tag'), 'wp-stats'), number_format_i18n(wp_count_terms('post_tag'))).'</li>'."\n";		
 			
-			$temp_stats .= '<li>'.sprintf(__ngettext('<strong>%s</strong> comment was posted.', '<strong>%s</strong> comments were posted.', get_totalcomments(false), 'wp-stats'), number_format_i18n(get_totalcomments(false))).'</li>'."\n";
-			$temp_stats .= '<li>'.sprintf(__ngettext('<strong>%s</strong> nickname was represented in the comments.', '<strong>%s</strong> different nicknames were represented in the comments.', get_totalcommentposters(false), 'wp-stats'), number_format_i18n(get_totalcommentposters(false))).'</li>'."\n";
+			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> comment was posted.', '<strong>%s</strong> comments were posted.', get_totalcomments(false), 'wp-stats'), number_format_i18n(get_totalcomments(false))).'</li>'."\n";
+			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> nickname was represented in the comments.', '<strong>%s</strong> different nicknames were represented in the comments.', get_totalcommentposters(false), 'wp-stats'), number_format_i18n(get_totalcommentposters(false))).'</li>'."\n";
 
-			$temp_stats .= '<li>'.sprintf(__ngettext('<strong>%s</strong> link was added.', '<strong>%s</strong> links were added.', get_totallinks(false), 'wp-stats'), number_format_i18n(get_totallinks(false))).'</li>'."\n";
-			$temp_stats .= '<li>'.sprintf(__ngettext('<strong>%s</strong> post category was needed.', '<strong>%s</strong> post categories were needed.', wp_count_terms('category'), 'wp-stats'), number_format_i18n(wp_count_terms('category'))).'</li>'."\n";
-			$temp_stats .= '<li>'.sprintf(__ngettext('<strong>%s</strong> link category was needed.', '<strong>%s</strong> link categories were needed.', wp_count_terms('link_category'), 'wp-stats'), number_format_i18n(wp_count_terms('link_category'))).'</li>'."\n";
+			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> link was added.', '<strong>%s</strong> links were added.', get_totallinks(false), 'wp-stats'), number_format_i18n(get_totallinks(false))).'</li>'."\n";
+			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> post category was needed.', '<strong>%s</strong> post categories were needed.', wp_count_terms('category'), 'wp-stats'), number_format_i18n(wp_count_terms('category'))).'</li>'."\n";
+			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> link category was needed.', '<strong>%s</strong> link categories were needed.', wp_count_terms('link_category'), 'wp-stats'), number_format_i18n(wp_count_terms('link_category'))).'</li>'."\n";
 			if(function_exists('akismet_spam_count')) {
-				$temp_stats .= '<li>'.sprintf(__ngettext('<strong>%s</strong> spam blocked.', '<strong>%s</strong> spam blocked.', get_option('akismet_spam_count'), 'wp-stats'), number_format_i18n(get_option('akismet_spam_count'))).'</li>'."\n";
+				$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> spam blocked.', '<strong>%s</strong> spam blocked.', get_option('akismet_spam_count'), 'wp-stats'), number_format_i18n(get_option('akismet_spam_count'))).'</li>'."\n";
 			}
 			// WP-Stats: General Stats Filter
 			$temp_stats = apply_filters('wp_stats_page_general', $temp_stats);
@@ -449,11 +449,11 @@ function stats_page() {
 		$temp_stats = apply_filters('wp_stats_page_plugins', $temp_stats);
 
 		// Top Recent Stats
-		$temp_stats .= '<h2 id="TopRecentStats">'.sprintf(__ngettext('Top %s Recent Stat', 'Top %s Recent Stats', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</h2>'."\n";
+		$temp_stats .= '<h2 id="TopRecentStats">'.sprintf(_n('Top %s Recent Stat', 'Top %s Recent Stats', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</h2>'."\n";
 
 		// Recent Posts
 		if($stats_display['recent_posts'] == 1) {
-			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Recent Post', '%s Recent Posts', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.sprintf(_n('%s Recent Post', '%s Recent Posts', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_recentposts('post', $stats_mostlimit, false);
 			$temp_stats .= '</ul>'."\n";
@@ -461,7 +461,7 @@ function stats_page() {
 
 		// Recent Comments
 		if($stats_display['recent_commtents'] == 1) {
-			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Recent Comment', '%s Recent Comments', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.sprintf(_n('%s Recent Comment', '%s Recent Comments', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_recentcomments('both', $stats_mostlimit, false);
 			$temp_stats .= '</ul>'."\n";
@@ -471,11 +471,11 @@ function stats_page() {
 		$temp_stats = apply_filters('wp_stats_page_recent', $temp_stats);
 
 		// Top Most Stats
-		$temp_stats .= '<h2 id="TopMostHighestStats">'.sprintf(__ngettext('%s Most/Highest Stat', '%s Most/Highest Stats', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</h2>'."\n";
+		$temp_stats .= '<h2 id="TopMostHighestStats">'.sprintf(_n('%s Most/Highest Stat', '%s Most/Highest Stats', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</h2>'."\n";
 
 		// Most Commented Posts
 		if($stats_display['commented_post'] == 1) {
-			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Most Commented Post', '%s Most Commented Posts', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.sprintf(_n('%s Most Commented Post', '%s Most Commented Posts', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_mostcommented('post', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";
@@ -483,7 +483,7 @@ function stats_page() {
 		
 		// Most Commented Pages
 		if($stats_display['commented_page'] == 1) {
-			$temp_stats .= '<p><strong>'.sprintf(__ngettext('%s Most Commented Page', '%s Most Commented Pages', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
+			$temp_stats .= '<p><strong>'.sprintf(_n('%s Most Commented Page', '%s Most Commented Pages', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_mostcommented('page', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";

@@ -675,6 +675,202 @@ function stats_page() {
 }
 
 
+### Class: WP-Stats Widget
+ class WP_Widget_Stats extends WP_Widget {
+	// Constructor
+	function WP_Widget_Stats() {
+		$widget_ops = array('description' => __('WP-Stats statistics', 'wp-stats'));
+		$this->WP_Widget('stats', __('Stats', 'wp-stats'), $widget_ops);
+	}
+
+	// Display Widget
+	function widget($args, $instance) {
+		extract($args);
+		$title = attribute_escape($instance['title']);
+		$limit = intval($instance['limit']);
+		$chars = intval($instance['chars']);
+		$show_link = intval($instance['show_link']);
+		$stats_total_authors = intval($instance['stats_total_authors']);
+		$stats_total_posts = intval($instance['stats_total_posts']);
+		$stats_total_pages = intval($instance['stats_total_pages']);
+		$stats_total_tags = intval($instance['stats_total_tags']);
+		$stats_total_comments = intval($instance['stats_total_comments']);
+		$stats_total_commenters = intval($instance['stats_total_commenters']);
+		$stats_total_links = intval($instance['stats_total_links']);
+		$stats_total_post_cat = intval($instance['stats_total_post_cat']);
+		$stats_total_link_cat = intval($instance['stats_total_link_cat']);
+		$stats_total_spam = intval($instance['stats_total_spam']);
+		$stats_most_commented_post = intval($instance['stats_most_commented_post']);
+		echo $before_widget.$before_title.$title.$after_title;
+		echo '<ul>'."\n";
+		echo '<li><strong>'.__('Total Stats', 'wp-stats').'</strong>'."\n";
+		echo '<ul>'."\n";
+		// Total Authors
+		if($stats_total_authors) {
+			echo '<li>'.sprintf(_n('<strong>%s</strong> Author', '<strong>%s</strong> Authors', get_totalauthors(false), 'wp-stats'), number_format_i18n(get_totalauthors(false))).'</li>'."\n";
+		}
+		// Total Posts
+		if($stats_total_posts) {
+			echo '<li>'.sprintf(_n('<strong>%s</strong> Post', '<strong>%s</strong> Posts', get_totalposts(false), 'wp-stats'), number_format_i18n(get_totalposts(false))).'</li>'."\n";
+		}
+		// Total Pages
+		if($stats_total_pages) {
+			'<li>'.sprintf(_n('<strong>%s</strong> Page', '<strong>%s</strong> Pages', get_totalpages(false), 'wp-stats'), number_format_i18n(get_totalpages(false))).'</li>'."\n";
+		}
+		// Total Tags
+		if($stats_total_tags) {
+			echo '<li>'.sprintf(_n('<strong>%s</strong> Tag', '<strong>%s</strong> Tags', wp_count_terms('post_tag'), 'wp-stats'), number_format_i18n(wp_count_terms('post_tag'))).'</li>'."\n";
+		}
+		// Total Comments
+		if($stats_total_comments) {
+			echo '<li>'.sprintf(_n('<strong>%s</strong> Comment', '<strong>%s</strong> Comments', get_totalcomments(false), 'wp-stats'), number_format_i18n(get_totalcomments(false))).'</li>'."\n";
+		}
+		// Total Comment Posters
+		if($stats_total_commenters) {
+			echo '<li>'.sprintf(_n('<strong>%s</strong> Comment Poster', '<strong>%s</strong> Comment Posters', get_totalcommentposters(false), 'wp-stats'), number_format_i18n(get_totalcommentposters(false))).'</li>'."\n";
+		}
+		// Total Links
+		if($stats_total_links) {
+			echo '<li>'.sprintf(_n('<strong>%s</strong> Link', '<strong>%s</strong> Links', get_totallinks(false), 'wp-stats'), number_format_i18n(get_totallinks(false))).'</li>'."\n";
+		}
+		// Total Post Categories
+		if($stats_total_post_cat) {
+			echo '<li>'.sprintf(_n('<strong>%s</strong> Post Category', '<strong>%s</strong> Post Categories', wp_count_terms('category'), 'wp-stats'), number_format_i18n(wp_count_terms('category'))).'</li>'."\n";
+		}
+		// Total Link Categories
+		if($stats_total_link_cat) {
+			echo '<li>'.sprintf(_n('<strong>%s</strong> Link Category', '<strong>%s</strong> Link Categories', wp_count_terms('link_category'), 'wp-stats'), number_format_i18n(wp_count_terms('link_category'))).'</li>'."\n";
+		}
+		// Total Spam
+		if($stats_total_spam && function_exists('akismet_spam_count')) {
+			echo '<li>'.sprintf(_n('<strong>%s</strong> Spam Blocked', '<strong>%s</strong> Spam Blockeds', akismet_spam_count(), 'wp-stats'), number_format_i18n(akismet_spam_count())).'</li>'."\n";
+		}
+		echo '</ul>'."\n";
+		echo '</li>'."\n";
+		echo '</ul>'."\n";
+		// Most Commented
+		if($stats_most_commented_post) {
+			echo '<ul>'."\n";
+			echo '<li><strong>'.number_format_i18n($limit).' '.__('Most Commented Posts', 'wp-stats').'</strong>'."\n";
+			echo '<ul>'."\n";
+			get_mostcommented('post', $limit, $chars);
+			echo '</ul>'."\n";
+			echo '</li>'."\n";
+			echo '</ul>'."\n";
+		}
+		if($show_link) {
+			echo '<ul>'."\n";
+			echo '<li><a href="'.stripslashes(get_option('stats_url')).'">'.__('My Blog Statistics', 'wp-stats').'</a></li>'."\n";
+			echo '</ul>'."\n";
+		}
+		echo $after_widget;
+	}
+
+	// When Widget Control Form Is Posted
+	function update($new_instance, $old_instance) {
+		if (!isset($new_instance['submit'])) {
+			return false;
+		}
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);;
+		$instance['limit'] = intval($new_instance['limit']);
+		$instance['chars'] = intval($new_instance['chars']);
+		$instance['show_link'] = intval($new_instance['show_link']);
+		$instance['stats_total_authors'] = intval($new_instance['stats_total_authors']);
+		$instance['stats_total_posts'] = intval($new_instance['stats_total_posts']);
+		$instance['stats_total_pages'] = intval($new_instance['stats_total_pages']);
+		$instance['stats_total_tags'] = intval($new_instance['stats_total_tags']);
+		$instance['stats_total_comments'] = intval($new_instance['stats_total_comments']);
+		$instance['stats_total_commenters'] = intval($new_instance['stats_total_commenters']);
+		$instance['stats_total_links'] = intval($new_instance['stats_total_links']);
+		$instance['stats_total_post_cat'] = intval($new_instance['stats_total_post_cat']);
+		$instance['stats_total_link_cat'] = intval($new_instance['stats_total_link_cat']);
+		$instance['stats_total_spam'] = intval($new_instance['stats_total_spam']);
+		$instance['stats_most_commented_post'] = intval($new_instance['stats_most_commented_post']);
+		return $instance;
+	}
+
+	// DIsplay Widget Control Form
+	function form($instance) {
+		global $wpdb;
+		$instance = wp_parse_args((array) $instance, array('title' => __('Stats', 'wp-stats'), 'limit' => 10, 'chars' => 200, 'show_link' => 1, 'stats_total_authors' => 1, 'stats_total_posts' => 1, 'stats_total_pages' => 1, 'stats_total_tags' => 1, 'stats_total_comments' => 1, 'stats_total_commenters' => 1, 'stats_total_links' => 1, 'stats_total_post_cat' => 1, 'stats_total_link_cat' => 1, 'stats_total_spam' => 1, 'stats_most_commented_post' => 1));
+		$title = attribute_escape($instance['title']);
+		$limit = intval($instance['limit']);
+		$chars = intval($instance['chars']);
+		$show_link = intval($instance['show_link']);
+		$stats_total_authors = intval($instance['stats_total_authors']);
+		$stats_total_posts = intval($instance['stats_total_posts']);
+		$stats_total_pages = intval($instance['stats_total_pages']);
+		$stats_total_tags = intval($instance['stats_total_tags']);
+		$stats_total_comments = intval($instance['stats_total_comments']);
+		$stats_total_commenters = intval($instance['stats_total_commenters']);
+		$stats_total_links = intval($instance['stats_total_links']);
+		$stats_total_post_cat = intval($instance['stats_total_post_cat']);
+		$stats_total_link_cat = intval($instance['stats_total_link_cat']);
+		$stats_total_spam = intval($instance['stats_total_spam']);
+		$stats_most_commented_post = intval($instance['stats_most_commented_post']);
+?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'wp-stats'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label>
+		</p>
+		<p>
+			<?php _e('Statistics To Display:', 'wp-postviews'); ?><br />
+			<input type="checkbox" id="<?php echo $this->get_field_id('stats_total_authors'); ?>" name="<?php echo $this->get_field_name('stats_total_authors'); ?>" value="1" <?php checked(1, $instance['stats_total_authors']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_total_authors'); ?>"><?php _e('Total Authors', 'wp-stats'); ?></label>
+			<br />
+			<input type="checkbox" id="<?php echo $this->get_field_id('stats_total_posts'); ?>" name="<?php echo $this->get_field_name('stats_total_posts'); ?>" value="1" <?php checked(1, $instance['stats_total_posts']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_total_posts'); ?>"><?php _e('Total Posts', 'wp-stats'); ?></label>
+			<br />
+			<input type="checkbox" id="<?php echo $this->get_field_id('stats_total_pages'); ?>" name="<?php echo $this->get_field_name('stats_total_pages'); ?>" value="1" <?php checked(1, $instance['stats_total_pages']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_total_pages'); ?>"><?php _e('Total Pages', 'wp-stats'); ?></label>
+			<br />
+			<input type="checkbox" id="<?php echo $this->get_field_id('stats_total_tags'); ?>" name="<?php echo $this->get_field_name('stats_total_tags'); ?>" value="1" <?php checked(1, $instance['stats_total_tags']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_total_tags'); ?>"><?php _e('Total Tags', 'wp-stats'); ?></label>
+			<br />
+			<input type="checkbox" id="<?php echo $this->get_field_id('stats_total_comments'); ?>" name="<?php echo $this->get_field_name('stats_total_comments'); ?>" value="1" <?php checked(1, $instance['stats_total_comments']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_total_comments'); ?>"><?php _e('Total Comments', 'wp-stats'); ?></label>
+			<br />
+			<input type="checkbox" id="<?php echo $this->get_field_id('stats_total_commenters'); ?>" name="<?php echo $this->get_field_name('stats_total_commenters'); ?>" value="1" <?php checked(1, $instance['stats_total_commenters']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_total_commenters'); ?>"><?php _e('Total Comment Posters', 'wp-stats'); ?></label>
+			<br />
+			<input type="checkbox" id="<?php echo $this->get_field_id('stats_total_links'); ?>" name="<?php echo $this->get_field_name('stats_total_links'); ?>" value="1" <?php checked(1, $instance['stats_total_links']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_total_links'); ?>"><?php _e('Total Links', 'wp-stats'); ?></label>
+			<br />
+			<input type="checkbox" id="<?php echo $this->get_field_id('stats_total_post_cat'); ?>" name="<?php echo $this->get_field_name('stats_total_post_cat'); ?>" value="1" <?php checked(1, $instance['stats_total_post_cat']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_total_post_cat'); ?>"><?php _e('Total Post Categories', 'wp-stats'); ?></label>
+			<br />
+			<input type="checkbox" id="<?php echo $this->get_field_id('stats_total_link_cat'); ?>" name="<?php echo $this->get_field_name('stats_total_link_cat'); ?>" value="1" <?php checked(1, $instance['stats_total_link_cat']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_total_link_cat'); ?>"><?php _e('Total Link Categories', 'wp-stats'); ?></label>
+			<br />
+			<?php if(function_exists('akismet_spam_count')): ?>
+				<input type="checkbox" id="<?php echo $this->get_field_id('stats_total_spam'); ?>" name="<?php echo $this->get_field_name('stats_total_spam'); ?>" value="1" <?php checked(1, $instance['stats_total_spam']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_total_spam'); ?>"><?php _e('Total Spam Blocked', 'wp-stats'); ?></label>
+				<br />
+			<?php endif; ?>
+			<br />
+			<input type="checkbox" id="<?php echo $this->get_field_id('stats_most_commented_post'); ?>" name="<?php echo $this->get_field_name('stats_most_commented_post'); ?>" value="1" <?php checked(1, $instance['stats_most_commented_post']); ?> />&nbsp;&nbsp;<label for="<?php echo $this->get_field_id('stats_most_commented_post'); ?>"><?php printf(_n('%s Most Commented Post', '%s Most Commented Posts', $options['most_limit'], 'wp-stats'), $options['most_limit']); ?></label>
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('limit'); ?>"><?php _e('No. Of Records To Show:', 'wp-stats'); ?> <span style="color: red;">*</span> <input class="widefat" id="<?php echo $this->get_field_id('limit'); ?>" name="<?php echo $this->get_field_name('limit'); ?>" type="text" value="<?php echo $limit; ?>" /></label>
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('chars'); ?>"><?php _e('Maximum Post Title Length (Characters):', 'wp-stats'); ?> <span style="color: red;">*</span> <input class="widefat" id="<?php echo $this->get_field_id('chars'); ?>" name="<?php echo $this->get_field_name('chars'); ?>" type="text" value="<?php echo $chars; ?>" /></label><br />
+			<small><?php _e('<strong>0</strong> to disable.', 'wp-stats'); ?></small>
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('show_link'); ?>"><?php _e('Show Link To Statistics Page?', 'wp-stats'); ?>
+				<select name="<?php echo $this->get_field_name('show_link'); ?>" id="<?php echo $this->get_field_id('show_link'); ?>" class="widefat">
+					<option value="0"<?php selected('0', $mode); ?>><?php _e('No', 'wp-stats'); ?></option>
+					<option value="1"<?php selected('1', $mode); ?>><?php _e('Yes', 'wp-stats'); ?></option>
+				</select>
+			</label>
+		</p>
+		<p style="color: red;">
+			<small><?php _e('* Used only in most commented post.', 'wp-stats'); ?></small>
+		<p>
+		<input type="hidden" id="<?php echo $this->get_field_id('submit'); ?>" name="<?php echo $this->get_field_name('submit'); ?>" value="1" />
+<?php
+	}
+}
+
+
+### Function: Init WP-Stats Widget
+add_action('widgets_init', 'widget_stats_init');
+function widget_stats_init() {
+	register_widget('WP_Widget_Stats');
+}
+
+
 ### Function: Stats Option
 add_action('activate_wp-stats/wp-stats.php', 'stats_init');
 function stats_init() {

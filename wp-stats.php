@@ -152,7 +152,7 @@ function get_recentposts($mode = '', $limit = 10, $display = true) {
 	} else {
 		$where = '1=1';
 	}
-    $recentposts = $wpdb->get_results("SELECT $wpdb->posts.*, $wpdb->users.* FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE user_activation_key = '' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
+    $recentposts = $wpdb->get_results("SELECT $wpdb->users.*, $wpdb->posts.* FROM $wpdb->posts LEFT JOIN $wpdb->users ON $wpdb->users.ID = $wpdb->posts.post_author WHERE user_activation_key = '' AND post_date < '".current_time('mysql')."' AND $where AND post_status = 'publish' AND post_password = '' ORDER  BY post_date DESC LIMIT $limit");
 	if($recentposts) {
 		foreach ($recentposts as $post) {
 			$post_title = get_the_title();

@@ -686,7 +686,7 @@ function stats_page() {
 	// Display Widget
 	function widget($args, $instance) {
 		extract($args);
-		$title = attribute_escape($instance['title']);
+		$title = attr($instance['title']);
 		$limit = intval($instance['limit']);
 		$chars = intval($instance['chars']);
 		$show_link = intval($instance['show_link']);
@@ -794,7 +794,7 @@ function stats_page() {
 	function form($instance) {
 		global $wpdb;
 		$instance = wp_parse_args((array) $instance, array('title' => __('Stats', 'wp-stats'), 'limit' => 10, 'chars' => 200, 'show_link' => 1, 'stats_total_authors' => 1, 'stats_total_posts' => 1, 'stats_total_pages' => 1, 'stats_total_tags' => 1, 'stats_total_comments' => 1, 'stats_total_commenters' => 1, 'stats_total_links' => 1, 'stats_total_post_cat' => 1, 'stats_total_link_cat' => 1, 'stats_total_spam' => 1, 'stats_most_commented_post' => 1));
-		$title = attribute_escape($instance['title']);
+		$title = attr($instance['title']);
 		$limit = intval($instance['limit']);
 		$chars = intval($instance['chars']);
 		$show_link = intval($instance['show_link']);

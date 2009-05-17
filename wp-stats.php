@@ -686,7 +686,7 @@ function stats_page() {
 	// Display Widget
 	function widget($args, $instance) {
 		extract($args);
-		$title = esc_attr($instance['title']);
+		$title = apply_filters('widget_title', esc_attr($instance['title']));
 		$limit = intval($instance['limit']);
 		$chars = intval($instance['chars']);
 		$show_link = intval($instance['show_link']);

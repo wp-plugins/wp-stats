@@ -850,8 +850,8 @@ function stats_page() {
 		<p>
 			<label for="<?php echo $this->get_field_id('show_link'); ?>"><?php _e('Show Link To Statistics Page?', 'wp-stats'); ?>
 				<select name="<?php echo $this->get_field_name('show_link'); ?>" id="<?php echo $this->get_field_id('show_link'); ?>" class="widefat">
-					<option value="0"<?php selected('0', $mode); ?>><?php _e('No', 'wp-stats'); ?></option>
-					<option value="1"<?php selected('1', $mode); ?>><?php _e('Yes', 'wp-stats'); ?></option>
+					<option value="0"<?php selected('0', $show_link); ?>><?php _e('No', 'wp-stats'); ?></option>
+					<option value="1"<?php selected('1', $show_link); ?>><?php _e('Yes', 'wp-stats'); ?></option>
 				</select>
 			</label>
 		</p>

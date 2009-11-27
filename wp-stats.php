@@ -460,7 +460,7 @@ function stats_page() {
 		}
 
 		// Recent Comments
-		if($stats_display['recent_commtents'] == 1) {
+		if($stats_display['recent_comments'] == 1) {
 			$temp_stats .= '<p><strong>'.sprintf(_n('%s Recent Comment', '%s Recent Comments', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
 			$temp_stats .= '<ul>'."\n";
 			$temp_stats .= get_recentcomments('both', $stats_mostlimit, false);
@@ -875,7 +875,7 @@ function widget_stats_init() {
 add_action('activate_wp-stats/wp-stats.php', 'stats_init');
 function stats_init() {
 	global $wpdb;
-	$stats_display = array('total_stats'  => 1, 'email'  => 1, 'polls' => 1, 'ratings' => 1, 'views' => 1, 'useronline' => 1, 'recent_posts' => 1, 'recent_commtents' => 1, 'commented_post' => 1, 'commented_page' => 0, 'emailed_most_post' => 1, 'emailed_most_page' => 0, 'rated_highest_post' => 1, 'rated_highest_page' => 0, 'rated_most_post' => 1, 'rated_most_page' => 0, 'viewed_most_post' => 1, 'viewed_most_page' => 0, 'authors' => 1, 'comment_members' => 1, 'post_cats' => 1, 'link_cats' => 1);  
+	$stats_display = array('total_stats'  => 1, 'email'  => 1, 'polls' => 1, 'ratings' => 1, 'views' => 1, 'useronline' => 1, 'recent_posts' => 1, 'recent_comments' => 1, 'commented_post' => 1, 'commented_page' => 0, 'emailed_most_post' => 1, 'emailed_most_page' => 0, 'rated_highest_post' => 1, 'rated_highest_page' => 0, 'rated_most_post' => 1, 'rated_most_page' => 0, 'viewed_most_post' => 1, 'viewed_most_page' => 0, 'authors' => 1, 'comment_members' => 1, 'post_cats' => 1, 'link_cats' => 1);  
 	add_option('stats_mostlimit', '10', 'Stats Most Limit');
 	add_option('stats_display', $stats_display, 'Stats To Display');
 	add_option('stats_url', get_option('siteurl').'/stats/', 'Stats URL');

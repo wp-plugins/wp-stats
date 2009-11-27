@@ -137,7 +137,7 @@ switch($mode) {
 
 				<p><strong><?php printf(_n('Top %s Recent Stat', 'Top %s Recent Stats', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)); ?></strong></p>
 				<input type="checkbox" name="stats_display[]" id="wpstats_recent_posts" value="recent_posts"<?php checked(1, $stats_display['recent_posts']); ?> />&nbsp;&nbsp;<label for="wpstats_recent_posts"><?php printf(_n('%s Most Recent Post', '%s Most Recent Posts', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)); ?></label><br />
-				<input type="checkbox" name="stats_display[]" id="wpstats_recent_commtents" value="recent_commtents"<?php checked(1, $stats_display['recent_commtents']); ?> />&nbsp;&nbsp;<label for="wpstats_recent_commtents"><?php printf(_n( '%s Most Recent Comment', '%s Most Recent Comments', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)); ?></label><br />
+				<input type="checkbox" name="stats_display[]" id="wpstats_recent_comments" value="recent_comments"<?php checked(1, $stats_display['recent_comments']); ?> />&nbsp;&nbsp;<label for="wpstats_recent_comments"><?php printf(_n( '%s Most Recent Comment', '%s Most Recent Comments', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)); ?></label><br />
 
 				<!-- Admin Recent Stats Filter -->
 				<?php echo apply_filters('wp_stats_page_admin_recent', $page_admin_recent_stats); ?>

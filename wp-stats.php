@@ -9,8 +9,8 @@ Author URI: http://lesterchan.net
 */
 
 
-/*  
-	Copyright 2009  Lester Chan  (email : lesterchan@gmail.com)
+/*
+	Copyright 2013  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -49,8 +49,8 @@ function stats_menu() {
 
 ### Function: Enqueue Stats Stylesheets
 add_action('wp_print_styles', 'stats_stylesheets');
-function stats_stylesheets() {	
-	if(!function_exists('pagenavi_stylesheets')) {		
+function stats_stylesheets() {
+	if(!function_exists('pagenavi_stylesheets')) {
 		if(@file_exists(TEMPLATEPATH.'/stats-css.css')) {
 			wp_enqueue_style('wp-stats', plugins_url(get_stylesheet_directory_uri().'/stats-css.css'), false, '2.50', 'all');
 		} else {
@@ -254,7 +254,7 @@ function get_authorsstats($mode = '', $display = true) {
 				$post_author = strip_tags(stripslashes($post->user_nicename));
 				$author_link = str_replace('%author%', $post_author, $permalink);
 				$display_name = strip_tags(stripslashes($post->display_name));
-				$posts_total = number_format_i18n($post->posts_total);				
+				$posts_total = number_format_i18n($post->posts_total);
 				if($using_permalink) {
 					$temp .= "<li><a href=\"".get_option('home').$author_link."\" title=\"".sprintf(__('View posts posted by %s', 'wp-stats'), $display_name)."\">$display_name</a> ($posts_total)</li>\n";
 				} else {
@@ -407,7 +407,7 @@ function stats_page_link($author, $page = 0) {
 
 ### Function: Statistics Page
 function stats_page() {
-	global $wpdb, $post;	
+	global $wpdb, $post;
 	// Variables Variables Variables
 	$comment_author = urldecode(strip_tags(stripslashes(trim($_GET['stats_author']))));
 	$page = intval($_GET['stats_page']);
@@ -426,8 +426,8 @@ function stats_page() {
 			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> author to this blog.', '<strong>%s</strong> authors to this blog.', get_totalauthors(false), 'wp-stats'), number_format_i18n(get_totalauthors(false))).'</li>'."\n";
 			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> post was posted.', '<strong>%s</strong> posts were posted.', get_totalposts(false), 'wp-stats'), number_format_i18n(get_totalposts(false))).'</li>'."\n";
 			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> page was created.', '<strong>%s</strong> pages were created.', get_totalpages(false), 'wp-stats'), number_format_i18n(get_totalpages(false))).'</li>'."\n";
-			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> tag was created.', '<strong>%s</strong> tags were created.', wp_count_terms('post_tag'), 'wp-stats'), number_format_i18n(wp_count_terms('post_tag'))).'</li>'."\n";		
-			
+			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> tag was created.', '<strong>%s</strong> tags were created.', wp_count_terms('post_tag'), 'wp-stats'), number_format_i18n(wp_count_terms('post_tag'))).'</li>'."\n";
+
 			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> comment was posted.', '<strong>%s</strong> comments were posted.', get_totalcomments(false), 'wp-stats'), number_format_i18n(get_totalcomments(false))).'</li>'."\n";
 			$temp_stats .= '<li>'.sprintf(_n('<strong>%s</strong> nickname was represented in the comments.', '<strong>%s</strong> different nicknames were represented in the comments.', get_totalcommentposters(false), 'wp-stats'), number_format_i18n(get_totalcommentposters(false))).'</li>'."\n";
 
@@ -444,7 +444,7 @@ function stats_page() {
 
 		// Plugin Stats
 		$temp_stats .= '<h2 id="PluginsStats">'.__('Plugins Stats', 'wp-stats').'</h2>'."\n";
-				
+
 		// WP-Stats: Plugins Stats Filter
 		$temp_stats = apply_filters('wp_stats_page_plugins', $temp_stats);
 
@@ -480,7 +480,7 @@ function stats_page() {
 			$temp_stats .= get_mostcommented('post', $stats_mostlimit, 0, false);
 			$temp_stats .= '</ul>'."\n";
 		}
-		
+
 		// Most Commented Pages
 		if($stats_display['commented_page'] == 1) {
 			$temp_stats .= '<p><strong>'.sprintf(_n('%s Most Commented Page', '%s Most Commented Pages', $stats_mostlimit, 'wp-stats'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
@@ -491,7 +491,7 @@ function stats_page() {
 
 		// WP-Stats: Top Most/Highest Stats Filter
 		$temp_stats = apply_filters('wp_stats_page_most', $temp_stats);
-		
+
 		// Authors Stats
 		$temp_stats .= '<h2 id="AuthorsStats">'.__('Authors Stats', 'wp-stats').'</h2>'."\n";
 
@@ -504,7 +504,7 @@ function stats_page() {
 		}
 
 		// WP-Stats: Authors Stats Filter
-		$temp_stats = apply_filters('wp_stats_page_authors', $temp_stats);			
+		$temp_stats = apply_filters('wp_stats_page_authors', $temp_stats);
 
 		// Comments' Members Stats
 		$temp_stats .= '<h2 id="CommentsMembersStats">'.__('Comments\' Members Stats', 'wp-stats').'</h2>'."\n";
@@ -588,15 +588,15 @@ function stats_page() {
 		if($start_page <= 0) {
 			$start_page = 1;
 		}
-		if(($offset + $perpage) > $numposts) { 
-			$max_on_page = $numposts; 
-		} else { 
-			$max_on_page = ($offset + $perpage); 
+		if(($offset + $perpage) > $numposts) {
+			$max_on_page = $numposts;
+		} else {
+			$max_on_page = ($offset + $perpage);
 		}
-		if (($offset + 1) > ($numposts)) { 
-			$display_on_page = $numposts; 
-		} else { 
-			$display_on_page = ($offset + 1); 
+		if (($offset + 1) > ($numposts)) {
+			$display_on_page = $numposts;
+		} else {
+			$display_on_page = ($offset + 1);
 		}
 
 		// Getting The Comments
@@ -620,8 +620,8 @@ function stats_page() {
 					// If New Title, Print It Out
 					if($post_title != $cache_post_title) {
 						$temp_stats .= "<p><strong><a href=\"".get_permalink()."\" title=\"".__('Posted On', 'wp-stats')." $post_date\">".__('Protected', 'wp-stats').": $post_title</a></strong></p>";
-						$temp_stats .= '<blockquote>'.__('Comments Protected', 'wp-stats').'</blockquote>';	
-					}							
+						$temp_stats .= '<blockquote>'.__('Comments Protected', 'wp-stats').'</blockquote>';
+					}
 				} else {
 					// If New Title, Print It Out
 					if($post_title != $cache_post_title) {
@@ -647,7 +647,7 @@ function stats_page() {
 			if($page > 1) {
 				$temp_stats .= '<a href="'.stats_page_link($comment_author_link, ($page-1)).'" title="'.__('&laquo;', 'wp-stats').'">&#8201;'.__('&laquo;', 'wp-stats').'&#8201;</a>';
 			}
-			for($i = $start_page; $i  <= $end_page; $i++) {						
+			for($i = $start_page; $i  <= $end_page; $i++) {
 				if($i == $page) {
 					$temp_stats .= '<span class="current">&#8201;'.number_format_i18n($i).'&#8201;</span>';
 				} else {
@@ -666,7 +666,7 @@ function stats_page() {
 		}
 		$temp_stats .= '<strong>&laquo;&laquo;</strong> <a href="'.$stats_url.'">'.__('Back To Stats Page', 'wp-stats').' </a>';
 	} // End If
-	
+
 	// Assign Back $post
 	$post = $temp_post;
 
@@ -867,6 +867,7 @@ function stats_page() {
 ### Function: Init WP-Stats Widget
 add_action('widgets_init', 'widget_stats_init');
 function widget_stats_init() {
+	stats_textdomain();
 	register_widget('WP_Widget_Stats');
 }
 
@@ -875,7 +876,7 @@ function widget_stats_init() {
 add_action('activate_wp-stats/wp-stats.php', 'stats_init');
 function stats_init() {
 	global $wpdb;
-	$stats_display = array('total_stats'  => 1, 'email'  => 1, 'polls' => 1, 'ratings' => 1, 'views' => 1, 'useronline' => 1, 'recent_posts' => 1, 'recent_comments' => 1, 'commented_post' => 1, 'commented_page' => 0, 'emailed_most_post' => 1, 'emailed_most_page' => 0, 'rated_highest_post' => 1, 'rated_highest_page' => 0, 'rated_most_post' => 1, 'rated_most_page' => 0, 'viewed_most_post' => 1, 'viewed_most_page' => 0, 'authors' => 1, 'comment_members' => 1, 'post_cats' => 1, 'link_cats' => 1);  
+	$stats_display = array('total_stats'  => 1, 'email'  => 1, 'polls' => 1, 'ratings' => 1, 'views' => 1, 'useronline' => 1, 'recent_posts' => 1, 'recent_comments' => 1, 'commented_post' => 1, 'commented_page' => 0, 'emailed_most_post' => 1, 'emailed_most_page' => 0, 'rated_highest_post' => 1, 'rated_highest_page' => 0, 'rated_most_post' => 1, 'rated_most_page' => 0, 'viewed_most_post' => 1, 'viewed_most_page' => 0, 'authors' => 1, 'comment_members' => 1, 'post_cats' => 1, 'link_cats' => 1);
 	add_option('stats_mostlimit', '10', 'Stats Most Limit');
 	add_option('stats_display', $stats_display, 'Stats To Display');
 	add_option('stats_url', get_option('siteurl').'/stats/', 'Stats URL');

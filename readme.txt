@@ -3,7 +3,7 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/wordpress
 Tags: stat, stats, statistics, wp-stats, wp-stat, top, most, widget, popular, information
 Requires at least: 2.8
-Tested up to: 3.3.1
+Tested up to: 3.5.1
 Stable tag: 2.50
 
 Display your WordPress blog statistics. Ranging from general total statistics, some of my plugins statistics and top 10 statistics.

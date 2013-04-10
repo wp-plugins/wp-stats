@@ -6,6 +6,7 @@ Description: Display your WordPress blog statistics. Ranging from general total 
 Version: 2.50
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
+Text Domain: wp-stats
 */
 
 

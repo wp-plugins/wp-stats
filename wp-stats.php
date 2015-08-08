@@ -3,7 +3,7 @@
 Plugin Name: WP-Stats
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Display your WordPress blog statistics. Ranging from general total statistics, some of my plugins statistics and top 10 statistics.
-Version: 2.52
+Version: 2.53
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 Text Domain: wp-stats
@@ -675,9 +675,9 @@ function stats_page() {
 ### Class: WP-Stats Widget
  class WP_Widget_Stats extends WP_Widget {
 	// Constructor
-	function WP_Widget_Stats() {
+	function __construct() {
 		$widget_ops = array('description' => __('WP-Stats statistics', 'wp-stats'));
-		$this->WP_Widget('stats', __('Stats', 'wp-stats'), $widget_ops);
+		parent::__construct('stats', __('Stats', 'wp-stats'), $widget_ops);
 	}
 
 	// Display Widget
